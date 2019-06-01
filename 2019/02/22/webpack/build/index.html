@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head tag -->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="keyword" content>
+  <link rel="shortcut icon" href="/images/portrait.png">
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <title>
+     webpack4搭建以及优化 - nvnvyezi 
+  </title>
+
+  <link rel="canonical" href="http://nvnvyezi.club/2019/02/22/webpack/build/">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/beantech.min.css">
+
+  <!-- Pygments Highlight CSS -->
+  <link rel="stylesheet" href="/css/highlight.css"> <link rel="stylesheet" href="/css/widget.css"> <link rel="stylesheet" href="/css/rocket.css">
+  <link rel="stylesheet" href="/css/signature.css"> <link rel="stylesheet" href="/css/toc.css">
+
+  <!-- Custom Fonts -->
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+  <!-- Hux change font-awesome CDN to qiniu -->
+  <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- ga & ba script hoook -->
+  <script></script>
+</head>
+
+
+  <!-- hack iOS CSS :active style -->
+  <body ontouchstart="">
+    <!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+  header.intro-header{
+      
+          background-image: url('/images/webpack.png')
+          /*post*/
+      
+  }
+  
+  #signature{
+      background-image: url('/images/logo.png');
+  }
+  
+</style>
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature" style="background-color: rgba(0, 0,0, 0.3);">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a class="tag" href="/tags/#webpack" title="webpack">webpack</a>
+              
+              <a class="tag" href="/tags/#react" title="react">react</a>
+              
+              <a class="tag" href="/tags/#typescript" title="typescript">typescript</a>
+              
+            </div>
+            <h1>webpack4搭建以及优化</h1>
+            <h2 class="subheading">
+              帮助你快速搭建webpack+react+ts环境，并且可以基于此环境快速搭建自己需要的环境
+            </h2>
+            <span class="meta">
+              Posted by nvnvyezi on 2019-02-22
+            </span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+ <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NVNV YEZI</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3><span id="概念">概念</span></h3>
+<p><code>Entry</code>：指定 webpack 开始构建的入口模块，从该模块开始构建并计算出直接或间接依赖的模块或者库</p>
+<p><code>Output</code>：告诉 webpack 如何命名输出的文件以及输出的目录</p>
+<p><code>Loaders</code>：由于 webpack 只能处理 javascript，所以我们需要对一些非 js 文件处理成 webpack 能够处理的模块，比如 sass 文件</p>
+<p><code>Plugins</code>：<code>Loaders</code>将各类型的文件处理成 webpack 能够处理的模块，<code>plugins</code>有着很强的能力。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。但也是最复杂的一个。比如对 js 文件进行压缩优化的<code>UglifyJsPlugin</code>插件</p>
+<p><code>Chunk</code>：coding split 的产物，我们可以对一些代码打包成一个单独的 chunk，比如某些公共模块，去重，更好的利用缓存。或者按需加载某些功能模块，优化加载时间。在 webpack3 及以前我们都利用<code>CommonsChunkPlugin</code>将一些公共代码分割成一个 chunk，实现单独加载。在 webpack4 中<code>CommonsChunkPlugin</code>被废弃，使用<code>SplitChunksPlugin</code></p>
+<h3><span id="webpack-启动参数">webpack 启动参数</span></h3>
+<ul>
+<li>color 输出结果带彩色，比如：会用红色显示耗时较长的步骤</li>
+<li>profile 输出性能数据，可以看到每一步的耗时</li>
+<li>progress 输出当前编译的进度，以百分比的形式呈现</li>
+<li>display-modules 默认情况下 node_modules 下的模块会被隐藏，加上这个参数可以显示这些被隐藏的模块</li>
+<li>display-error-details 输出详细的错误信息</li>
+</ul>
+<h3><span id="webpack4-特性">webpack4 特性</span></h3>
+<ul>
+<li>Webpack4 需要与 webpack-cli 一起使用</li>
+<li>新添了 mode 属性，
+<ul>
+<li>development
+<ul>
+<li>Process.env.NODE_ENV = development，需在启动时设置 NODE_ENV=development，否则在编译过程中取不到该值</li>
+<li>默认开启以下插件，利用持久化缓存</li>
+<li><code>namedChunksPlugin</code>：以名称固化 chunk id,</li>
+<li><code>namemodulesPlugin</code>：以名称固化 module id</li>
+</ul>
+</li>
+<li>production
+<ul>
+<li>Process.env.NODE_ENV = production，同样需配置</li>
+<li>默认开启以下插件</li>
+<li><code>SideEffectsFlagPlugin</code> 和 <code>UglifyJsPlugin</code> 用于 tree-shaking</li>
+<li><code>FlagDependencyUsagePlugin</code> ：编译时标记依赖</li>
+<li><code>FlagIncludedChunksPlugin</code> ：标记子 chunks，防子 chunks 多次加载</li>
+<li><code>ModuleConcatenationPlugin</code> ：作用域提升(scope hosting),预编译功能,提升或者预编译所有模块到一个闭包中，提升代码在浏览器中的执行速度</li>
+<li><code>NoEmitOnErrorsPlugin</code> ：在输出阶段时，遇到编译错误跳过</li>
+<li><code>OccurrenceOrderPlugin</code> ：给经常使用的 ids 更短的值</li>
+<li><code>SideEffectsFlagPlugin</code> ：识别 package.json 或者 module.rules 的 sideEffects 标志（纯的 ES2015 模块)，安全地删除未用到的 export 导出</li>
+<li><code>UglifyJsPlugin</code> ：删除未引用代码，并压缩</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>移除 <code>CommonsChunkPlugin</code>插件，取而代之的是两个新的配置项（optimization.splitChunks 和 optimization.runtimeChunk）</li>
+<li><code>module.loaders</code> 替换为 <code>modules.rules</code></li>
+<li>webpack4 增加了 WebAssembly 的支持，可以直接 import/export wasm 模块，也可以通过编写 loaders 直接 import C++/C/Rust</li>
+</ul>
+<h3><span id="splitchunks">splitChunks</span></h3>
+<p>可以参考https://segmentfault.com/a/1190000013476837</p>
+<h4><span id="extra-text-webpack-plugin">extra-text-webpack-plugin</span></h4>
+<p>关于<code>[hash]</code>和<code>[chunkhash]</code>的区别，简单来说，<code>[hash]</code>是编译（compilation）后的 hash 值，<code>compilation</code>对象代表某个版本的资源对应的编译进程。项目中任何一个文件改动，webpack 就会重新创建<code>compilation</code>对象，然后计算新的 compilation 的 hash 值，所有的编译输出文件名都会使用相同的 hash 指纹，改一个就一起变。而<code>[chunkhash]</code>是根据具体模块文件的内容计算所得的 hash 值，某个文件的改动只会影响它本身的 hash 指纹，不会影响其他文件。</p>
+<h3><span id="hashchunkhash">hash/chunkhash:</span></h3>
+<p><code>hash</code>：在 webpack 一次构建中会产生一个 compilation 对象，该 hash 值是对 compilation 内所有的内容计算而来的</p>
+<blockquote>
+<p>与整个项目的构建有关。只要整个项目中有文件更改，就会产生新的 hash 值，并且所有的文件共用一个 hash 值。</p>
+<p>hash 一般是结合 CDN 缓存来使用，通过 webpack 构建之后，生成对应文件名自动带上对应的 MD5 值。如果文件内容改变的话，那么对应文件哈希值也会改变，对应的 HTML 引用的 URL 地址也会改变，触发 CDN 服务器从源服务器上拉取对应数据，进而更新本地缓存。但是在实际使用的时候，这几种 hash 计算还是有一定区别。</p>
+<p>compiler 对象代表的是配置完备的 Webpack 环境。 compiler 对象只在 Webpack 启动时构建一次，由 Webpack 组合所有的配置项构建生成。</p>
+<p>compilation 对象代表某个版本的资源对应的编译进程。当使用 Webpack 的 development 中间件时，每次检测到项目文件有改动就会创建一个 compilation，进而能够针对改动生产全新的编译文件。compilation 对象包含当前模块资源、待编译文件、有改动的文件和监听依赖的所有信息。</p>
+<p>compiler 代表配置好的 webpack 环境，compilation 针对随时可变得项目文件，只要文件有改动就会重新创建。</p>
+</blockquote>
+<p><code>chunkhash</code>：每一个 chunk 都根据自身的内容计算而来。</p>
+<blockquote>
+<p>根据不同的 entry 进行文件依赖分析，构建对应的 chunk，生成对应的 hash 值，即可以将一些公共库单独打包构建，只要不改动公共库的代码，生成的 hash 值就不变。</p>
+<p>保证了在线上构建的时候只要文件内容没有更改就不会重复构建</p>
+</blockquote>
+<p><code>contenthash</code>：在 js 中引用 css 时，保证 css 不变的情况下 hash 值不变</p>
+<p><a href="https://juejin.im/post/5a4502be6fb9a0450d1162ed" target="_blank" rel="noopener">https://juejin.im/post/5a4502be6fb9a0450d1162ed</a></p>
+<p>分析 webpack 中的 Compiler/Compilation/Stats 对象及构建顺序：<a href="https://github.com/liangklfangl/webpack-compiler-and-compilation" target="_blank" rel="noopener">https://github.com/liangklfangl/webpack-compiler-and-compilation</a></p>
+<h3><span id="tsconfigjson">tsconfig.json</span></h3>
+<p><strong>概述</strong></p>
+<p>如果一个目录下存在一个<code>tsconfig.json</code>文件，那么它意味着这个目录是 TypeScript 项目的根目录。<code>tsconfig.json</code>文件中指定了用来编译这个项目的根文件和编译选项。 一个项目可以通过以下方式之一来编译：</p>
+<p><strong>使用 tsconfig.json</strong></p>
+<ul>
+<li>不带任何输入文件的情况下调用<code>tsc</code>，编译器会从当前目录开始去查找<code>tsconfig.json</code>文件，逐级向上搜索父目录。</li>
+<li>不带任何输入文件的情况下调用<code>tsc</code>，且使用命令行参数<code>--project</code>（或<code>-p</code>）指定一个包含<code>tsconfig.json</code>文件的目录。</li>
+</ul>
+<p>当命令行上指定了输入文件时，<code>tsconfig.json</code>文件会被忽略</p>
+<p><strong>配置示例</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="attr">"module"</span>: <span class="string">"commonjs"</span>,</span><br><span class="line">    <span class="attr">"noImplicitAny"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"removeComments"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"preserveConstEnums"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"sourceMap"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"files"</span>: [<span class="string">"app.ts"</span>, <span class="string">"foo.ts"</span>],</span><br><span class="line">  // 或者使用include,exclude指定待编译文件</span><br><span class="line">  "include": ["src/**/*"],</span><br><span class="line">  "exclude": ["node_modules"]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>compilerOptions</code> 用来配置编译选项，<code>files</code> 用来指定待编译文件。</p>
+<p>这里的待编译文件是指<strong>入口文件</strong>，任何被入口文件依赖的文件</p>
+<p><code>files</code> 属性是一个数组，数组元素可以是相对文件路径和绝对文件路径。</p>
+<p><code>include</code> 和 <code>exclude</code> 属性也是一个数组，但数组元素是类似 <code>glob</code> 的文件模式。它支持的 <code>glob</code> 通配符包括：</p>
+<ul>
+<li><code>*</code> ：匹配 0 或多个字符（注意：不含路径分隔符）</li>
+<li><code>?</code> ：匹配任意单个字符（注意：不含路径分隔符）</li>
+<li><code>**/</code> ：递归匹配任何子路径</li>
+</ul>
+<p>TS 文件指拓展名为 <code>.ts</code>、<code>.tsx</code> 或 <code>.d.ts</code> 的文件。如果开启了 <code>allowJs</code> 选项，那 <code>.js</code> 和 <code>.jsx</code> 文件也属于 TS 文件。</p>
+<p>如果仅仅包含一个 <code>*</code> 或者 <code>.*</code> ，那么只有<strong>TS 文件</strong>才会被包含。</p>
+<p>如果 <code>files</code> 和 <code>include</code> 都未设置，那么除了 <code>exclude</code> 排除的文件，编译器会默认包含路径下的所有 <strong>TS 文件</strong>。</p>
+<p>如果同时设置 <code>files</code> 和 <code>include</code> ，那么编译器会把两者指定的文件都引入。</p>
+<p>如果未设置 <code>exclude</code> ，那其默认值为 <code>node_modules</code> 、<code>bower_components</code>、<code>jspm_packages</code> 和编译选项 <code>outDir</code> 指定的路径。</p>
+<p><code>exclude</code> 只对 <code>include</code> 有效，对 <code>files</code> 无效。即 <code>files</code> 指定的文件如果同时被 <code>exclude</code> 排除，那么该文件仍然会被编译器引入。</p>
+<p>前面提到，任何被 <code>files</code> 或 <code>include</code> 引入的文件的依赖会被自动引入。<br>
+反过来，如果 <code>B.ts</code> 被 <code>A.ts</code> 依赖，那么 <code>B.ts</code> 不能被 <code>exclude</code> 排除，除非 <code>A.ts</code> 也被排除了。</p>
+<p>有一点要注意的是，编译器不会引入疑似为输出的文件。比如，如果引入的文件中包含 <code>index.ts</code> ，那么 <code>index.d.ts</code> 和 <code>index.js</code> 就会被排除。通常来说，只有拓展名不一样的文件命名法是不推荐的。</p>
+<p><code>tsconfig.json</code> 也可以为空文件，这种情况下会使用默认的编译选项来编译所有默认引入的文件。</p>
+<p>官方编译选项列表：<a href="https://www.tslang.cn/docs/handbook/compiler-options.html" target="_blank" rel="noopener">https://www.tslang.cn/docs/handbook/compiler-options.html</a></p>
+<p>可以参考：<a href="https://www.tslang.cn/docs/handbook/tsconfig-json.html" target="_blank" rel="noopener">https://www.tslang.cn/docs/handbook/tsconfig-json.html</a></p>
+<h3><span id="tslinteslint-选择">tslint/eslint 选择</span></h3>
+<p><a href="https://ts.xcatliu.com/engineering/lint.html" target="_blank" rel="noopener">https://ts.xcatliu.com/engineering/lint.html</a></p>
+<p>Eslint 规则:<a href="http://eslint.cn/docs/user-guide/configuring" target="_blank" rel="noopener">http://eslint.cn/docs/user-guide/configuring</a></p>
+<p>参考掘金的 eslint；<a href="https://juejin.im/post/5b3859a36fb9a00e4d53fc85" target="_blank" rel="noopener">https://juejin.im/post/5b3859a36fb9a00e4d53fc85</a></p>
+<p>react 配置 eslint 一些规则： <a href="https://segmentfault.com/a/1190000013062992" target="_blank" rel="noopener">https://segmentfault.com/a/1190000013062992</a></p>
+<h5><span id="eslint-配置项">eslint 配置项</span></h5>
+<ul>
+<li>root 限定配置文件的使用范围</li>
+<li>parser 指定 eslint 的解析器</li>
+<li>parserOptions 设置解析器选项</li>
+<li>extends 指定 eslint 规范</li>
+<li>plugins 引用第三方的插件</li>
+<li>env 指定代码运行的宿主环境</li>
+<li>rules 启用额外的规则或覆盖默认的规则</li>
+<li>globals 声明在代码中的自定义全局变量</li>
+</ul>
+<h3><span id="git-提交检测huskypre-commitlint-staged">git 提交检测/husky/pre-commit/lint-staged</span></h3>
+<p>husky 继承了 Git 下所有的钩子，在触发钩子的时候，husky 可以阻止不合法的 commit,push 等等。</p>
+<p>husky 是一个 npm 包，安装后，可以很方便的在<code>package.json</code>配置<code>git hook</code> 脚本 。</p>
+<p>比如，在 package.json 内配置如</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">   "lint": "eslint src"</span><br><span class="line"> &#125;,</span><br><span class="line"> "husky": &#123;</span><br><span class="line">   "hooks": &#123;</span><br><span class="line">     "pre-commit": "npm run lint"</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<p>那么，在后续的每一次<code>git commit</code> 之前，都会执行一次对应的 hook 脚本<code>npm run lint</code> 。其他 hook 同理</p>
+<p>pre-commit：<a href="https://github.com/PaicFE/blog/issues/10" target="_blank" rel="noopener">https://github.com/PaicFE/blog/issues/10</a></p>
+<p>lint-staged: <a href="https://github.com/okonet/lint-staged" target="_blank" rel="noopener">https://github.com/okonet/lint-staged</a></p>
+<h3><span id="prettire-配置">prettire 配置</span></h3>
+<p><a href="https://prettier.io/docs/en/options.html" target="_blank" rel="noopener">https://prettier.io/docs/en/options.html</a></p>
+<h3><span id="优化">优化</span></h3>
+<ol>
+<li>
+<p>include &amp; exclude</p>
+</li>
+<li>
+<p>babel-loader</p>
+</li>
+</ol>
+<ul>
+<li><code>cacheDirectory</code>：默认值为 <code>false</code>。当有设置时，指定的目录将用来缓存 loader 的执行结果。之后的 webpack 构建，将会尝试读取缓存，来避免在每次执行时，可能产生的、高性能消耗的 Babel 重新编译过程(recompilation process)。如果设置了一个空值 (<code>loader: 'babel-loader?cacheDirectory'</code>) 或者 <code>true</code> (<code>loader: babel-loader?cacheDirectory=true</code>)，loader 将使用默认的缓存目录 <code>node_modules/.cache/babel-loader</code>，如果在任何根目录下都没有找到 <code>node_modules</code> 目录，将会降级回退到操作系统默认的临时文件目录。</li>
+</ul>
+<ol start="3">
+<li>引入 babel runtime，避免重复引入</li>
+<li><code>resolve.modules</code>解析时搜索的目录</li>
+<li><code>resolve.mainFields</code>用于配置第三方模块使用那个入口文件</li>
+</ol>
+<blockquote>
+<p>安装的第三方模块中都会有一个 package.json 文件,用于描述这个模块的属性，其中有些字段用于描述入口文件在哪里，resolve.mainFields 用于配置采用哪个字段作为入口文件的描述。</p>
+<p>可以存在多个字段描述入口文件的原因是因为有些模块可以同时用在多个环境中，针对不同的运行环境需要使用不同的代码。 以 isomorphic-fetch API 为例，它是 Promise 的一个实现，但可同时用于浏览器和 Node.js 环境。</p>
+</blockquote>
+<ol start="6">
+<li>
+<p><code>resolve.alias</code>配置项通过别名来把原导入路径映射成一个新的导入路径</p>
+</li>
+<li>
+<p><code>resolve.extensions</code>在导入语句没带文件后缀时，webpack 自动带上后缀去尝试查询文件是否存在</p>
+<ol>
+<li>后缀列表尽可能小</li>
+<li>频率最高的往前方</li>
+<li>导出语句里尽可能带上后缀</li>
+</ol>
+</li>
+<li>
+<p><code>module.noParse</code>让 webpack 忽略对部分没采用模块化的文件的递归解析处理</p>
+<ol>
+<li>被忽略掉的文件里不应该包含 import 、 require 、 define 等模块化语句</li>
+</ol>
+</li>
+<li>
+<p>使用动态链接库</p>
+<ol>
+<li><code>webapck.DllPlugin</code>
+<ol>
+<li><code>context</code> (optional): manifest 文件中请求的上下文(context)(默认值为 webpack 的上下文(context))</li>
+<li><code>name</code>: 暴露出的 DLL 的函数名 (<a href="https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js" target="_blank" rel="noopener">TemplatePaths</a>: <code>[hash]</code> &amp; <code>[name]</code> )</li>
+<li><code>path</code>: manifest json 文件的<strong>绝对路径</strong> (输出文件)`</li>
+</ol>
+</li>
+<li><code>webpack.DllReferencePlugin</code>
+<ol>
+<li><code>context</code>: (<strong>绝对路径</strong>) manifest (或者是内容属性)中请求的上下文</li>
+<li><code>manifest</code>: 包含 <code>content</code> 和 <code>name</code> 的对象，或者在编译时(compilation)的一个用于加载的 JSON manifest 绝对路径</li>
+<li><code>content</code> (optional): 请求到模块 id 的映射 (默认值为 <code>manifest.content</code>)</li>
+<li><code>name</code> (optional): dll 暴露的地方的名称 (默认值为 <code>manifest.name</code>) (可参考 <a href="https://webpack.docschina.org/configuration/externals/" target="_blank" rel="noopener"><code>externals</code></a>)</li>
+<li><code>scope</code> (optional): dll 中内容的前缀</li>
+<li><code>sourceType</code> (optional): dll 是如何暴露的 (<a href="https://webpack.docschina.org/configuration/output/#output-librarytarget" target="_blank" rel="noopener">libraryTarget</a>)</li>
+</ol>
+</li>
+<li><code>libraryTarget</code> 和 <code>library</code>
+<ol>
+<li>output.libraryTarget 配置以何种方式导出库。</li>
+<li>output.library 配置导出库的名称。 它们通常搭配在一起使用。</li>
+</ol>
+</li>
+<li>推荐参考： <a href="https://segmentfault.com/a/1190000014121749" target="_blank" rel="noopener">https://segmentfault.com/a/1190000014121749</a></li>
+</ol>
+</li>
+<li>
+<p><code>HappyPack</code>: 让 Webpack 把任务分解给多个子进程去并发的执行，子进程处理完后再把结果发送给主进程。</p>
+<ol>
+<li>
+<p><code>id: String</code> 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件.</p>
+<p><code>loaders: Array</code> 用法和 webpack Loader 配置中一样.</p>
+<p><code>threads: Number</code> 代表开启几个子进程去处理这一类型的文件，默认是 3 个，类型必须是整数。</p>
+<p><code>verbose: Boolean</code> 是否允许 HappyPack 输出日志，默认是 true。</p>
+<p><code>threadPool: HappyThreadPool</code> 代表共享进程池，即多个 HappyPack 实例都使用同一个共享进程池中的子进程去处理任务，以防止资源占用过多。</p>
+<p><code>verboseWhenProfiling: Boolean</code> 开启<code>webpack --profile</code> ,仍然希望 HappyPack 产生输出。</p>
+<p><code>debug: Boolean</code> 启用 debug 用于故障排查。默认 <code>false</code>。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><code>ParallelUglifyPlugin</code>:可以把对 JS 文件的串行压缩变为开启多个子进程并行执行&amp;oq=可以把对 JS 文件的串行压缩变为开启多个子进程并行执行</p>
+</li>
+<li>
+<p>在支持 es6 的环境中直接使用 es6，不进行转换</p>
+</li>
+<li>
+<p><code>splitChunks</code>: 提取公共代码</p>
+</li>
+<li>
+<p>区分环境，使用 mode</p>
+</li>
+<li>
+<p>代码分离</p>
+</li>
+</ol>
+<p>具体细节配置可参考，<a href="https://github.com/nvnvyezi/init-webpack" target="_blank" rel="noopener">https://github.com/nvnvyezi/init-webpack</a></p>
+<h3><span id="package">package</span></h3>
+<h4><span id="babel-preset-env">babel-preset-env</span></h4>
+<p>根据配置的目标浏览器或者运行环境来自动将 ES2015+的代码转换为 es5。</p>
+<p><strong>参数</strong></p>
+<ul>
+<li>targets</li>
+<li>targets.node</li>
+<li>targets.browsers</li>
+<li>spec : 启用更符合规范的转换，但速度会更慢，默认为 <code>false</code></li>
+<li>loose：是否使用 <code>loose mode</code>，默认为 <code>false</code></li>
+<li>modules：将 ES6 module 转换为其他模块规范，可选 <code>&quot;adm&quot; | &quot;umd&quot; | &quot;systemjs&quot; | &quot;commonjs&quot; | &quot;cjs&quot; | false</code>，默认为 <code>false</code></li>
+<li>debug：启用 debug，默认 <code>false</code></li>
+<li>include：一个包含使用的 <code>plugins</code> 的数组</li>
+<li>exclude：一个包含不使用的 <code>plugins</code> 的数组</li>
+<li>useBuiltIns：为 <code>polyfills</code> 应用 <code>@babel/preset-env</code> ，可选 <code>&quot;usage&quot; | &quot;entry&quot; | false</code>，默认为 <code>false</code></li>
+</ul>
+<h4><span id="babelpreset-react">@babel/preset-react</span></h4>
+<p><a href="https://www.babeljs.cn/docs/babel-preset-react" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="html-loader">html-loader</span></h4>
+<p><a href="https://webpack.docschina.org/loaders/html-loader/" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="html-webpack-plugin">html-webpack-plugin</span></h4>
+<p><a href="https://webpack.docschina.org/plugins/html-webpack-plugin/" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="mini-css-extract-plugin">mini-css-extract-plugin</span></h4>
+<p><a href="https://github.com/webpack-contrib/mini-css-extract-plugin" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="postcss-loader">postcss-loader</span></h4>
+<p><a href="https://www.webpackjs.com/loaders/postcss-loader/" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="webpack-parallel-uglify-plugin">webpack-parallel-uglify-plugin</span></h4>
+<p><a href="https://www.cnblogs.com/tugenhua0707/p/9569762.html" target="_blank" rel="noopener">使用</a></p>
+<h4><span id="babelplugin-proposal-class-properties">@babel/plugin-proposal-class-properties</span></h4>
+<p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-class-properties" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="babelplugin-proposal-export-default-from">@babel/plugin-proposal-export-default-from</span></h4>
+<p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-export-default-from" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="babelplugin-proposal-export-namespace-from">@babel/plugin-proposal-export-namespace-from</span></h4>
+<p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-export-namespace-from" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="babelplugin-proposal-object-rest-spread">@babel/plugin-proposal-object-rest-spread</span></h4>
+<p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-object-rest-spread" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="babelplugin-proposal-optional-chaining">@babel/plugin-proposal-optional-chaining</span></h4>
+<p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="babelplugin-syntax-dynamic-import">@babel/plugin-syntax-dynamic-import</span></h4>
+<p><a href="https://babeljs.io/docs/en/babel-plugin-syntax-dynamic-import" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="babelplugin-transform-runtime">@babel/plugin-transform-runtime</span></h4>
+<p><a href="https://babeljs.io/docs/en/babel-plugin-transform-runtime" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="babelpreset-typescript">@babel/preset-typescript</span></h4>
+<p><a href="https://babeljs.io/docs/en/babel-preset-typescript" target="_blank" rel="noopener">文档</a></p>
+<h4><span id="eslint-plugin-react-hooks">eslint-plugin-react-hooks</span></h4>
+<p><a href="http://react.html.cn/docs/hooks-rules.html" target="_blank" rel="noopener">使用说明</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/12/10/JavaScript/inherit/" data-toggle="tooltip" data-placement="top" title="js继承">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概念</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">webpack 启动参数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">webpack4 特性</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">splitChunks</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">extra-text-webpack-plugin</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">hash/chunkhash:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">tsconfig.json</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">tslint/eslint 选择</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.0.1.</span> <span class="toc-nav-text">eslint 配置项</span></a></li></ol></li></ol><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">git 提交检测/husky/pre-commit/lint-staged</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">prettire 配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">优化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">package</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.1.</span> <span class="toc-nav-text">babel-preset-env</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.2.</span> <span class="toc-nav-text">@babel/preset-react</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.3.</span> <span class="toc-nav-text">html-loader</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.4.</span> <span class="toc-nav-text">html-webpack-plugin</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.5.</span> <span class="toc-nav-text">mini-css-extract-plugin</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.6.</span> <span class="toc-nav-text">postcss-loader</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.7.</span> <span class="toc-nav-text">webpack-parallel-uglify-plugin</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.8.</span> <span class="toc-nav-text">@babel/plugin-proposal-class-properties</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.9.</span> <span class="toc-nav-text">@babel/plugin-proposal-export-default-from</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.10.</span> <span class="toc-nav-text">@babel/plugin-proposal-export-namespace-from</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.11.</span> <span class="toc-nav-text">@babel/plugin-proposal-object-rest-spread</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.12.</span> <span class="toc-nav-text">@babel/plugin-proposal-optional-chaining</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.13.</span> <span class="toc-nav-text">@babel/plugin-syntax-dynamic-import</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.14.</span> <span class="toc-nav-text">@babel/plugin-transform-runtime</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.15.</span> <span class="toc-nav-text">@babel/preset-typescript</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.16.</span> <span class="toc-nav-text">eslint-plugin-react-hooks</span></a></li></ol></li>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">所属标签</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#webpack" title="webpack">webpack</a>
+                        
+                          <a class="tag" href="/tags/#react" title="react">react</a>
+                        
+                          <a class="tag" href="/tags/#typescript" title="typescript">typescript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+  <!-- <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Copyright &copy; nvnvyezi 2019
+        </p>
+      </div>
+    </div>
+  </div> -->
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function(e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+<!-- jquery.tagcloud.js -->
+<script>
+  // only load tagcloud.js in tag.html
+  if ($("#tag_cloud").length !== 0) {
+    async("http://nvnvyezi.club/js/jquery.tagcloud.js", function() {
+      $.fn.tagcloud.defaults = {
+        //size: {start: 1, end: 1, unit: 'em'},
+        color: { start: "#bbbbee", end: "#0085a1" }
+      };
+      $("#tag_cloud a").tagcloud();
+    });
+  }
+</script>
+
+<!--fastClick.js -->
+<script>
+  async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function() {
+    var $nav = document.querySelector("nav");
+    if ($nav) FastClick.attach($nav);
+  });
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+    <a id="rocket" href="#top" class=""></a>
+    <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+    <!-- Image to hack wechat -->
+    <!-- <img
+      src="http://nvnvyezi.club/images/icon_wechat.png"
+      width="0"
+      height="0"
+    /> -->
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+  </body>
+</html>
