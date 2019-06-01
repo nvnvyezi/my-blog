@@ -10,13 +10,20 @@
   color: #0085a1;
   text-decoration: none;
 }
+.widget ul {
+  margin: 0;
+}
+.widget ul li {
+  margin: 7px 0;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.7;
+}
 .widget ul ul,
 .widget ol ul,
 .widget ul ol,
 .widget ol ol {
   margin-left: 0 10px;
-ul
-  list-style: disc;
 }
 .widget ul ul ol,
 .widget ol ul ol,
