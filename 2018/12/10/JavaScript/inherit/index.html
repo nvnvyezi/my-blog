@@ -143,13 +143,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -158,6 +151,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -201,6 +201,8 @@
 
     <!-- Main Content -->
     <!-- Modify by Yu-Hsuan Yen -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
 <!-- Post Content -->
 <article>
@@ -428,7 +430,11 @@
 <li>实现较为复杂</li>
 </ul>
 
+
+                <!-- duoshuo Share start -->
                 
+                <!-- 多说 Share end-->
+                <div id="gitalk-container"></div>
 
                 <hr>
                 <!-- Pager -->
@@ -440,14 +446,6 @@
                     
                     
                 </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
 
                 <!-- disqus comment start -->
                 
@@ -497,7 +495,20 @@
     </div>
 </article>
 
+<!-- 添加gitalk评论 -->
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+            clientID: 'ed588defc49f2dd112f0',
+            clientSecret: '58808c8e9bcc55875f8380be0c63c748e1e465d1',
+            repo: 'my-blog',
+            owner: 'nvnvyezi',
+            admin: ['nvnvyezi'],
+            id: location.pathname,      // Ensure uniqueness and length less than 50
+            distractionFreeMode: false  // Facebook-like distraction free mode
+        })
 
+        gitalk.render('gitalk-container')
+</script>
 
 
 
@@ -539,6 +550,7 @@
 
 <script type="text/javascript" src="/js/zooming.js"></script>
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 
     <!-- Footer -->
     <!-- Footer -->
