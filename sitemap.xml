@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+
     <sitemap>
         <loc>http://nvnvyezi.club/post-sitemap.xml</loc>
-        <lastmod>2019-06-01T04:13:24.386Z</lastmod>
+        <lastmod>2019-06-02T05:16:07.693Z</lastmod>
     </sitemap>
 
     <sitemap>
@@ -13,12 +14,12 @@
 
     <sitemap>
         <loc>http://nvnvyezi.club/category-sitemap.xml</loc>
-        <lastmod>2019-06-01T03:49:01.074Z</lastmod>
+        <lastmod>2019-06-02T05:16:07.693Z</lastmod>
     </sitemap>
 
     <sitemap>
         <loc>http://nvnvyezi.club/tag-sitemap.xml</loc>
-        <lastmod>2019-06-01T03:49:01.074Z</lastmod>
+        <lastmod>2019-06-02T05:16:07.693Z</lastmod>
     </sitemap>
 
 </sitemapindex>

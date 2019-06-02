@@ -47,8 +47,6 @@
 
   <!-- ga & ba script hoook -->
   <script></script>
-  <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.13.2/dist/av-min.js"></script>
-  <script>AV.initialize("pTwGc5X0W7Pngg8h8hSb859C-gzGzoHsz", "D7F3nLm15HIHegDpzxhmLcXj");</script>
 </head>
 
 
@@ -91,6 +89,10 @@
             <h2 class="subheading">
               帮助你快速搭建webpack+react+ts环境，并且可以基于此环境快速搭建自己需要的环境
             </h2>
+            <span class="meta">
+              <a target="_blank" title="web counters" href="http://gostats.com"><img alt="web counters" src="http://monster.gostats.com/bin/count/a_507606/t_4/i_1/z_0/show_hits/counter.png" style="border-width:0"></a>
+              visitors</span>
+            <span class="meta" style="padding: 10px 0;">6.3k words altogether</span>
             <span class="meta">
               Posted by nvnvyezi on 2019-02-22
             </span>
@@ -203,7 +205,7 @@
             <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
-                post-container">
+                post-container" style="margin-bottom: 30px;">
 
                 <h3><span id="概念">概念</span></h3>
 <p><code>Entry</code>：指定 webpack 开始构建的入口模块，从该模块开始构建并计算出直接或间接依赖的模块或者库</p>
@@ -588,20 +590,54 @@
     }
 </style>
 
-
+<script type="text/javascript" src="/js/zooming.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
     <!-- Footer -->
     <!-- Footer -->
 <footer>
-  <!-- <div class="container">
+  <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+               
+          <li>
+            <a target="_blank" href="https://github.com/nvnvyezi">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+           
+          <li>
+            <a target="_blank" href="https://user.qzone.qq.com/1187128658">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
         <p class="copyright text-muted">
           Copyright &copy; nvnvyezi 2019
         </p>
+        <!-- <p class="copyright text-muted">
+          阅读量:
+          <a target="_blank" title="web counters" href="http://gostats.com"
+            ><img
+              alt="web counters"
+              src="http://monster.gostats.com/bin/count/a_507606/t_4/i_1/z_0/show_hits/counter.png"
+              style="border-width:0"
+          /></a>
+          <span class="post-count"
+            >6.3k words altogether</span
+          >
+        </p> -->
       </div>
     </div>
-  </div> -->
+  </div>
 </footer>
 
 <!-- jQuery -->
@@ -681,75 +717,6 @@
 <!-- Baidu Tongji -->
 
 
-<!--page counter part-->
-<script>
-  function addCount (Counter) {
-          url=$('.article-date').attr('href').trim();
-      title = $('.article-title').text().trim();
-      var query=new AV.Query(Counter);
-      //use url as unique idnetfication
-      query.equalTo("url",url);
-      query.find({
-          success: function(results){
-              if(results.length>0)
-              {
-                  var counter=results[0];
-                  counter.fetchWhenSave(true); //get recent result
-                  counter.increment("time");
-                  counter.save();
-              }
-              else
-              {
-                  var newcounter=new Counter();
-                  newcounter.set("title",title);
-                  newcounter.set("url",url);
-                  newcounter.set("time",1);
-                  newcounter.save(null,{
-                      success: function(newcounter){
-                      //alert('New object created');
-                      },
-                      error: function(newcounter,error){
-                      alert('Failed to create');
-                      }
-                      });
-              }
-          },
-          error: function(error){
-              //find null is not a error
-              alert('Error:'+error.code+" "+error.message);
-          }
-      });
-  }
-  $(function(){
-      var Counter=AV.Object.extend("Counter");
-      //only increse visit counting when intering a page
-      if ($('.article-title').length == 1)
-         addCount(Counter);
-      var query=new AV.Query(Counter);
-      query.descending("time");
-      // the sum of popular posts
-      query.limit(10); 
-      query.find({
-          success: function(results){
-                  for(var i=0;i<results.length;i++)    
-                  {
-                      var counter=results[i];
-                      title=counter.get("title");
-                      url=counter.get("url");
-                      time=counter.get("time");
-                      // add to the popularlist widget
-                      showcontent=title+" ("+time+")";
-                      //notice the "" in href
-                      $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
-                  }
-              },
-          error: function(error){
-              alert("Error:"+error.code+" "+error.message);
-          }
-          }
-      )
-      });
-</script>
 
     <a id="rocket" href="#top" class=""></a>
     <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>

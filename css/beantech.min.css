@@ -621,7 +621,6 @@ footer .copyright a:focus {
   margin: 0;
   font-size: 0.85em;
   line-height: 1.764705882em;
-  vertical-align: middle;
   vertical-align: baseline;
   opacity: 0;
   -webkit-transition: top 0.3s ease, opacity 0.3s ease;
@@ -730,7 +729,7 @@ img::-moz-selection {
   background: transparent;
 }
 body {
-  webkit-tap-highlight-color: #406599;
+  -webkit-tap-highlight-color: #406599;
 }
 .tags {
   margin-bottom: -5px;
