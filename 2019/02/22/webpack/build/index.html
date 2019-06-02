@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content>
-  <meta name="keyword" content>
+  <meta name="description" content="帮助你快速搭建webpack+react+ts环境，并且可以基于此环境快速搭建自己需要的环境">
+  <!-- <meta name="keyword" content="" /> -->
   <link rel="shortcut icon" href="/images/portrait.png">
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -145,14 +145,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -216,13 +216,13 @@
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container" style="margin-bottom: 30px;">
-        <h3><span id="概念">概念</span></h3>
+        <h3 id="gai-nian">概念</h3>
 <p><code>Entry</code>：指定 webpack 开始构建的入口模块，从该模块开始构建并计算出直接或间接依赖的模块或者库</p>
 <p><code>Output</code>：告诉 webpack 如何命名输出的文件以及输出的目录</p>
 <p><code>Loaders</code>：由于 webpack 只能处理 javascript，所以我们需要对一些非 js 文件处理成 webpack 能够处理的模块，比如 sass 文件</p>
 <p><code>Plugins</code>：<code>Loaders</code>将各类型的文件处理成 webpack 能够处理的模块，<code>plugins</code>有着很强的能力。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。但也是最复杂的一个。比如对 js 文件进行压缩优化的<code>UglifyJsPlugin</code>插件</p>
 <p><code>Chunk</code>：coding split 的产物，我们可以对一些代码打包成一个单独的 chunk，比如某些公共模块，去重，更好的利用缓存。或者按需加载某些功能模块，优化加载时间。在 webpack3 及以前我们都利用<code>CommonsChunkPlugin</code>将一些公共代码分割成一个 chunk，实现单独加载。在 webpack4 中<code>CommonsChunkPlugin</code>被废弃，使用<code>SplitChunksPlugin</code></p>
-<h3><span id="webpack-启动参数">webpack 启动参数</span></h3>
+<h3 id="webpack-qi-dong-can-shu">webpack 启动参数</h3>
 <ul>
 <li>color 输出结果带彩色，比如：会用红色显示耗时较长的步骤</li>
 <li>profile 输出性能数据，可以看到每一步的耗时</li>
@@ -230,7 +230,7 @@
 <li>display-modules 默认情况下 node_modules 下的模块会被隐藏，加上这个参数可以显示这些被隐藏的模块</li>
 <li>display-error-details 输出详细的错误信息</li>
 </ul>
-<h3><span id="webpack4-特性">webpack4 特性</span></h3>
+<h3 id="webpack-4-te-xing">webpack4 特性</h3>
 <ul>
 <li>Webpack4 需要与 webpack-cli 一起使用</li>
 <li>新添了 mode 属性，
@@ -263,11 +263,11 @@
 <li><code>module.loaders</code> 替换为 <code>modules.rules</code></li>
 <li>webpack4 增加了 WebAssembly 的支持，可以直接 import/export wasm 模块，也可以通过编写 loaders 直接 import C++/C/Rust</li>
 </ul>
-<h3><span id="splitchunks">splitChunks</span></h3>
+<h3 id="split-chunks">splitChunks</h3>
 <p>可以参考https://segmentfault.com/a/1190000013476837</p>
-<h4><span id="extra-text-webpack-plugin">extra-text-webpack-plugin</span></h4>
+<h4 id="extra-text-webpack-plugin">extra-text-webpack-plugin</h4>
 <p>关于<code>[hash]</code>和<code>[chunkhash]</code>的区别，简单来说，<code>[hash]</code>是编译（compilation）后的 hash 值，<code>compilation</code>对象代表某个版本的资源对应的编译进程。项目中任何一个文件改动，webpack 就会重新创建<code>compilation</code>对象，然后计算新的 compilation 的 hash 值，所有的编译输出文件名都会使用相同的 hash 指纹，改一个就一起变。而<code>[chunkhash]</code>是根据具体模块文件的内容计算所得的 hash 值，某个文件的改动只会影响它本身的 hash 指纹，不会影响其他文件。</p>
-<h3><span id="hashchunkhash">hash/chunkhash:</span></h3>
+<h3 id="hash-chunkhash">hash/chunkhash:</h3>
 <p><code>hash</code>：在 webpack 一次构建中会产生一个 compilation 对象，该 hash 值是对 compilation 内所有的内容计算而来的</p>
 <blockquote>
 <p>与整个项目的构建有关。只要整个项目中有文件更改，就会产生新的 hash 值，并且所有的文件共用一个 hash 值。</p>
@@ -284,7 +284,7 @@
 <p><code>contenthash</code>：在 js 中引用 css 时，保证 css 不变的情况下 hash 值不变</p>
 <p><a href="https://juejin.im/post/5a4502be6fb9a0450d1162ed" target="_blank" rel="noopener">https://juejin.im/post/5a4502be6fb9a0450d1162ed</a></p>
 <p>分析 webpack 中的 Compiler/Compilation/Stats 对象及构建顺序：<a href="https://github.com/liangklfangl/webpack-compiler-and-compilation" target="_blank" rel="noopener">https://github.com/liangklfangl/webpack-compiler-and-compilation</a></p>
-<h3><span id="tsconfigjson">tsconfig.json</span></h3>
+<h3 id="tsconfig-json">tsconfig.json</h3>
 <p><strong>概述</strong></p>
 <p>如果一个目录下存在一个<code>tsconfig.json</code>文件，那么它意味着这个目录是 TypeScript 项目的根目录。<code>tsconfig.json</code>文件中指定了用来编译这个项目的根文件和编译选项。 一个项目可以通过以下方式之一来编译：</p>
 <p><strong>使用 tsconfig.json</strong></p>
@@ -316,12 +316,12 @@
 <p><code>tsconfig.json</code> 也可以为空文件，这种情况下会使用默认的编译选项来编译所有默认引入的文件。</p>
 <p>官方编译选项列表：<a href="https://www.tslang.cn/docs/handbook/compiler-options.html" target="_blank" rel="noopener">https://www.tslang.cn/docs/handbook/compiler-options.html</a></p>
 <p>可以参考：<a href="https://www.tslang.cn/docs/handbook/tsconfig-json.html" target="_blank" rel="noopener">https://www.tslang.cn/docs/handbook/tsconfig-json.html</a></p>
-<h3><span id="tslinteslint-选择">tslint/eslint 选择</span></h3>
+<h3 id="tslint-eslint-xuan-ze">tslint/eslint 选择</h3>
 <p><a href="https://ts.xcatliu.com/engineering/lint.html" target="_blank" rel="noopener">https://ts.xcatliu.com/engineering/lint.html</a></p>
 <p>Eslint 规则:<a href="http://eslint.cn/docs/user-guide/configuring" target="_blank" rel="noopener">http://eslint.cn/docs/user-guide/configuring</a></p>
 <p>参考掘金的 eslint；<a href="https://juejin.im/post/5b3859a36fb9a00e4d53fc85" target="_blank" rel="noopener">https://juejin.im/post/5b3859a36fb9a00e4d53fc85</a></p>
 <p>react 配置 eslint 一些规则： <a href="https://segmentfault.com/a/1190000013062992" target="_blank" rel="noopener">https://segmentfault.com/a/1190000013062992</a></p>
-<h5><span id="eslint-配置项">eslint 配置项</span></h5>
+<h5 id="eslint-pei-zhi-xiang">eslint 配置项</h5>
 <ul>
 <li>root 限定配置文件的使用范围</li>
 <li>parser 指定 eslint 的解析器</li>
@@ -332,7 +332,7 @@
 <li>rules 启用额外的规则或覆盖默认的规则</li>
 <li>globals 声明在代码中的自定义全局变量</li>
 </ul>
-<h3><span id="git-提交检测huskypre-commitlint-staged">git 提交检测/husky/pre-commit/lint-staged</span></h3>
+<h3 id="git-ti-jiao-jian-ce-husky-pre-commit-lint-staged">git 提交检测/husky/pre-commit/lint-staged</h3>
 <p>husky 继承了 Git 下所有的钩子，在触发钩子的时候，husky 可以阻止不合法的 commit,push 等等。</p>
 <p>husky 是一个 npm 包，安装后，可以很方便的在<code>package.json</code>配置<code>git hook</code> 脚本 。</p>
 <p>比如，在 package.json 内配置如</p>
@@ -340,9 +340,9 @@
 <p>那么，在后续的每一次<code>git commit</code> 之前，都会执行一次对应的 hook 脚本<code>npm run lint</code> 。其他 hook 同理</p>
 <p>pre-commit：<a href="https://github.com/PaicFE/blog/issues/10" target="_blank" rel="noopener">https://github.com/PaicFE/blog/issues/10</a></p>
 <p>lint-staged: <a href="https://github.com/okonet/lint-staged" target="_blank" rel="noopener">https://github.com/okonet/lint-staged</a></p>
-<h3><span id="prettire-配置">prettire 配置</span></h3>
+<h3 id="prettire-pei-zhi">prettire 配置</h3>
 <p><a href="https://prettier.io/docs/en/options.html" target="_blank" rel="noopener">https://prettier.io/docs/en/options.html</a></p>
-<h3><span id="优化">优化</span></h3>
+<h3 id="you-hua">优化</h3>
 <ol>
 <li>
 <p>include &amp; exclude</p>
@@ -441,8 +441,8 @@
 </li>
 </ol>
 <p>具体细节配置可参考，<a href="https://github.com/nvnvyezi/init-webpack" target="_blank" rel="noopener">https://github.com/nvnvyezi/init-webpack</a></p>
-<h3><span id="package">package</span></h3>
-<h4><span id="babel-preset-env">babel-preset-env</span></h4>
+<h3 id="package">package</h3>
+<h4 id="babel-preset-env">babel-preset-env</h4>
 <p>根据配置的目标浏览器或者运行环境来自动将 ES2015+的代码转换为 es5。</p>
 <p><strong>参数</strong></p>
 <ul>
@@ -457,35 +457,35 @@
 <li>exclude：一个包含不使用的 <code>plugins</code> 的数组</li>
 <li>useBuiltIns：为 <code>polyfills</code> 应用 <code>@babel/preset-env</code> ，可选 <code>&quot;usage&quot; | &quot;entry&quot; | false</code>，默认为 <code>false</code></li>
 </ul>
-<h4><span id="babelpreset-react">@babel/preset-react</span></h4>
+<h4 id="babel-preset-react">@babel/preset-react</h4>
 <p><a href="https://www.babeljs.cn/docs/babel-preset-react" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="html-loader">html-loader</span></h4>
+<h4 id="html-loader">html-loader</h4>
 <p><a href="https://webpack.docschina.org/loaders/html-loader/" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="html-webpack-plugin">html-webpack-plugin</span></h4>
+<h4 id="html-webpack-plugin">html-webpack-plugin</h4>
 <p><a href="https://webpack.docschina.org/plugins/html-webpack-plugin/" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="mini-css-extract-plugin">mini-css-extract-plugin</span></h4>
+<h4 id="mini-css-extract-plugin">mini-css-extract-plugin</h4>
 <p><a href="https://github.com/webpack-contrib/mini-css-extract-plugin" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="postcss-loader">postcss-loader</span></h4>
+<h4 id="postcss-loader">postcss-loader</h4>
 <p><a href="https://www.webpackjs.com/loaders/postcss-loader/" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="webpack-parallel-uglify-plugin">webpack-parallel-uglify-plugin</span></h4>
+<h4 id="webpack-parallel-uglify-plugin">webpack-parallel-uglify-plugin</h4>
 <p><a href="https://www.cnblogs.com/tugenhua0707/p/9569762.html" target="_blank" rel="noopener">使用</a></p>
-<h4><span id="babelplugin-proposal-class-properties">@babel/plugin-proposal-class-properties</span></h4>
+<h4 id="babel-plugin-proposal-class-properties">@babel/plugin-proposal-class-properties</h4>
 <p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-class-properties" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="babelplugin-proposal-export-default-from">@babel/plugin-proposal-export-default-from</span></h4>
+<h4 id="babel-plugin-proposal-export-default-from">@babel/plugin-proposal-export-default-from</h4>
 <p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-export-default-from" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="babelplugin-proposal-export-namespace-from">@babel/plugin-proposal-export-namespace-from</span></h4>
+<h4 id="babel-plugin-proposal-export-namespace-from">@babel/plugin-proposal-export-namespace-from</h4>
 <p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-export-namespace-from" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="babelplugin-proposal-object-rest-spread">@babel/plugin-proposal-object-rest-spread</span></h4>
+<h4 id="babel-plugin-proposal-object-rest-spread">@babel/plugin-proposal-object-rest-spread</h4>
 <p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-object-rest-spread" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="babelplugin-proposal-optional-chaining">@babel/plugin-proposal-optional-chaining</span></h4>
+<h4 id="babel-plugin-proposal-optional-chaining">@babel/plugin-proposal-optional-chaining</h4>
 <p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="babelplugin-syntax-dynamic-import">@babel/plugin-syntax-dynamic-import</span></h4>
+<h4 id="babel-plugin-syntax-dynamic-import">@babel/plugin-syntax-dynamic-import</h4>
 <p><a href="https://babeljs.io/docs/en/babel-plugin-syntax-dynamic-import" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="babelplugin-transform-runtime">@babel/plugin-transform-runtime</span></h4>
+<h4 id="babel-plugin-transform-runtime">@babel/plugin-transform-runtime</h4>
 <p><a href="https://babeljs.io/docs/en/babel-plugin-transform-runtime" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="babelpreset-typescript">@babel/preset-typescript</span></h4>
+<h4 id="babel-preset-typescript">@babel/preset-typescript</h4>
 <p><a href="https://babeljs.io/docs/en/babel-preset-typescript" target="_blank" rel="noopener">文档</a></p>
-<h4><span id="eslint-plugin-react-hooks">eslint-plugin-react-hooks</span></h4>
+<h4 id="eslint-plugin-react-hooks">eslint-plugin-react-hooks</h4>
 <p><a href="http://react.html.cn/docs/hooks-rules.html" target="_blank" rel="noopener">使用说明</a></p>
 
 
@@ -499,7 +499,7 @@
         <ul class="pager">
            
           <li class="next">
-            <a href="/2018/12/10/JavaScript/inherit/" data-toggle="tooltip" data-placement="top" title="js继承">Next Post &rarr;</a>
+            <a href="/2018/12/10/JavaScript/type-detection/" data-toggle="tooltip" data-placement="top" title="js数据类型检测">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -517,11 +517,12 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概念</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">webpack 启动参数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">webpack4 特性</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">splitChunks</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">extra-text-webpack-plugin</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">hash/chunkhash:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">tsconfig.json</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">tslint/eslint 选择</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.0.1.</span> <span class="toc-nav-text">eslint 配置项</span></a></li></ol></li></ol><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">git 提交检测/husky/pre-commit/lint-staged</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">prettire 配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">优化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">package</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.1.</span> <span class="toc-nav-text">babel-preset-env</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.2.</span> <span class="toc-nav-text">@babel/preset-react</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.3.</span> <span class="toc-nav-text">html-loader</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.4.</span> <span class="toc-nav-text">html-webpack-plugin</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.5.</span> <span class="toc-nav-text">mini-css-extract-plugin</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.6.</span> <span class="toc-nav-text">postcss-loader</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.7.</span> <span class="toc-nav-text">webpack-parallel-uglify-plugin</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.8.</span> <span class="toc-nav-text">@babel/plugin-proposal-class-properties</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.9.</span> <span class="toc-nav-text">@babel/plugin-proposal-export-default-from</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.10.</span> <span class="toc-nav-text">@babel/plugin-proposal-export-namespace-from</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.11.</span> <span class="toc-nav-text">@babel/plugin-proposal-object-rest-spread</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.12.</span> <span class="toc-nav-text">@babel/plugin-proposal-optional-chaining</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.13.</span> <span class="toc-nav-text">@babel/plugin-syntax-dynamic-import</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.14.</span> <span class="toc-nav-text">@babel/plugin-transform-runtime</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.15.</span> <span class="toc-nav-text">@babel/preset-typescript</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.16.</span> <span class="toc-nav-text">eslint-plugin-react-hooks</span></a></li></ol></li>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#gai-nian"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概念</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#webpack-qi-dong-can-shu"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">webpack 启动参数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#webpack-4-te-xing"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">webpack4 特性</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#split-chunks"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">splitChunks</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#extra-text-webpack-plugin"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">extra-text-webpack-plugin</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hash-chunkhash"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">hash/chunkhash:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tsconfig-json"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">tsconfig.json</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tslint-eslint-xuan-ze"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">tslint/eslint 选择</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#eslint-pei-zhi-xiang"><span class="toc-nav-number">7.0.1.</span> <span class="toc-nav-text">eslint 配置项</span></a></li></ol></li></ol><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#git-ti-jiao-jian-ce-husky-pre-commit-lint-staged"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">git 提交检测/husky/pre-commit/lint-staged</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#prettire-pei-zhi"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">prettire 配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#you-hua"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">优化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#package"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">package</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-preset-env"><span class="toc-nav-number">11.1.</span> <span class="toc-nav-text">babel-preset-env</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-preset-react"><span class="toc-nav-number">11.2.</span> <span class="toc-nav-text">@babel/preset-react</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#html-loader"><span class="toc-nav-number">11.3.</span> <span class="toc-nav-text">html-loader</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#html-webpack-plugin"><span class="toc-nav-number">11.4.</span> <span class="toc-nav-text">html-webpack-plugin</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#mini-css-extract-plugin"><span class="toc-nav-number">11.5.</span> <span class="toc-nav-text">mini-css-extract-plugin</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#postcss-loader"><span class="toc-nav-number">11.6.</span> <span class="toc-nav-text">postcss-loader</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#webpack-parallel-uglify-plugin"><span class="toc-nav-number">11.7.</span> <span class="toc-nav-text">webpack-parallel-uglify-plugin</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-plugin-proposal-class-properties"><span class="toc-nav-number">11.8.</span> <span class="toc-nav-text">@babel/plugin-proposal-class-properties</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-plugin-proposal-export-default-from"><span class="toc-nav-number">11.9.</span> <span class="toc-nav-text">@babel/plugin-proposal-export-default-from</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-plugin-proposal-export-namespace-from"><span class="toc-nav-number">11.10.</span> <span class="toc-nav-text">@babel/plugin-proposal-export-namespace-from</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-plugin-proposal-object-rest-spread"><span class="toc-nav-number">11.11.</span> <span class="toc-nav-text">@babel/plugin-proposal-object-rest-spread</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-plugin-proposal-optional-chaining"><span class="toc-nav-number">11.12.</span> <span class="toc-nav-text">@babel/plugin-proposal-optional-chaining</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-plugin-syntax-dynamic-import"><span class="toc-nav-number">11.13.</span> <span class="toc-nav-text">@babel/plugin-syntax-dynamic-import</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-plugin-transform-runtime"><span class="toc-nav-number">11.14.</span> <span class="toc-nav-text">@babel/plugin-transform-runtime</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#babel-preset-typescript"><span class="toc-nav-number">11.15.</span> <span class="toc-nav-text">@babel/preset-typescript</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#eslint-plugin-react-hooks"><span class="toc-nav-number">11.16.</span> <span class="toc-nav-text">eslint-plugin-react-hooks</span></a></li></ol></li>
         
         </div>
       </aside>
     
+
 
 
       <!-- Sidebar Container -->
@@ -664,7 +665,7 @@
 
           <!-- </div> -->
           visitors&nbsp;&nbsp;
-          <span class="post-count">6.3k words altogether</span>
+          <span class="post-count">6.9k words altogether</span>
         </p>
       </div>
     </div>

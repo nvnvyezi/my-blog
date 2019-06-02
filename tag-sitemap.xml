@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>http://nvnvyezi.club/tags/%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B/</loc>
+        <lastmod>2019-06-02T13:59:24.554Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/js/</loc>
+        <lastmod>2019-06-02T13:59:24.554Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://nvnvyezi.club/tags/typescript/</loc>
         <lastmod>2019-06-02T05:16:07.693Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -25,13 +39,6 @@
 
     <url>
         <loc>http://nvnvyezi.club/tags/%E7%BB%A7%E6%89%BF/</loc>
-        <lastmod>2019-06-01T03:49:01.074Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/tags/js/</loc>
         <lastmod>2019-06-01T03:49:01.074Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
