@@ -87,7 +87,7 @@
             <h2 class="subheading">
               继承是oo语言中的一个最为人津津乐道的概念。许多oo语言都支持两种继承方式：接口继承和实现继承。接口继承只继承方法签名，而实现继承则继承实际的方法。如前所述，由于函数没有签名，在ECMAScript中无法实现接口继承。ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。
             </h2>
-            <span class="meta">
+            <span class="meta" style="padding-bottom: 10px">
               <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
                 ><img
                   alt="php计数器"
@@ -143,6 +143,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -151,13 +158,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -200,22 +200,21 @@
 
 
     <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    
+<!-- Modify by Yu-Hsuan Yen -->
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
 <!-- Post Content -->
 <article>
-    <div class="container">
-        <div class="row">
-
-            <!-- Post Container -->
-            <div class="
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container" style="margin-bottom: 30px;">
-
-                <h3><span id="原型链继承">原型链继承</span></h3>
+        <h3><span id="原型链继承">原型链继承</span></h3>
 <blockquote>
 <p>利用原型让一个引用类型继承另一个引用类型的属性和方法</p>
 </blockquote>
@@ -431,29 +430,28 @@
 </ul>
 
 
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-                <div id="gitalk-container"></div>
+        <!-- 分享-->
+        <div class="social-share share-component" align="center" data-source="https://nvnvyezi.club" data-sites="qzone,qq,weibo,wechat" data-wechat-qrcode-title="请打开微信扫一扫分享" data-wechat-qrcode-helper></div>
+        <!-- 分享-->
+        <div id="gitalk-container"></div>
 
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2019/02/22/webpack/build/" data-toggle="tooltip" data-placement="top" title="webpack4搭建以及优化">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                </ul>
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          <li class="previous">
+            <a href="/2019/02/22/webpack/build/" data-toggle="tooltip" data-placement="top" title="webpack4搭建以及优化">&larr; Previous Post</a>
+          </li>
+           
+        </ul>
 
-                <!-- disqus comment start -->
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
+        <!-- disqus comment start -->
+        
+        <!-- disqus comment end -->
+      </div>
+
+      <!-- Tabe of Content -->
+      <!-- Table of Contents -->
 
     
       <aside id="sidebar">
@@ -466,90 +464,101 @@
       </aside>
     
 
-                
-            <!-- Sidebar Container -->
-            <div class="
+
+      <!-- Sidebar Container -->
+      <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 sidebar-container">
+        <!-- Featured Tags -->
+        
+        <section>
+          <!-- no hr -->
+          <h5><a href="/tags/">所属标签</a></h5>
+          <div class="tags">
+            
+            <a class="tag" href="/tags/#js" title="js">js</a>
+            
+            <a class="tag" href="/tags/#继承" title="继承">继承</a>
+            
+          </div>
+        </section>
+        
 
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">所属标签</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#js" title="js">js</a>
-                        
-                          <a class="tag" href="/tags/#继承" title="继承">继承</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
+        <!-- Friends Blog -->
+        
+      </div>
     </div>
+  </div>
 </article>
 
 <!-- 添加gitalk评论 -->
 <script type="text/javascript">
-    var gitalk = new Gitalk({
-            clientID: 'ed588defc49f2dd112f0',
-            clientSecret: '58808c8e9bcc55875f8380be0c63c748e1e465d1',
-            repo: 'my-blog',
-            owner: 'nvnvyezi',
-            admin: ['nvnvyezi'],
-            id: location.pathname,      // Ensure uniqueness and length less than 50
-            distractionFreeMode: false  // Facebook-like distraction free mode
-        })
+  var gitalk = new Gitalk({
+    clientID: "ed588defc49f2dd112f0",
+    clientSecret: "58808c8e9bcc55875f8380be0c63c748e1e465d1",
+    repo: "my-blog",
+    owner: "nvnvyezi",
+    admin: ["nvnvyezi"],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false // Facebook-like distraction free mode
+  });
 
-        gitalk.render('gitalk-container')
+  gitalk.render("gitalk-container");
 </script>
 
-
-
-
-
+ 
 <!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function(e) {
+          c(null, e);
+        },
+        false
+      );
     }
+    s.parentNode.insertBefore(o, s);
+  }
 </script>
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
+  async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: "hover",
+      placement: "left",
+      icon: "ℬ"
+    };
+    anchors
+      .add()
+      .remove(".intro-header h1")
+      .remove(".subheading")
+      .remove(".sidebar-container h5");
+  });
 </script>
 <style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
     }
+  }
 </style>
 
 <script type="text/javascript" src="/js/zooming.js"></script>
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
 
 
     <!-- Footer -->
