@@ -1415,8 +1415,7 @@ ul ul {
   list-style: none;
 }
 .list-inline > li {
-  line-height: 30px;
-    margin-left: 20px;
+  display: inline-block;
 }
 dl {
   margin-top: 0;
