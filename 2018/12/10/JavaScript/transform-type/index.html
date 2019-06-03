@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head tag -->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="搞清楚==和===以及[] == ![]的区别">
+  <!-- <meta name="keyword" content="" /> -->
+  <link rel="shortcut icon" href="/images/portrait.png">
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <title>
+     js数据类型转换 - nvnvyezi-blog 
+  </title>
+
+  <link rel="canonical" href="http://nvnvyezi.club/2018/12/10/JavaScript/transform-type/">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/beantech.min.css">
+
+  <!-- Pygments Highlight CSS -->
+  <link rel="stylesheet" href="/css/highlight.css"> <link rel="stylesheet" href="/css/widget.css"> <link rel="stylesheet" href="/css/rocket.css">
+  <link rel="stylesheet" href="/css/signature.css"> <link rel="stylesheet" href="/css/toc.css">
+
+  <!-- Custom Fonts -->
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+  <!-- Hux change font-awesome CDN to qiniu -->
+  <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- ga & ba script hoook -->
+  <script></script>
+</head>
+
+
+  <!-- hack iOS CSS :active style -->
+  <body ontouchstart="">
+    <!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+  header.intro-header{
+      
+          background-image: url('/images/book.jpg')
+          /*post*/
+      
+  }
+  
+  #signature{
+      background-image: url('/images/logo.png');
+  }
+  
+</style>
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature" style="background-color: rgba(0, 0,0, 0.3);">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a class="tag" href="/tags/#js" title="js">js</a>
+              
+              <a class="tag" href="/tags/#类型转换" title="类型转换">类型转换</a>
+              
+            </div>
+            <h1>js数据类型转换</h1>
+            <h2 class="subheading">
+              搞清楚==和===以及[] == ![]的区别
+            </h2>
+            <span class="meta" style="padding-bottom: 10px">
+              <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
+                ><img
+                  alt="php计数器"
+                  src="http://monster.gostats.cn/bin/count/a_507608/t_4/i_1/z_0/show_hits/counter.png"
+                  style="border-width:0"
+              /></a> -->
+              <!-- <div align="center"> -->
+              <a href="http://www.amazingcounters.com"><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3242783&c=9728662" alt="AmazingCounters.com"></a>
+
+              <!-- </div> -->
+              visitors</span>
+            <span class="meta">
+              Posted by nvnvyezi on 2018-12-10
+            </span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+ <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NVNV YEZI</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Modify by Yu-Hsuan Yen -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container" style="margin-bottom: 30px;">
+        <h3 id="chou-xiang-zhi-cao-zuo">抽象值操作</h3>
+<h4 id="tostring">Tostring</h4>
+<p><code>toString()</code> 方法返回一个表示该对象的字符串。</p>
+<p>每个对象都有一个<code>toString()</code>方法，当该对象被表示为一个文本值时，或者一个对象以预期的字符串方式引用时自动调用。默认情况下，<code>toString()</code>方法被每个<code>Object</code>对象继承。如果此方法在自定义对象中未被覆盖，<code>toString()</code> 返回 “[object <em>type</em>]”，其中<code>type</code>是对象的类型。</p>
+<h5 id="todo">todo</h5>
+<ol>
+<li>从JavaScript1.8.5开始<code>toString()</code>调用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null" target="_blank" rel="noopener"><code>null</code></a>返回<code>[object Null]</code>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="noopener"><code>undefined</code></a> 返回<code>[object Undefined]</code></li>
+<li><code>Number</code>对象覆盖了<code>Object</code>对象上的<code>toString</code>方法，不是直接继承的<code>Object.prototype.toString</code>
+<ol>
+<li>转换的基数（2到36），未指定的情况下默认为10，不在范围之内将抛出一个<code>RangeError</code></li>
+<li>当要转换的值是负数的时候，结果会保留负号</li>
+</ol>
+</li>
+<li>数组<code>toString()</code>方法返回表示指定数组及其元素的字符串。
+<ol>
+<li><code>toString</code>方法连接数组并返回一个字符串，其中包含用逗号分隔的每个数组元素。</li>
+</ol>
+</li>
+</ol>
+<h4 id="to-number">ToNumber</h4>
+<p>将非数字值转换为数字值</p>
+<p>在转换对象时，会先转换为对应的基本类型值，当返回非数字的基本类型值，在进行进一步的转换，转换规则如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="string">'23'</span>) 			<span class="comment">//23</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'12f'</span>) 		<span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">true</span>) 			<span class="comment">//1</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">false</span>) 		<span class="comment">//0</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>) <span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>) 			<span class="comment">//0</span></span><br><span class="line"><span class="built_in">Number</span>([<span class="string">'23'</span>])		<span class="comment">//23</span></span><br><span class="line"><span class="built_in">Number</span>(&#123;&#125;)				<span class="comment">//NaN</span></span><br></pre></td></tr></table></figure>
+<h4 id="to-primitive">ToPrimitive</h4>
+<p><code>Symbol.toPrimitive</code> 指将被调用的指定函数值的属性转换为相对应的原始值。</p>
+<p><code>Symbol.toPrimitive</code> 属性可以将一个对象转换为原始值。<code>该函数由字符串参数 hint 调用，</code>目的是指定原始值转换结果的首选类型。 hint 参数可以是<code>number</code>，<code>string</code>， 和 <code>default</code> 中的一种。</p>
+<p>在没有<code>Symbol.toPrimitive</code>的时候，会首先检查对象是否有<code>valueOf</code>方法，如果存在并且返回值为基本类型则使用此方法，否则继续查看对象是否存在<code>toString</code>方法，如果存在并且返回值为基本类型则使用此方法，否则将抛出<code>TypeError</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MDN的示例</span></span><br><span class="line"><span class="comment">// 没有 Symbol.toPrimitive 属性的对象</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(+obj1);     <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;obj1&#125;</span>`</span>); <span class="comment">// "[object Object]"</span></span><br><span class="line"><span class="built_in">console</span>.log(obj1 + <span class="string">""</span>); <span class="comment">// "[object Object]"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 拥有 Symbol.toPrimitive 属性的对象</span></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.toPrimitive](hint) &#123;</span><br><span class="line">    <span class="keyword">if</span> (hint == <span class="string">"number"</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (hint == <span class="string">"string"</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(+obj2);     <span class="comment">// 10      -- hint is "number"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;obj2&#125;</span>`</span>); <span class="comment">// "hello" -- hint is "string"</span></span><br><span class="line"><span class="built_in">console</span>.log(obj2 + <span class="string">""</span>); <span class="comment">// "true"  -- hint is "default"</span></span><br></pre></td></tr></table></figure>
+<h4 id="to-boolean">toBoolean</h4>
+<p>将JavaScript值转换为布尔值。</p>
+<p>转换规则如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下情况为false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>) 				<span class="comment">//false</span></span><br><span class="line"><span class="built_in">Boolean</span>(+<span class="number">0</span>)					<span class="comment">//false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="number">-0</span>)					<span class="comment">//false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">NaN</span>)				<span class="comment">//false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">undefined</span>)	<span class="comment">//false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">null</span>) 			<span class="comment">//false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">false</span>) 			<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<h3 id="xian-shi-lei-xing-zhuan-huan">显式类型转换</h3>
+<p>显式强制类型转换是通过显而易见的、目的明确的代码将数据进行强制类型转换。</p>
+<p>字符串和数字之间是通过<code>String()</code>和<code>Number()</code>来进行呼吸那个转换的</p>
+<p><code>String()</code>按照<code>ToString</code>规则，将值转换为字符串基本类型。</p>
+<p><code>Number()</code>按照<code>ToNumber</code>规则，将值转换为数字基本类型。</p>
+<p><code>+</code>运算符可以显式的将字符串或者日期转换为数字</p>
+<p><code>!!</code>显式的将类型转换为布尔值</p>
+<h3 id="yin-shi-lei-xing-zhuan-huan">隐式类型转换</h3>
+<p>隐式强制类型转换往往是一些操作的附带产物，如if(){}中会将括号内的部分转换为布尔类型。</p>
+<p>参考数学运算符</p>
+<h3 id="lei-xing-zhuan-huan-gui-ze">类型转换规则</h3>
+<img src="assets/image-20190530214313217.png" data-action="zoom">
+<h3 id="shu-xue-yun-suan-fu">数学运算符</h3>
+<p>对非Number类型进行运算符运算时，会先将非Number类型转换为Number类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>] + [<span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="comment">//1,23,4</span></span><br></pre></td></tr></table></figure>
+<h4 id="jia-fa-yun-suan">加法运算</h4>
+<ul>
+<li>当一侧为<code>String</code>类型，被识别为字符串拼接，并会优先将另一侧转换为字符串类型。</li>
+<li>当一侧为<code>Number</code>类型，另一侧为原始类型，则将原始类型转换为<code>Number</code>类型。</li>
+<li>当一侧为<code>Number</code>类型，另一侧为引用类型，将引用类型和<code>Number</code>类型转换成字符串后拼接。</li>
+</ul>
+<h5 id="todo-1">todo</h5>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[] + &#123;&#125; <span class="comment">// [object Object]</span></span><br><span class="line">&#123;&#125; + [] <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<h5 id>[] + {}</h5>
+<p>左侧转换为&quot;&quot;，右侧转换为&quot;[object Object]&quot;</p>
+<h5 id="-1">{} + []</h5>
+<p>涉及JavaScript的语法解析规则。</p>
+<p>{}被解析为一个空的代码块</p>
+<p>&quot;+[]&quot;被解析为对于空数组的一元操作“+”，也就是将数组强制转换为数字</p>
+<h4 id="-2">==</h4>
+<h5 id="na-n">NaN</h5>
+<p><code>NaN</code>和其他任何类型比较永远返回<code>false</code></p>
+<h5 id="null-undefined">null/undefined</h5>
+<p><code>null == undefined</code>比较结果是<code>true</code>，除此之外，<code>null、undefined</code>和其他任何结果的比较值都为<code>false</code>。</p>
+<h5 id="boolean">Boolean</h5>
+<p><code>Boolean</code>和其他任何类型比较，<code>Boolean</code>首先被转换为<code>Number</code>类型。</p>
+<h5 id="string-number">string/number</h5>
+<p><code>String</code>和<code>Number</code>比较，先将<code>String</code>转换为<code>Number</code>类型。</p>
+<h5 id="ji-ben-lei-xing-yin-yong-lei-xing">基本类型/引用类型</h5>
+<p>当基本类型和引用类型做比较时，对象类型会依照<code>ToPrimitive</code>规则转换为原始类型:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] == ![] <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><code>!</code>的优先级高于<code>==</code>，<code>![]</code>首先会被转换为<code>false</code>，然后<code>false</code>转换成<code>Number</code>类型<code>0</code>，左侧<code>[]</code>转换为<code>0</code>，两侧比较相等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="literal">null</span>] == <span class="literal">false</span> <span class="comment">// true</span></span><br><span class="line">[<span class="literal">undefined</span>] == <span class="literal">false</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>根据数组的<code>ToPrimitive</code>规则，数组元素为<code>null</code>或<code>undefined</code>时，该元素被当做空字符串处理，所以<code>[null]、[undefined]</code>都会被转换为<code>0</code>。</p>
+<h3 id="kuan-song-xiang-deng-yan-ge-xiang-deng">宽松相等/严格相等</h3>
+<p><code>==</code>允许在相等比较中进行强制类型转换，而<code>===</code>不允许。</p>
+<h4 id="bi-jiao-shi-de-zhuan-huan-gui-ze">比较时的转换规则</h4>
+<img src="assets/v2-965475269c7d2316048bd0af38cafe4e_hd.jpg" data-action="zoom">
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">比较运算x==y, 其中x和y是值，产生<span class="literal">true</span>或者<span class="literal">false</span>。这样的比较按如下方式进行：</span><br><span class="line"><span class="number">1.</span> 若Type(x)与Type(y)相同， 则</span><br><span class="line">	a. 若Type(x)为Undefined， 返回<span class="literal">true</span>。</span><br><span class="line">	b. 若Type(x)为Null， 返回<span class="literal">true</span>。</span><br><span class="line">	c. 若Type(x)为<span class="built_in">Number</span>， 则</span><br><span class="line">		i. 若x为<span class="literal">NaN</span>， 返回<span class="literal">false</span>。</span><br><span class="line">		ii. 若y为<span class="literal">NaN</span>， 返回<span class="literal">false</span>。</span><br><span class="line">		iii. 若x与y为相等数值， 返回<span class="literal">true</span>。</span><br><span class="line">		iv. 若x 为 +<span class="number">0</span> 且 y为−<span class="number">0</span>， 返回<span class="literal">true</span>。</span><br><span class="line">		v. 若x 为 −<span class="number">0</span> 且 y为+<span class="number">0</span>， 返回<span class="literal">true</span>。</span><br><span class="line">		vi. 返回<span class="literal">false</span>。</span><br><span class="line">	d. 若Type(x)为<span class="built_in">String</span>, 则当x和y为完全相同的字符序列（长度相等且相同字符在相同位置）时返回<span class="literal">true</span>。 否则， 返回<span class="literal">false</span>。</span><br><span class="line">	e. 若Type(x)为<span class="built_in">Boolean</span>, 当x和y为同为<span class="literal">true</span>或者同为<span class="literal">false</span>时返回<span class="literal">true</span>。 否则， 返回<span class="literal">false</span>。</span><br><span class="line">	f. 当x和y为引用同一对象时返回<span class="literal">true</span>。否则，返回<span class="literal">false</span>。</span><br><span class="line"><span class="number">2.</span> 若x为<span class="literal">null</span>且y为<span class="literal">undefined</span>， 返回<span class="literal">true</span>。</span><br><span class="line"><span class="number">3.</span> 若x为<span class="literal">undefined</span>且y为<span class="literal">null</span>， 返回<span class="literal">true</span>。</span><br><span class="line"><span class="number">4.</span> 若Type(x) 为 <span class="built_in">Number</span> 且 Type(y)为<span class="built_in">String</span>， 返回comparison x == ToNumber(y)的结果。</span><br><span class="line"><span class="number">5.</span> 若Type(x) 为 <span class="built_in">String</span> 且 Type(y)为<span class="built_in">Number</span>，返回比较ToNumber(x) == y的结果。</span><br><span class="line"><span class="number">6.</span> 若Type(x)为<span class="built_in">Boolean</span>， 返回比较ToNumber(x) == y的结果。</span><br><span class="line"><span class="number">7.</span> 若Type(y)为<span class="built_in">Boolean</span>， 返回比较x == ToNumber(y)的结果。</span><br><span class="line"><span class="number">8.</span> 若Type(x)为<span class="built_in">String</span>或<span class="built_in">Number</span>，且Type(y)为<span class="built_in">Object</span>，返回比较x == ToPrimitive(y)的结果。</span><br><span class="line"><span class="number">9.</span> 若Type(x)为<span class="built_in">Object</span>且Type(y)为<span class="built_in">String</span>或<span class="built_in">Number</span>， 返回比较ToPrimitive(x) == y的结果。</span><br><span class="line"><span class="number">10.</span> 返回<span class="literal">false</span>。</span><br></pre></td></tr></table></figure>
+
+
+        <!-- Friends Blog -->
+        
+          <hr>
+          <h5>参考文档</h5>
+          <ul class="list-inline">
+            
+            <li>
+              <a href="https://juejin.im/post/5cec1bcff265da1b8f1aa08f" target="_blank">【JS 进阶】你真的掌握变量和类型了吗</a>
+            </li>
+            
+            <li>
+              <a href="https://juejin.im/post/5b3b76de5188251afc25567f" target="_blank">JavaScript中的强制类型转换</a>
+            </li>
+            
+            <li>
+              <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive" target="_blank">Symbol​.toPrimitive[MDN]</a>
+            </li>
+            
+            <li>
+              <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString" target="_blank">Object​.prototype​.toString()[MDN]</a>
+            </li>
+            
+          </ul>
+          
+
+        <!-- 分享-->
+        <div class="social-share share-component" align="center" data-source="https://nvnvyezi.club" data-sites="qzone,qq,weibo,wechat" data-wechat-qrcode-title="请打开微信扫一扫分享" data-wechat-qrcode-helper></div>
+        <!-- 分享-->
+        <div id="gitalk-container"></div>
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          <li class="previous">
+            <a href="/2018/12/10/JavaScript/inherit/" data-toggle="tooltip" data-placement="top" title="js继承">&larr; Previous Post</a>
+          </li>
+           
+        </ul>
+
+        <!-- disqus comment start -->
+        
+        <!-- disqus comment end -->
+      </div>
+
+      <!-- Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#chou-xiang-zhi-cao-zuo"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">抽象值操作</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#tostring"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Tostring</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#todo"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#to-number"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">ToNumber</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#to-primitive"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">ToPrimitive</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#to-boolean"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">toBoolean</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#xian-shi-lei-xing-zhuan-huan"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">显式类型转换</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#yin-shi-lei-xing-zhuan-huan"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">隐式类型转换</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#lei-xing-zhuan-huan-gui-ze"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">类型转换规则</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#shu-xue-yun-suan-fu"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">数学运算符</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#jia-fa-yun-suan"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">加法运算</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#todo-1"><span class="toc-nav-number">5.1.1.</span> <span class="toc-nav-text">todo</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#"><span class="toc-nav-number">5.1.2.</span> <span class="toc-nav-text">[] + {}</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#-1"><span class="toc-nav-number">5.1.3.</span> <span class="toc-nav-text">{} + []</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#-2"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">==</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#na-n"><span class="toc-nav-number">5.2.1.</span> <span class="toc-nav-text">NaN</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null-undefined"><span class="toc-nav-number">5.2.2.</span> <span class="toc-nav-text">null/undefined</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#boolean"><span class="toc-nav-number">5.2.3.</span> <span class="toc-nav-text">Boolean</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#string-number"><span class="toc-nav-number">5.2.4.</span> <span class="toc-nav-text">string/number</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#ji-ben-lei-xing-yin-yong-lei-xing"><span class="toc-nav-number">5.2.5.</span> <span class="toc-nav-text">基本类型/引用类型</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#kuan-song-xiang-deng-yan-ge-xiang-deng"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">宽松相等/严格相等</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#bi-jiao-shi-de-zhuan-huan-gui-ze"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">比较时的转换规则</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+        <!-- Featured Tags -->
+        
+        <section>
+          <!-- no hr -->
+          <h5><a href="/tags/">所属标签</a></h5>
+          <div class="tags">
+            
+            <a class="tag" href="/tags/#js" title="js">js</a>
+            
+            <a class="tag" href="/tags/#类型转换" title="类型转换">类型转换</a>
+            
+          </div>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- 添加gitalk评论 -->
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: "ed588defc49f2dd112f0",
+    clientSecret: "58808c8e9bcc55875f8380be0c63c748e1e465d1",
+    repo: "my-blog",
+    owner: "nvnvyezi",
+    admin: ["nvnvyezi"],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false // Facebook-like distraction free mode
+  });
+
+  gitalk.render("gitalk-container");
+</script>
+
+ 
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function(e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+  async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: "hover",
+      placement: "left",
+      icon: "ℬ"
+    };
+    anchors
+      .add()
+      .remove(".intro-header h1")
+      .remove(".subheading")
+      .remove(".sidebar-container h5");
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+               
+          <li>
+            <a target="_blank" href="https://github.com/nvnvyezi">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+           
+          <li>
+            <a target="_blank" href="https://user.qzone.qq.com/1187128658">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">
+          Copyright &copy; nvnvyezi 2019
+        </p>
+        <p class="copyright text-muted">
+          <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
+            ><img
+              alt="php计数器"
+              src="http://monster.gostats.cn/bin/count/a_507608/t_4/i_1/z_0/show_hits/counter.png"
+              style="border-width:0"
+          /></a> -->
+          <!-- <div align="center"> -->
+          <a href="http://www.amazingcounters.com"><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3242783&c=9728662" alt="AmazingCounters.com"></a>
+
+          <!-- </div> -->
+          visitors&nbsp;&nbsp;
+          <span class="post-count">8.5k words altogether</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function(e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+<!-- jquery.tagcloud.js -->
+<script>
+  // only load tagcloud.js in tag.html
+  if ($("#tag_cloud").length !== 0) {
+    async("http://nvnvyezi.club/js/jquery.tagcloud.js", function() {
+      $.fn.tagcloud.defaults = {
+        //size: {start: 1, end: 1, unit: 'em'},
+        color: { start: "#bbbbee", end: "#0085a1" }
+      };
+      $("#tag_cloud a").tagcloud();
+    });
+  }
+</script>
+
+<!--fastClick.js -->
+<script>
+  async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function() {
+    var $nav = document.querySelector("nav");
+    if ($nav) FastClick.attach($nav);
+  });
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+    <a id="rocket" href="#top" class=""></a>
+    <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+    <!-- Image to hack wechat -->
+    <!-- <img
+      src="http://nvnvyezi.club/images/icon_wechat.png"
+      width="0"
+      height="0"
+    /> -->
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+  </body>
+</html>

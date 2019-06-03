@@ -3,14 +3,21 @@
 
 
     <url>
-        <loc>http://nvnvyezi.club/tags/%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B/</loc>
-        <lastmod>2019-06-02T13:59:24.554Z</lastmod>
+        <loc>http://nvnvyezi.club/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</loc>
+        <lastmod>2019-06-03T10:59:01.418Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/js/</loc>
+        <lastmod>2019-06-03T10:59:01.418Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B/</loc>
         <lastmod>2019-06-02T13:59:24.554Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
