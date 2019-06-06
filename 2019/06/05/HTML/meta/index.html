@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head tag -->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="r0MJNowOXwUCdeGtWMXCWKrxWGq1vRjhRKYMdi_B9AY">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="了解常用的meta标签有什么，知道为什么要使用meta标签，以及meta标签的作用">
+  <meta name="author" content="nvnvyezi">
+  <link rel="shortcut icon" href="/images/portrait.png">
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <title>
+     meta标签的用法 - nvnvyezi的博客 
+  </title>
+
+  <link rel="canonical" href="http://nvnvyezi.club/2019/06/05/HTML/meta/">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/beantech.min.css">
+
+  <!-- Pygments Highlight CSS -->
+  <link rel="stylesheet" href="/css/highlight.css"> <link rel="stylesheet" href="/css/widget.css"> <link rel="stylesheet" href="/css/rocket.css">
+  <link rel="stylesheet" href="/css/signature.css"> <link rel="stylesheet" href="/css/toc.css">
+
+  <!-- Custom Fonts -->
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+  <!-- Hux change font-awesome CDN to qiniu -->
+  <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- ga & ba script hoook -->
+  <script></script>
+</head>
+
+
+  <!-- hack iOS CSS :active style -->
+  <body ontouchstart="">
+    <!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+  header.intro-header{
+      
+          background-image: url('/images/book.jpg')
+          /*post*/
+      
+  }
+  
+  #signature{
+      background-image: url('/images/logo.png');
+  }
+  
+</style>
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature" style="background-color: rgba(0, 0,0, 0.3);">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a class="tag" href="/tags/#html" title="html">html</a>
+              
+              <a class="tag" href="/tags/#meta" title="meta">meta</a>
+              
+            </div>
+            <h1>meta标签的用法</h1>
+            <h2 class="subheading">
+              了解常用的meta标签有什么，知道为什么要使用meta标签，以及meta标签的作用
+            </h2>
+            <span class="meta" style="padding-bottom: 10px">
+              <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
+                ><img
+                  alt="php计数器"
+                  src="http://monster.gostats.cn/bin/count/a_507608/t_4/i_1/z_0/show_hits/counter.png"
+                  style="border-width:0"
+              /></a> -->
+              <!-- <div align="center"> -->
+              <a href="http://www.amazingcounters.com"><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3242783&c=9728662" alt="AmazingCounters.com"></a>
+
+              <!-- </div> -->
+              visitors</span>
+            <span class="meta">
+              Posted by nvnvyezi on 2019-06-05
+            </span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+ <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NVNV YEZI</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Modify by Yu-Hsuan Yen -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container" style="margin-bottom: 30px;">
+        <p><strong>元数据即描述数据的数据</strong></p>
+<h3 id="meta">meta</h3>
+<p>一个html文件是一个数据，meta标签就是用来描述该文件的元数据</p>
+<p>位于文档的头部，不包含任何内容，仅提供页面的说明，关键字等数据，服务于浏览器，搜索引擎和其他网络服务</p>
+<p>标签的属性定义了与文档相关联的名称/键值对</p>
+<ul>
+<li><strong>http-equiv</strong>: 把<code>content</code>属性关联到<code>HTTP</code>头部
+<ul>
+<li><code>content-type</code></li>
+<li><code>expires</code></li>
+<li><code>refresh</code></li>
+<li><code>set-cookie</code></li>
+</ul>
+</li>
+<li><strong>name</strong>: 把<code>content</code>属性关联到一个名称
+<ul>
+<li><code>author</code></li>
+<li><code>description</code></li>
+<li><code>keywords</code></li>
+<li><code>generator</code></li>
+<li><code>revised</code></li>
+<li><code>others</code></li>
+</ul>
+</li>
+<li><strong>content</strong>: 于<code>http-equiv</code>和<code>name</code>属性相关的元信息</li>
+<li><strong>charset</strong>：声明当前文档所使用的字符编码</li>
+</ul>
+<h4 id="notes">Notes</h4>
+<ol>
+<li>必须位于<code>head</code>元素内部</li>
+<li>总是以名称/值的形式被成对传递的</li>
+<li>一个<code>meta</code>元素只用于一种用途</li>
+<li>如果设置了<code>name</code>，则说明是一个文档页面，适用于整个页面</li>
+<li>如果设置了<code>http-equiv</code>，则是一个<code>pragma</code>指令，通常由Web服务器提供有关如何提供网页的信息。</li>
+<li>如果设置了<code>charset</code>，则是字符集声明，用于网页所使用的字符编码。</li>
+<li>如果设置了<code>itemprop</code>，则是用户定义的元数据 - 对于用户代理是透明的，因为元数据的语义是特定于用户的</li>
+</ol>
+<h3 id="name">name</h3>
+<p>定义元数据的名称，与<code>content</code>属性包含的值相关联。HTML 和 XHTML 标签都没有指定任何预先定义的 <code>&lt;meta&gt;</code> 名称。通常情况下，您可以自由使用对自己和源文档的读者来说富有意义的名称。</p>
+<ul>
+<li>
+<p><code>application-name</code>：定义正运行在该网页上的网络应用名称</p>
+<ul>
+<li>简单的网页不应该去定义</li>
+</ul>
+</li>
+<li>
+<p><code>author</code>：文档的作者名称</p>
+</li>
+<li>
+<p><code>description</code>：内容的简短和精确描述，一些浏览器，如Firefox和Opera，将其用作书签页面的默认描述。</p>
+</li>
+<li>
+<p><code>generator</code>：生成页面的软件的标识符</p>
+</li>
+<li>
+<p><code>keywords</code>：用逗号分隔的与页面内容相关的单词</p>
+</li>
+<li>
+<p><code>referrer</code>：控制所有从该页面发出的HTTP请求中<code>referer</code>首部的内容。<code>content</code>取值：数据来源于<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta#attr-name" target="_blank" rel="noopener">MDN</a></p>
+<table>
+<thead>
+<tr>
+<th>content</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>no-referrer</code></td>
+<td>不要发送 HTTP <code>Referer</code> 首部。</td>
+</tr>
+<tr>
+<td><code>origin</code></td>
+<td>发送当前文档的 <a href="https://developer.mozilla.org/en-US/docs/Glossary/Origin" target="_blank" rel="noopener">origin</a>。</td>
+</tr>
+<tr>
+<td><code>no-referrer-when-downgrade</code></td>
+<td>当目的地是先验安全的(https-&gt;https)则发送 <a href="https://developer.mozilla.org/en-US/docs/Glossary/Origin" target="_blank" rel="noopener">origin</a> 作为 referrer ，但是当目的地是较不安全的 (https-&gt;http)时则不发送 referrer 。这个是默认的行为。</td>
+</tr>
+<tr>
+<td><code>origin-when-crossorigin</code></td>
+<td>在同源请求下，发送完整的URL (不含查询参数) ，其他情况下则仅发送当前文档的 <a href="https://developer.mozilla.org/en-US/docs/Glossary/Origin" target="_blank" rel="noopener">origin</a>。</td>
+</tr>
+<tr>
+<td><code>unsafe-URL</code></td>
+<td>在同源请求下，发送完整的URL (不含查询参数)。</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><code>creator</code>：文档创建者的名称，可以是机构的名称，有多个的话必须定义多个<code>meta</code></p>
+</li>
+<li>
+<p><code>googlebot</code>：<code>robots</code>谷歌的索引抓取工具Googlebot 的同义词，只适用于google</p>
+</li>
+<li>
+<p><code>publisher</code>：以自由格式定义文档发布者的名称，可以是机构的名称。</p>
+</li>
+<li>
+<p><code>robots</code>：定义协作爬虫应该与页面的行为，以逗号分隔的值的列表。数据来源于<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta#attr-name" target="_blank" rel="noopener">MDN</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">值</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">使用者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>index</code></td>
+<td style="text-align:left">允许机器人索引页面</td>
+<td style="text-align:left">所有</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>noindex</code></td>
+<td style="text-align:left">阻止机器人索引页面</td>
+<td style="text-align:left">所有</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>follow</code></td>
+<td style="text-align:left">允许机器人跟踪页面上的链接</td>
+<td style="text-align:left">所有</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>nofollow</code></td>
+<td style="text-align:left">阻止机器人跟踪页面上的链接</td>
+<td style="text-align:left">所有</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>noodp</code></td>
+<td style="text-align:left">阻止使用<a href="http://www.dmoz.org/" target="_blank" rel="noopener">Open Directory Project</a>描述（如果有）作为搜索引擎结果页面中页面的描述</td>
+<td style="text-align:left"><a href="http://www.google.com/support/webmasters/bin/answer.py?hl=en&amp;answer=79812" target="_blank" rel="noopener">谷歌</a>，<a href="http://help.yahoo.com/l/us/yahoo/search/indexing/indexing-11.html;_ylt=Arh3LHnisvRMPJKzQqmJ97JYqCN4" target="_blank" rel="noopener">雅虎</a>，<a href="http://www.bing.com/toolbox/blogs/webmaster/archive/2008/06/03/robots-exclusion-protocol-joining-together-to-provide-better-documentation.aspx" target="_blank" rel="noopener">必应</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>noarchive</code></td>
+<td style="text-align:left">阻止搜索引擎缓存页面内容</td>
+<td style="text-align:left"><a href="http://www.google.com/support/webmasters/bin/answer.py?hl=en&amp;answer=79812" target="_blank" rel="noopener">谷歌</a>，<a href="http://help.yahoo.com/l/us/yahoo/search/indexing/basics-10.html;_ylt=Aszma_Ly8TfhL7mn_LGWn5RYqCN4" target="_blank" rel="noopener">雅虎</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>nosnippet</code></td>
+<td style="text-align:left">阻止在搜索引擎结果页面中显示页面的任何描述</td>
+<td style="text-align:left"><a href="http://www.google.com/support/webmasters/bin/answer.py?answer=35304" target="_blank" rel="noopener">谷歌</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>noimageindex</code></td>
+<td style="text-align:left">阻止此页面显示为索引图像的引用页面</td>
+<td style="text-align:left"><a href="http://www.google.com/support/webmasters/bin/answer.py?hl=en&amp;answer=79812" target="_blank" rel="noopener">谷歌</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>noydir</code></td>
+<td style="text-align:left">阻止使用Yahoo Directory描述（如果有）作为搜索引擎结果页面中页面的描述</td>
+<td style="text-align:left"><a href="http://help.yahoo.com/l/us/yahoo/search/indexing/indexing-11.html;_ylt=Arh3LHnisvRMPJKzQqmJ97JYqCN4" target="_blank" rel="noopener">雅虎</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>nocache</code></td>
+<td style="text-align:left">同义词 <code>noarchive</code></td>
+<td style="text-align:left"><a href="http://www.bing.com/toolbox/blogs/webmaster/archive/2008/06/03/robots-exclusion-protocol-joining-together-to-provide-better-documentation.aspx" target="_blank" rel="noopener">Bing</a></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><code>slurp</code>：与<code>robots</code>一样， 但其仅使用于 Slurp – Yahoo Search的抓取工具。</p>
+</li>
+<li>
+<p><code>rebderer</code>：为双核浏览器准备，用于指定双核浏览器默认以何种方式渲染页面</p>
+</li>
+<li>
+<p><code>viewport</code>：提供有关视口初始大小的提示，仅供移动设备使用。数据来源于<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta#attr-name" target="_blank" rel="noopener">MDN</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">值</th>
+<th style="text-align:left">可能值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>width</code></td>
+<td style="text-align:left">一个正整数或者字符串 <code>device-width</code></td>
+<td style="text-align:left">以pixels（像素）为单位， 定义viewport（视口）的宽度。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>height</code></td>
+<td style="text-align:left">一个正整数或者字符串 <code>device-height</code></td>
+<td style="text-align:left">以pixels（像素）为单位， 定义viewport（视口）的高度。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>initial-scale</code></td>
+<td style="text-align:left"><code>一个0.0</code> 到<code>10.0之间的正数</code></td>
+<td style="text-align:left">定义设备宽度（纵向模式下的设备宽度或横向模式下的设备高度）与视口大小之间的缩放比率。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>maximum-scale</code></td>
+<td style="text-align:left"><code>一个0.0</code> 到<code>10.0之间的正数</code></td>
+<td style="text-align:left">定义缩放的最大值；它必须大于或等于<code>minimum-scale</code>的值，不然会导致不确定的行为发生。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>minimum-scale</code></td>
+<td style="text-align:left">一个<code>0.0</code> 到<code>10.0</code>之间的正数</td>
+<td style="text-align:left">定义缩放的最小值；它必须小于或等于<code>maximum-scale</code>的值，不然会导致不确定的行为发生。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>user-scalable</code></td>
+<td style="text-align:left">一个布尔值（<code>yes</code>或者<code>no</code>）</td>
+<td style="text-align:left">如果设置为<code>no</code>，用户将不能放大或缩小网页。默认值为<code>yes</code>。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="notes-1">Notes</h4>
+<ol>
+<li>设置了<code>itemprop</code>, <code>http-equiv</code>or <code>charset</code>中任意一个属性 ，都不能在设置这个属性了。</li>
+<li>动态的插入<code>&lt;meta name=&quot;referrer&quot;&gt;</code>是不起作用的，如果同时有多个彼此冲突的策略被定义，那么 no-referrer 策略会生效。</li>
+<li>如果没有提供 name 属性，会采用 http-equiv 属性的值。</li>
+</ol>
+<h3 id="charset">charset</h3>
+<p>声明当前文档所使用的字符编码，可以被具有<code>lang</code>属性的元素所覆盖。值必须是一个符合由IANA所定义的字符编码首选MIME 名称（<em>preferred MIME name</em> ）之一。</p>
+<h4 id="notes-2">Notes</h4>
+<ol>
+<li>鼓励使用UTF-8</li>
+<li>不应该使用不兼容ASCII的编码规范， 以避免不必要的安全风险：浏览器不支持他们(这些不规范的编码)可能会导致浏览器渲染html出错. 比如<code>JIS_C6226-1983</code>, <code>JIS_X0212-1990</code>, <code>HZ-GB-2312</code>, <code>JOHAB</code>,ISO-2022 系列,EBCDIC系列 等文字</li>
+<li>非兼容ASCII编码就是那些不会将8位代码点的<code>0x20</code> 到 <code>0x7E</code> 映射为Unicode代码点 <code>0x0020</code> 到 <code>0x007E</code> 的编码)</li>
+<li>开发者必须禁用 <code>CESU-8</code>, <code>UTF-7</code>, <code>BOCU-1</code> 或 <code>SCSU</code> 这些字符集，因为这些字符集已经被证实存在跨站脚本攻击（XSS）的风险。</li>
+<li>开发者应尽量避免使用 <code>UTF-32</code>字符集对网页进行编码，因为不是所有的HTML5编码算法能够将其与 <code>UTF-16</code> 编码区分开来。</li>
+<li>声明的字符编码必须与页面保存所使用的编码相匹配，以避免乱码和安全漏洞.</li>
+<li>HTTP的Content-Type头部以及任何Byte-Order Marks元素都优先于此元素。</li>
+<li>强烈建议使用该属性定义字符编码. 如果未定义，某些跨脚本技术可能危害网页</li>
+</ol>
+<h3 id="http-equiv">http-equiv</h3>
+<p>指示服务器在发送实际的文档之前先在要传送给浏览器的 MIME 文档头部包含名称/值对。</p>
+<ul>
+<li><code>content-language</code>：定义页面使用的默认语言
+<ul>
+<li>尽量使用全剧属性<code>lang</code>来代替</li>
+</ul>
+</li>
+<li><code>content-security-policy</code>：允许页面作者定义当前页的 <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives" target="_blank" rel="noopener">内容策略</a>。 内容策略主要指定允许的服务器源和脚本端点，这有助于防止跨站点脚本攻击。</li>
+<li><code>content-type</code>：定义文档的MIME type
+<ul>
+<li>使用<code>charset</code>代替</li>
+</ul>
+</li>
+<li><code>default-style</code>：指定了在页面上使用的首选样式表</li>
+<li><code>refresh</code>
+<ul>
+<li>如果<code>content</code>只包含一个正整数，则是重新载入页面的时间间隔</li>
+<li>如果<code>content</code>包含一个正整数并且跟着一个字符串，则是重定向到指定链接的时间间隔</li>
+</ul>
+</li>
+<li><code>set-cookie</code>：为页面定义cookie
+<ul>
+<li>该用HTTP的<code>Set-Cookie</code>代替</li>
+</ul>
+</li>
+</ul>
+<h3 id="robots-txt-he-meta-robots-qu-bie">robots.txt和meta robots区别</h3>
+<h4 id="robots-txt">robots.txt</h4>
+<p>阻止搜索引擎抓取页面，一般不建议使用</p>
+<h5 id="chuang-jian">创建</h5>
+<p>在根目录创建<code>robots.txt</code></p>
+<h6 id="nei-rong">内容</h6>
+<p>User-agent：搜索引擎的值（*表示所有），比如<code>Baiduspider</code>，<code>Googlebot</code>，<code>MSNBot</code>等</p>
+<p>Disallow：不希望抓取的页面路径</p>
+<p>Allow：禁止抓取的路径里面存在子路径需要被抓取</p>
+<h5 id="ying-yong-chang-jing">应用场景</h5>
+<ul>
+<li>未完成的頁面</li>
+<li>测试页面</li>
+<li>网站后台</li>
+</ul>
+<h4 id="meta-robots">meta robots</h4>
+<p>在索引层面阻止搜索引擎索引页面，但搜索引擎还是抓取了页面的</p>
+<h5 id="ying-yong-chang-jing-1">应用场景</h5>
+<ul>
+<li>当网页不适合出现但是又可以提高SEO排名</li>
+</ul>
+
+
+        <!-- Friends Blog -->
+        
+          <hr>
+          <h5>参考文档</h5>
+          <ul class="list-inline">
+            
+            <li style="display: block;margin-left: 15px;line-height: 30px">
+              <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta#attr-name" target="_blank">meta-MDN</a>
+            </li>
+            
+            <li style="display: block;margin-left: 15px;line-height: 30px">
+              <a href="http://www.yesharris.com/meta-robots-and-robots-txt/" target="_blank">三分鐘搞懂 SEO的《meta robots、robots.txt》</a>
+            </li>
+            
+          </ul>
+          
+
+        <!-- 分享-->
+        <div class="social-share share-component" align="center" data-source="https://nvnvyezi.club" data-sites="qzone,qq,weibo,wechat" data-wechat-qrcode-title="请打开微信扫一扫分享" data-wechat-qrcode-helper></div>
+        <!-- 分享-->
+        <div id="gitalk-container"></div>
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+           
+          <li class="next">
+            <a href="/2019/06/04/HTML/global-attribute/" data-toggle="tooltip" data-placement="top" title="HTML全局属性">Next Post &rarr;</a>
+          </li>
+          
+        </ul>
+
+        <!-- disqus comment start -->
+        
+        <!-- disqus comment end -->
+      </div>
+
+      <!-- Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#meta"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">meta</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#name"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">name</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-1"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#charset"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">charset</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-2"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#http-equiv"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">http-equiv</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#robots-txt-he-meta-robots-qu-bie"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">robots.txt和meta robots区别</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#robots-txt"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">robots.txt</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#chuang-jian"><span class="toc-nav-number">5.1.1.</span> <span class="toc-nav-text">创建</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#nei-rong"><span class="toc-nav-number">5.1.1.1.</span> <span class="toc-nav-text">内容</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#ying-yong-chang-jing"><span class="toc-nav-number">5.1.2.</span> <span class="toc-nav-text">应用场景</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#meta-robots"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">meta robots</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#ying-yong-chang-jing-1"><span class="toc-nav-number">5.2.1.</span> <span class="toc-nav-text">应用场景</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+        <!-- Featured Tags -->
+        
+        <section>
+          <!-- no hr -->
+          <h5><a href="/tags/">所属标签</a></h5>
+          <div class="tags">
+            
+            <a class="tag" href="/tags/#html" title="html">html</a>
+            
+            <a class="tag" href="/tags/#meta" title="meta">meta</a>
+            
+          </div>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- 添加gitalk评论 -->
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: "ed588defc49f2dd112f0",
+    clientSecret: "58808c8e9bcc55875f8380be0c63c748e1e465d1",
+    repo: "my-blog",
+    owner: "nvnvyezi",
+    admin: ["nvnvyezi"],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false // Facebook-like distraction free mode
+  });
+
+  gitalk.render("gitalk-container");
+</script>
+
+ 
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function(e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+  async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: "hover",
+      placement: "left",
+      icon: "ℬ"
+    };
+    anchors
+      .add()
+      .remove(".intro-header h1")
+      .remove(".subheading")
+      .remove(".sidebar-container h5");
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+               
+          <li>
+            <a target="_blank" href="https://github.com/nvnvyezi">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+           
+          <li>
+            <a target="_blank" href="https://user.qzone.qq.com/1187128658">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">
+          Copyright &copy; nvnvyezi 2019
+        </p>
+        <p class="copyright text-muted">
+          <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
+            ><img
+              alt="php计数器"
+              src="http://monster.gostats.cn/bin/count/a_507608/t_4/i_1/z_0/show_hits/counter.png"
+              style="border-width:0"
+          /></a> -->
+          <!-- <div align="center"> -->
+          <a href="http://www.amazingcounters.com"><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3242783&c=9728662" alt="AmazingCounters.com"></a>
+
+          <!-- </div> -->
+          visitors&nbsp;&nbsp;
+          <span class="post-count">14k words altogether</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function(e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+<!-- jquery.tagcloud.js -->
+<script>
+  // only load tagcloud.js in tag.html
+  if ($("#tag_cloud").length !== 0) {
+    async("http://nvnvyezi.club/js/jquery.tagcloud.js", function() {
+      $.fn.tagcloud.defaults = {
+        //size: {start: 1, end: 1, unit: 'em'},
+        color: { start: "#bbbbee", end: "#0085a1" }
+      };
+      $("#tag_cloud a").tagcloud();
+    });
+  }
+</script>
+
+<!--fastClick.js -->
+<script>
+  async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function() {
+    var $nav = document.querySelector("nav");
+    if ($nav) FastClick.attach($nav);
+  });
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+    <a id="rocket" href="#top" class=""></a>
+    <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+    <!-- Image to hack wechat -->
+    <!-- <img
+      src="http://nvnvyezi.club/images/icon_wechat.png"
+      width="0"
+      height="0"
+    /> -->
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+  </body>
+</html>
