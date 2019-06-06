@@ -8,8 +8,24 @@
     </url>
 
     <url>
+        <loc>http://nvnvyezi.club/2018/12/10/JavaScript/type-detection/</loc>
+        <lastmod>2019-06-06T09:09:44.669Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/2018/12/10/JavaScript/transform-type/</loc>
+        <lastmod>2019-06-06T09:09:35.186Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://nvnvyezi.club/2019/06/04/HTML/global-attribute/</loc>
-        <lastmod>2019-06-05T07:00:08.477Z</lastmod>
+        <lastmod>2019-06-06T09:09:14.734Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -18,22 +34,6 @@
     <url>
         <loc>http://nvnvyezi.club/2019/06/03/HTML/doctype/</loc>
         <lastmod>2019-06-03T13:27:08.590Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/2018/12/10/JavaScript/transform-type/</loc>
-        <lastmod>2019-06-03T10:59:01.418Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/2018/12/10/JavaScript/type-detection/</loc>
-        <lastmod>2019-06-02T13:59:24.554Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

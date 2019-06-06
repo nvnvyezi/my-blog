@@ -4,10 +4,10 @@
   <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+  <meta name="google-site-verification" content="r0MJNowOXwUCdeGtWMXCWKrxWGq1vRjhRKYMdi_B9AY">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="从基础开始，了解dir,accesskey,contenteditable,data-*,lang,hidden等全局属性的用法，">
-  <!-- <meta name="keyword" content="" /> -->
+  <meta name="author" content="nvnvyezi">
   <link rel="shortcut icon" href="/images/portrait.png">
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -155,14 +155,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -241,7 +241,7 @@
 <p><code>auto</code>，让用户代理决定。它使用基本算法，因为它解析元素内的字符，直到找到具有强方向性的字符，然后将该方向性应用于整个元素。</p>
 </li>
 </ul>
-<h4 id="todo">todo</h4>
+<h4 id="notes">Notes</h4>
 <ol>
 <li>IE/Edge不支持<code>auto</code>关键字</li>
 </ol>
@@ -252,7 +252,7 @@
 <h4 id="ge-ping-tai-ji-huo-accesskey-de-cao-zuo">各平台激活accesskey的操作</h4>
 <p>图片来自<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/accesskey" target="_blank" rel="noopener">MDN</a></p>
 <img src="assets/image-20190604142304876.png" data-action="zoom">
-<h4 id="todo-1">todo</h4>
+<h4 id="notes-1">Notes</h4>
 <ol>
 <li>
 <p>IE触发的是<code>focus</code>事件，其他浏览器是<code>click</code>事件</p>
@@ -289,7 +289,7 @@
 <li><code>words</code>: 每个<strong>单词</strong>的第一个字母默认为大写字母；所有其他字母都默认为小写字母。</li>
 <li><code>characters</code>: 所有的<strong>字母</strong>都默认为大写。</li>
 </ul>
-<h4 id="todo-2">todo</h4>
+<h4 id="notes-2">Notes</h4>
 <ol>
 <li><code>autocapitalize</code> 属性可以覆盖每个元素的行为，比如关闭iOS中用户开启的首字母大写。</li>
 <li>当<code>input</code>元素的<code>type</code>属性为<code>email</code>，<code>password</code>，<code>url</code>时，<code>autocapitalize</code>不会生效</li>
@@ -304,7 +304,7 @@
 <li><code>true</code>或者空字符串元素可被编辑</li>
 <li><code>false</code>元素不可被编辑</li>
 </ul>
-<h4 id="todo-3">todo</h4>
+<h4 id="notes-3">Notes</h4>
 <ol>
 <li>如果未设置此属性，默认值将从其父元素继承。</li>
 <li>属性的值是枚举属性，且不允许简写</li>
@@ -319,7 +319,7 @@
 <li>不能包含任何分号 (<code>U+003A</code>)；</li>
 <li>不能包含A至Z的大写字母。</li>
 </ul>
-<h4 id="todo-4">todo</h4>
+<h4 id="notes-4">Notes</h4>
 <ol>
 <li>任何破折号(<code>U+002D</code>) 都会被下个字母的大写替代(驼峰拼写)。</li>
 <li><code>HTMLElement.dataset</code>属性是一个<code>DOMStringMap</code></li>
@@ -332,7 +332,7 @@
 <li><code>false</code>不可以被拖动</li>
 <li>如果该属性没有设值，则默认值 为 auto ，表示使用浏览器定义的默认行为</li>
 </ul>
-<h4 id="todo-5">todo</h4>
+<h4 id="notes-5">Notes</h4>
 <ol>
 <li>枚举属性</li>
 <li>不允许简写</li>
@@ -346,7 +346,7 @@
 </ul>
 <h3 id="hidden">hidden</h3>
 <p>布尔属性，表示一个元素尚未或者不再相关。例如，它可以被用来隐藏一个页面元素直到登录完毕。如果一个元素设置了这个属性，它就不会被显示。</p>
-<h4 id="todo-6">todo</h4>
+<h4 id="notes-6">Notes</h4>
 <ol>
 <li>如果某些内容被标记为隐藏，它将从所有版块中隐藏,包括例如屏幕阅读器.</li>
 <li><code>hidden</code>属性不能用于隐藏那些可以在其它板块中合理显示的内容</li>
@@ -378,7 +378,7 @@
 <li><code>tabindex=&quot;0&quot;</code> ，表示元素是可聚焦的，并且可以通过键盘导航来聚焦到该元素，它的相对顺序是当前处于的DOM结构来决定的。</li>
 <li><code>tabindex</code>=正值，表示元素是可聚焦的，并且可以通过键盘导航来访问到该元素；它的相对顺序按照<strong>tabindex</strong> 的数值递增而滞后获焦。如果多个元素拥有相同的 <strong>tabindex</strong>，它们的相对顺序按照他们在当前DOM中的先后顺序决定。</li>
 </ul>
-<h4 id="todo-7">todo</h4>
+<h4 id="notes-7">Notes</h4>
 <ol>
 <li>在<code>div</code>上设置了<code>tabindex</code>属性，子元素的内容将不能使用箭头键来滚动，除非在子元素上也设置<code>tabindex</code></li>
 </ol>
@@ -391,7 +391,7 @@
 <li><code>false</code>不会检查</li>
 </ul>
 <p>如果没有设置这个属性，默认值由元素自身类型和浏览器设置决定。默认值也可以被继承，当有祖先元素的 <em>spellcheck</em> 设置为 <code>true</code> 的情况下，子元素的默认值也是 <code>true</code>。</p>
-<h4 id="todo-8">todo</h4>
+<h4 id="notes-8">Notes</h4>
 <ol>
 <li>这个属性仅仅是浏览器上的提示: 浏览器并不会强制去检查拼写错误，通常不可编辑的元素是不会去检查拼写错误的，就算它的spellcheck 属性被设置为true而且浏览器支持拼写检查。</li>
 </ol>
@@ -525,7 +525,7 @@
 <p>具体信息可以查看<a href="https://lepture.com/zh/2015/fe-microdata" target="_blank" rel="noopener">前端的基础修养</a></p>
 <h4 id="itemid">itemid</h4>
 <p>元素的唯一的全局标识符</p>
-<h5 id="todo-9">todo</h5>
+<h5 id="notes-9">Notes</h5>
 <ol>
 <li><code>itemid</code> 属性只能为同时拥有 <strong>itemscope</strong> 和 <strong>itemtype</strong> 的元素指定。</li>
 <li><code>itemid</code> 只能为拥有 <code>itemscope</code> 的元素指定，它的相应 <code>itemtype</code> 引用或定义了支持全局标识符的词汇</li>
@@ -534,19 +534,19 @@
 <p>向元素中添加属性。每一个HTML元素都可以指定一个itemprop属性，一个<code>itemprop</code>属性由name-value对组成。每一个键值对称为一个属性，一个元素可以有一个或者多个属性。属性值可以是一个string或者一个URL，并且可以和大部分元素进行组合。</p>
 <h4 id="itemref">itemref</h4>
 <p>在特殊情况，元素不能写在<code>itemscope</code>中时，可以用<code>itemref</code>来标识，<code>itemref</code>使用元素的id来进行关联</p>
-<h5 id="todo-10">todo</h5>
+<h5 id="notes-10">Notes</h5>
 <ol>
 <li><code>itemref</code> 属性只能在指定了 <code>itemscope</code> 的元素上指定。</li>
 </ol>
 <h4 id="itemscope">itemscope</h4>
 <p>值为布尔值。定义了一个与元数据关联的数据项。就是说一个元素的 <code>itemscope</code> 属性会创建一个项，包含了一组与元素相关的键值对</p>
-<h5 id="todo-11">todo</h5>
+<h5 id="notes-11">Notes</h5>
 <ol>
 <li>每个 HTML 元素都可以有指定的 <code>itemscope</code> 属性。一个具有 <code>itemscope</code> 属性的元素可以没有关联的 <code>itemtype</code> ，但必须有相关的 <code>itemref</code>。</li>
 </ol>
 <h4 id="itemtype">itemtype</h4>
 <p>用于定义数据结构中的 <code>itemprop</code>（条目属性）</p>
-<h5 id="todo-12">todo</h5>
+<h5 id="notes-12">Notes</h5>
 <ol>
 <li>值必须是唯一标识的无序集合（大小写敏感），并且每个标识都是有效的绝对 URL，并且所有都使用相同词汇定义。属性的值必须至少拥有一个标识。</li>
 <li>条目的类型必须全部为定义在适用规范（例如 <a href="http://schema.org/" target="_blank" rel="noopener">schema.org</a>）中的类型，并且必须使用相同词汇定义。</li>
@@ -603,7 +603,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dir"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">dir</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#todo"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#accesskey"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">accesskey</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ge-ping-tai-ji-huo-accesskey-de-cao-zuo"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">各平台激活accesskey的操作</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#todo-1"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#autocapitalize"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">autocapitalize</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#todo-2"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#class"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">class</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#contenteditable"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">contenteditable</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#todo-3"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#data"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">data-*</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#de-xian-zhi"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">*的限制</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#todo-4"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#draggable"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">draggable</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#todo-5"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dropzone"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">dropzone</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hidden"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">hidden</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#todo-6"><span class="toc-nav-number">9.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#id"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">id</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#title"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">title</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ying-yong"><span class="toc-nav-number">11.1.</span> <span class="toc-nav-text">应用</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#translate"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">translate</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tabindex"><span class="toc-nav-number">13.</span> <span class="toc-nav-text">tabindex</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#todo-7"><span class="toc-nav-number">13.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#style"><span class="toc-nav-number">14.</span> <span class="toc-nav-text">style</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#spellcheck"><span class="toc-nav-number">15.</span> <span class="toc-nav-text">spellcheck</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#todo-8"><span class="toc-nav-number">15.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#slot"><span class="toc-nav-number">16.</span> <span class="toc-nav-text">slot</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#lang"><span class="toc-nav-number">17.</span> <span class="toc-nav-text">lang</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#wei-shi-yao-yao-shi-yong-lang"><span class="toc-nav-number">17.1.</span> <span class="toc-nav-text">为什么要使用lang</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#microdata"><span class="toc-nav-number">18.</span> <span class="toc-nav-text">microdata</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemid"><span class="toc-nav-number">18.1.</span> <span class="toc-nav-text">itemid</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#todo-9"><span class="toc-nav-number">18.1.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemprop"><span class="toc-nav-number">18.2.</span> <span class="toc-nav-text">itemprop</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemref"><span class="toc-nav-number">18.3.</span> <span class="toc-nav-text">itemref</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#todo-10"><span class="toc-nav-number">18.3.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemscope"><span class="toc-nav-number">18.4.</span> <span class="toc-nav-text">itemscope</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#todo-11"><span class="toc-nav-number">18.4.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemtype"><span class="toc-nav-number">18.5.</span> <span class="toc-nav-text">itemtype</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#todo-12"><span class="toc-nav-number">18.5.1.</span> <span class="toc-nav-text">todo</span></a></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dir"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">dir</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#accesskey"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">accesskey</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ge-ping-tai-ji-huo-accesskey-de-cao-zuo"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">各平台激活accesskey的操作</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-1"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#autocapitalize"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">autocapitalize</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-2"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#class"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">class</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#contenteditable"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">contenteditable</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-3"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#data"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">data-*</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#de-xian-zhi"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">*的限制</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-4"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#draggable"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">draggable</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-5"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dropzone"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">dropzone</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hidden"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">hidden</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-6"><span class="toc-nav-number">9.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#id"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">id</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#title"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">title</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ying-yong"><span class="toc-nav-number">11.1.</span> <span class="toc-nav-text">应用</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#translate"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">translate</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tabindex"><span class="toc-nav-number">13.</span> <span class="toc-nav-text">tabindex</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-7"><span class="toc-nav-number">13.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#style"><span class="toc-nav-number">14.</span> <span class="toc-nav-text">style</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#spellcheck"><span class="toc-nav-number">15.</span> <span class="toc-nav-text">spellcheck</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-8"><span class="toc-nav-number">15.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#slot"><span class="toc-nav-number">16.</span> <span class="toc-nav-text">slot</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#lang"><span class="toc-nav-number">17.</span> <span class="toc-nav-text">lang</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#wei-shi-yao-yao-shi-yong-lang"><span class="toc-nav-number">17.1.</span> <span class="toc-nav-text">为什么要使用lang</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#microdata"><span class="toc-nav-number">18.</span> <span class="toc-nav-text">microdata</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemid"><span class="toc-nav-number">18.1.</span> <span class="toc-nav-text">itemid</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#notes-9"><span class="toc-nav-number">18.1.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemprop"><span class="toc-nav-number">18.2.</span> <span class="toc-nav-text">itemprop</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemref"><span class="toc-nav-number">18.3.</span> <span class="toc-nav-text">itemref</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#notes-10"><span class="toc-nav-number">18.3.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemscope"><span class="toc-nav-number">18.4.</span> <span class="toc-nav-text">itemscope</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#notes-11"><span class="toc-nav-number">18.4.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#itemtype"><span class="toc-nav-number">18.5.</span> <span class="toc-nav-text">itemtype</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#notes-12"><span class="toc-nav-number">18.5.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
