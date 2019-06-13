@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="google-site-verification" content="r0MJNowOXwUCdeGtWMXCWKrxWGq1vRjhRKYMdi_B9AY">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="了解为什么typeof检测类型的局限性以及其他的类型检测方法">
+  <meta name="description" content="CSS隐藏页面元素的方法，以及各方法之间的区别">
   <meta name="author" content="nvnvyezi">
   <link rel="shortcut icon" href="/images/portrait.png">
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <title>
-     js数据类型检测 - nvnvyezi的博客 
+     元素隐藏的几种方法 - nvnvyezi的博客 
   </title>
 
-  <link rel="canonical" href="http://nvnvyezi.club/2018/12/10/JavaScript/type-detection/">
+  <link rel="canonical" href="http://nvnvyezi.club/2018/12/10/CSS/hide/">
 
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -78,14 +78,12 @@
           <div class="post-heading">
             <div class="tags">
               
-              <a class="tag" href="/tags/#js" title="js">js</a>
-              
-              <a class="tag" href="/tags/#类型检测" title="类型检测">类型检测</a>
+              <a class="tag" href="/tags/#css" title="css">css</a>
               
             </div>
-            <h1>js数据类型检测</h1>
+            <h1>元素隐藏的几种方法</h1>
             <h2 class="subheading">
-              了解为什么typeof检测类型的局限性以及其他的类型检测方法
+              CSS隐藏页面元素的方法，以及各方法之间的区别
             </h2>
             <span class="meta" style="padding-bottom: 10px">
               <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
@@ -214,45 +212,113 @@
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container" style="margin-bottom: 30px;">
-        <h2 id="typeof">typeof</h2>
-<p>只能检测出<code>undefined</code>，<code>string</code>， <code>number</code>， <code>boolean</code>， <code>symbol</code>， <code>function</code>，<code>object</code></p>
-<h3 id="fan-hui-zhi">返回值</h3>
+        <h3 id="overflow">overflow</h3>
+<p>定义当一个元素的内容太大而无法适应块级格式化上下文时候该做什么。</p>
+<p>指定除<code>visible</code>(默认值)以外的值将创建一个新的块级格式化上下文</p>
+<p>为使<code>overflow</code>有效果，块级容器必须有一个指定的高度（<code>height</code>或者<code>max-height</code>）或者将<code>white-space:nowrap</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">height</span>: 0;</span><br><span class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="notes">Notes</h4>
+<ol>
+<li>即使将overflow设置为hidden，也可以使用JavaScript <code>Element.scrollTop</code>属性来滚动HTML元素</li>
+<li>设置一个轴为<code>visible</code>，同时设置另一个轴为不同的值，会导致设置<code>visible</code>的轴的行为会变成<code>auto</code></li>
+<li>存在<code>border</code>，<code>padding</code>属性时可以相应事件</li>
+<li>视觉上的隐藏，不影响其他元素的布局， 不占据空间</li>
+<li>会被读屏软件获取到</li>
+<li>用户无法进行直接的交互</li>
+<li>可以通过dom获取到</li>
+<li>子孙元素无法重新显示出来</li>
+</ol>
+<h3 id="opacity">opacity</h3>
+<p>指定了一个元素的透明度，这个元素和他包括的子元素都拥有相同的透明度。</p>
+<p>当<code>opacity</code>值不为1时，会将元素放在一个新的层叠上下文中。</p>
+<h4 id="notes-1">Notes</h4>
+<ol>
+<li>视觉上的隐藏，影响其他元素的布局</li>
+<li>用户可以进行交互并且可以响应dom事件</li>
+<li>元素的所有内容会被读屏软件获取到。</li>
+</ol>
+<h3 id="visibility">visibility</h3>
+<p>显示或隐藏元素而不更改文档的布局，还可以隐藏<code>table</code>中的行或列</p>
 <ul>
-<li>基本类型，除 null 以外，均可以返回正确的结果。</li>
-<li>引用类型，除 function 以外，一律返回 object 类型。</li>
-<li>null ，返回 object 类型。</li>
-<li>function 返回 function 类型。</li>
+<li>
+<p><code>visible</code>：元素正常显示</p>
+</li>
+<li>
+<p><code>hidden</code>：隐藏元素，其他元素的布局不改变，和元素透明表现一致，若将其子元素设为<code>visibility: visible</code>，则该子元素依然可见。</p>
+</li>
+<li>
+<p><code>collapse</code>：隐藏表格的行或列，并且不占用任何空间，和<code>display:none</code>表现效果相当</p>
+</li>
 </ul>
-<h3 id="yuan-li">原理</h3>
-<p>js 在底层存储变量的时候，会在变量的机器码的低位 1-3 位存储其类型信息</p>
+<h4 id="notes-2">Notes</h4>
+<ol>
+<li>各浏览器对<code>collapse</code>表现可能不太一致，不建议使用</li>
+<li>影响其他元素的布局</li>
+<li>不会响应任何用户交互</li>
+<li>通过dom可以获取元素，无法响应dom事件</li>
+<li>其子孙元素可以通过设置<code>visible</code>来重新显示出来</li>
+<li>元素在读屏软件中也会被隐藏</li>
+<li>和<code>transition</code>搭配没有动画效果，但是消失的时间和设置的时间一样。</li>
+<li>背景图会不会发送请求，因浏览器而异，Chrome会，Safari会</li>
+<li><code>img</code>会发送请求</li>
+</ol>
+<h3 id="display">display</h3>
+<p>指定了元素的显示类型，它包含两类基础特征，用于指定元素怎样生成盒模型</p>
+<ol>
+<li>外部显示类型：定义了元素怎样参与流式布局的处理</li>
+<li>内部显示类型：定义了元素内子元素的布局方式。</li>
+</ol>
 <ul>
-<li>000：对象</li>
-<li>010：浮点数</li>
-<li>100：字符串</li>
-<li>110：布尔</li>
-<li>1：整数</li>
+<li>none: 会将元素从可访问性树中移除，并且其子元素也不在被屏幕阅读技术访问</li>
 </ul>
-<p><code>null</code>：所有机器码均为 0</p>
-<p><code>undefined</code>：用 −2<sup>30</sup> 整数来表示</p>
-<p><code>typeof</code> 在判断 <code>null</code> 的时候由于 <code>null</code> 的所有机器码均为 0，因此直接被当做了对象来看待。</p>
-<h2 id="to-string">toString</h2>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isType = <span class="function"><span class="params">type</span> =&gt;</span> target =&gt;</span><br><span class="line">  <span class="built_in">Object</span>.prototype.toString.call(target) === <span class="string">`[object <span class="subst">$&#123;type&#125;</span>]`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> isArray = isType(<span class="string">"Array"</span>);</span><br><span class="line"><span class="keyword">const</span> isRegExp = isType(<span class="string">"RegExp"</span>);</span><br><span class="line"><span class="keyword">const</span> isNull = isType(<span class="string">"Null"</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="instanceof">instanceof</h2>
-<p>instanceof 运算符用于测试构造函数的 prototype 属性是否出现在对象的原型链中的任何位置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_instanceof</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="built_in">Object</span>.getPrototypeOf(left) &amp;&amp; right.prototype) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Object</span>.getPrototypeOf(left) === right.prototype) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    left = <span class="built_in">Object</span>.getPrototypeOf(left);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>实现的<code>_instanceof</code>和直接使用 instanceof 对基本类型判断表现不一致</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>] <span class="keyword">instanceof</span> <span class="built_in">Array</span>; <span class="comment">// true</span></span><br><span class="line">[<span class="number">1</span>] <span class="keyword">instanceof</span> <span class="built_in">Object</span>; <span class="comment">// true</span></span><br><span class="line"><span class="string">"tom"</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>; <span class="comment">//false</span></span><br><span class="line"><span class="number">11</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span>; <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-<p><code>instanceof</code>运算符直接访问的变量的原始值，不会自动建立包装类。因此不能用来判断基本类型值。</p>
-<p><strong>instanceof 只能用来判断两个对象是否属于实例关系， 而不能判断一个对象实例具体属于哪种类型。</strong></p>
-<h3 id="wen-ti">问题</h3>
-<p><code>instanceof</code>假定只有一个全局执行环境。如果网页中包含多个框架，那实际上就存在两个以上不同的全局执行环境，从而存在两个以上不同版本的构造函数。如果你从一个框架向另一个框架传入一个数组，那么传入的数组与在第二个框架中原生创建的数组分别具有各自不同的构造函数。</p>
-<h2 id="constructor-1">constructor</h2>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"s"</span>.constructor === <span class="built_in">String</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h3 id="notes">Notes</h3>
-<ul>
-<li>null 和 undefined 没有 constructor 属性，可以采用其他判断方式</li>
-<li>函数的 constructor 是不稳定的，这个主要体现在自定义对象上，当开发者重写 prototype 后，原有的 constructor 引用会丢失，constructor 会默认为 Object</li>
-</ul>
+<h4 id="notes-3">Notes</h4>
+<ol>
+<li>元素不占据任何空间</li>
+<li>不能进行交互</li>
+<li>可以通过dom获取到，不能响应dom事件</li>
+<li>其子元素不能通过<code>block</code>重新显示</li>
+<li>读屏软件无法获取该元素</li>
+<li><code>transition</code>动画失效</li>
+<li>背景图会不会发送请求，因浏览器而异，Chrome会，Safari不会</li>
+<li><code>img</code>会发送请求</li>
+</ol>
+<h3 id="hidden">hidden</h3>
+<p>和<code>display:none</code>效果相当</p>
+<h3 id="position">position</h3>
+<p>假设有一个元素你想要与它交互，但是你又不想让它影响你的网页布局，在这种情况下，可以选择将元素移出可视区域</p>
+<h4 id="notes-4">Notes</h4>
+<ol>
+<li>视觉上的隐藏，实际显示在可视区域之外</li>
+<li>不影响其他元素布局</li>
+<li>用户无法直接进行交互</li>
+<li>可以被读屏软件获取到</li>
+<li>通过dom可以获取元素</li>
+</ol>
+<h3 id="clip-yi-cong-biao-zhun-shan-chu">clip（已从标准删除）</h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/clip" target="_blank" rel="noopener">文档-MDN</a></p>
+<h3 id="clip-path-ti-dai-clip-shu-xing">clip-path（替代clip属性）</h3>
+<p>通过裁剪实现元素隐藏</p>
+<h4 id="notes-5">Notes</h4>
+<ol>
+<li>视觉上的隐藏，元素仍然占据着空间，影响其他元素的布局。</li>
+<li>用户无法与其进行直接的交互</li>
+<li>元素的内容可以被读屏软件获取到</li>
+<li>通过dom可以获取到</li>
+<li>子孙元素无法在重新显示出来</li>
+</ol>
+<h3 id="z-index">z-index</h3>
+<p>元素存在，层叠关系变低，隐藏在其他元素下面</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">position</span><span class="selector-pseudo">:absolute</span>;</span><br><span class="line"><span class="selector-tag">z-index</span><span class="selector-pseudo">:-1000</span>;<span class="comment">/* 不占据空间，无法点击 */</span></span><br></pre></td></tr></table></figure>
+<h3 id="transform">transform</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">scale</span>(0,0)</span><br></pre></td></tr></table></figure>
+<h4 id="notes-6">Notes</h4>
+<ol>
+<li>视觉上的隐藏，隐藏元素仍然占据着空间。影响其他元素布局</li>
+<li>用户无法进行直接交互</li>
+<li>可以被读屏软件获取到</li>
+<li>通过dom可以获取到</li>
+<li>子孙元素无法重新显示出来</li>
+</ol>
 
 
         <!-- Friends Blog -->
@@ -268,13 +334,9 @@
         <ul class="pager">
           
           <li class="previous">
-            <a href="/2019/02/22/webpack/build/" data-toggle="tooltip" data-placement="top" title="webpack4搭建以及优化">&larr; Previous Post</a>
+            <a href="/2018/12/10/JavaScript/transform-type/" data-toggle="tooltip" data-placement="top" title="js数据类型转换">&larr; Previous Post</a>
           </li>
            
-          <li class="next">
-            <a href="/2018/12/10/JavaScript/inherit/" data-toggle="tooltip" data-placement="top" title="js继承">Next Post &rarr;</a>
-          </li>
-          
         </ul>
 
         <!-- disqus comment start -->
@@ -290,7 +352,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#typeof"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">typeof</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#fan-hui-zhi"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">返回值</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#yuan-li"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">原理</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#to-string"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">toString</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#instanceof"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">instanceof</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#wen-ti"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">问题</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#constructor-1"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">constructor</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#overflow"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">overflow</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#opacity"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">opacity</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-1"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#visibility"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">visibility</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-2"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#display"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">display</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-3"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hidden"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">hidden</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#position"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">position</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-4"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#clip-yi-cong-biao-zhun-shan-chu"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">clip（已从标准删除）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#clip-path-ti-dai-clip-shu-xing"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">clip-path（替代clip属性）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-5"><span class="toc-nav-number">8.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#z-index"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">z-index</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#transform"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">transform</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-6"><span class="toc-nav-number">10.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -310,9 +372,7 @@
           <h5><a href="/tags/">所属标签</a></h5>
           <div class="tags">
             
-            <a class="tag" href="/tags/#js" title="js">js</a>
-            
-            <a class="tag" href="/tags/#类型检测" title="类型检测">类型检测</a>
+            <a class="tag" href="/tags/#css" title="css">css</a>
             
           </div>
         </section>
