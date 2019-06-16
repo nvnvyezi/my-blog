@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>http://nvnvyezi.club/tags/SEO/</loc>
+        <lastmod>2019-06-16T11:49:51.601Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://nvnvyezi.club/tags/%E7%BB%A7%E6%89%BF/</loc>
         <lastmod>2019-06-16T11:47:53.459Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -117,13 +124,6 @@
     <url>
         <loc>http://nvnvyezi.club/tags/webpack/</loc>
         <lastmod>2019-06-16T11:38:58.553Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/tags/SEO/</loc>
-        <lastmod>2019-06-16T11:37:49.766Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
