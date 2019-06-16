@@ -8,29 +8,36 @@
     </url>
 
     <url>
-        <loc>http://nvnvyezi.club/categories/CSS/</loc>
-        <lastmod>2019-06-13T04:15:48.714Z</lastmod>
+        <loc>http://nvnvyezi.club/categories/JavaScript/</loc>
+        <lastmod>2019-06-16T11:47:53.459Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/categories/HTML/</loc>
-        <lastmod>2019-06-06T10:43:22.134Z</lastmod>
+        <lastmod>2019-06-16T11:47:37.423Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://nvnvyezi.club/categories/JavaScript/</loc>
-        <lastmod>2019-06-06T09:09:44.669Z</lastmod>
+        <loc>http://nvnvyezi.club/categories/CSS/</loc>
+        <lastmod>2019-06-16T11:47:18.565Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/categories/webpack/</loc>
-        <lastmod>2019-06-02T05:16:07.693Z</lastmod>
+        <lastmod>2019-06-16T11:38:58.553Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/categories/SEO/</loc>
+        <lastmod>2019-06-16T11:37:49.766Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

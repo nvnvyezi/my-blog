@@ -3,71 +3,127 @@
 
 
     <url>
-        <loc>http://nvnvyezi.club/tags/css/</loc>
-        <lastmod>2019-06-13T04:15:48.714Z</lastmod>
+        <loc>http://nvnvyezi.club/tags/%E7%BB%A7%E6%89%BF/</loc>
+        <lastmod>2019-06-16T11:47:53.459Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/js/</loc>
+        <lastmod>2019-06-16T11:47:53.459Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</loc>
+        <lastmod>2019-06-16T11:47:45.595Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/meta/</loc>
-        <lastmod>2019-06-06T10:43:22.134Z</lastmod>
+        <lastmod>2019-06-16T11:47:37.423Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/html/</loc>
-        <lastmod>2019-06-06T10:43:22.134Z</lastmod>
+        <lastmod>2019-06-16T11:47:37.423Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/title/</loc>
-        <lastmod>2019-06-06T10:41:17.291Z</lastmod>
+        <lastmod>2019-06-16T11:47:30.761Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/hidden/</loc>
-        <lastmod>2019-06-06T10:41:17.291Z</lastmod>
+        <lastmod>2019-06-16T11:47:30.761Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/contenteditable/</loc>
-        <lastmod>2019-06-06T10:41:17.291Z</lastmod>
+        <lastmod>2019-06-16T11:47:30.761Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/style/</loc>
-        <lastmod>2019-06-06T10:41:17.291Z</lastmod>
+        <lastmod>2019-06-16T11:47:30.761Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/class/</loc>
-        <lastmod>2019-06-06T10:41:17.291Z</lastmod>
+        <lastmod>2019-06-16T11:47:30.761Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/accesskey/</loc>
-        <lastmod>2019-06-06T10:41:17.291Z</lastmod>
+        <lastmod>2019-06-16T11:47:30.761Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://nvnvyezi.club/tags/dir/</loc>
-        <lastmod>2019-06-06T10:41:17.291Z</lastmod>
+        <lastmod>2019-06-16T11:47:30.761Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/doctype/</loc>
+        <lastmod>2019-06-16T11:47:25.473Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/css/</loc>
+        <lastmod>2019-06-16T11:47:18.565Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/typescript/</loc>
+        <lastmod>2019-06-16T11:38:58.553Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/react/</loc>
+        <lastmod>2019-06-16T11:38:58.553Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/webpack/</loc>
+        <lastmod>2019-06-16T11:38:58.553Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://nvnvyezi.club/tags/SEO/</loc>
+        <lastmod>2019-06-16T11:37:49.766Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -75,55 +131,6 @@
     <url>
         <loc>http://nvnvyezi.club/tags/%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B/</loc>
         <lastmod>2019-06-06T09:09:44.669Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/tags/js/</loc>
-        <lastmod>2019-06-06T09:09:44.669Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</loc>
-        <lastmod>2019-06-06T09:09:35.186Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/tags/doctype/</loc>
-        <lastmod>2019-06-03T13:27:08.590Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/tags/typescript/</loc>
-        <lastmod>2019-06-02T05:16:07.693Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/tags/react/</loc>
-        <lastmod>2019-06-02T05:16:07.693Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/tags/webpack/</loc>
-        <lastmod>2019-06-02T05:16:07.693Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/tags/%E7%BB%A7%E6%89%BF/</loc>
-        <lastmod>2019-06-01T03:49:01.074Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
