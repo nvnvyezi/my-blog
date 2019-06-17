@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="google-site-verification" content="r0MJNowOXwUCdeGtWMXCWKrxWGq1vRjhRKYMdi_B9AY">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="CSS隐藏页面元素的方法，以及各方法之间的区别">
+  <meta name="description" content="了解HTTP请求方法都有哪些，以及他们之间的区别">
   <meta name="author" content="nvnvyezi">
   <link rel="shortcut icon" href="/images/portrait.png">
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <title>
-     元素隐藏的几种方法 - nvnvyezi的博客 
+     HTTP请求方法 - nvnvyezi的博客 
   </title>
 
-  <link rel="canonical" href="http://nvnvyezi.club/2018/12/10/CSS/hide/">
+  <link rel="canonical" href="http://nvnvyezi.club/2019/06/17/HTTP/http-request-methods/">
 
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -57,7 +57,7 @@
 <style type="text/css">
   header.intro-header{
       
-          background-image: url('/images/bg3.jpg')
+          background-image: url('/images/bg8.jpg')
           /*post*/
       
   }
@@ -78,12 +78,14 @@
           <div class="post-heading">
             <div class="tags">
               
-              <a class="tag" href="/tags/#css" title="css">css</a>
+              <a class="tag" href="/tags/#http" title="http">http</a>
+              
+              <a class="tag" href="/tags/#HTTP请求方法" title="HTTP请求方法">HTTP请求方法</a>
               
             </div>
-            <h1>元素隐藏的几种方法</h1>
+            <h1>HTTP请求方法</h1>
             <h2 class="subheading">
-              CSS隐藏页面元素的方法，以及各方法之间的区别
+              了解HTTP请求方法都有哪些，以及他们之间的区别
             </h2>
             <span class="meta" style="padding-bottom: 10px">
               <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
@@ -98,7 +100,7 @@
               <!-- </div> -->
               visitors</span>
             <span class="meta">
-              Posted by nvnvyezi on 2018-12-10
+              Posted by nvnvyezi on 2019-06-17
             </span>
           </div>
           
@@ -212,117 +214,137 @@
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container" style="margin-bottom: 30px;">
-        <h3 id="overflow">overflow</h3>
-<p>定义当一个元素的内容太大而无法适应块级格式化上下文时候该做什么。</p>
-<p>指定除<code>visible</code>(默认值)以外的值将创建一个新的块级格式化上下文</p>
-<p>为使<code>overflow</code>有效果，块级容器必须有一个指定的高度（<code>height</code>或者<code>max-height</code>）或者将<code>white-space:nowrap</code>。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">height</span>: 0;</span><br><span class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br></pre></td></tr></table></figure>
+        <h3 id="get">GET</h3>
+<p>请求指定的资源，使用<code>get</code>的请求理论上只应该用于获取数据</p>
+<h4 id="te-dian">特点</h4>
+<ol>
+<li>请求有主体</li>
+<li>成功的响应带有主体</li>
+<li>是幂等的，理论是安全的，在回退时不会有负面影响</li>
+<li>浏览器会主动缓存，也支持用户手动收藏</li>
+<li>支持HTML表单</li>
+<li>编码方式默认因浏览器和<code>Content-Type</code>来决定，为了后端一致性，建议使用js来进行统一进行编码</li>
+<li>传递的参数直接暴漏在URL中</li>
+<li>可以携带的参数有大小限制，一般是客户端或者服务器做的限制，不是请求本身的</li>
+</ol>
+<h3 id="post">POST</h3>
+<p>发送数据给服务器，请求主体的类型由<code>Content-Type</code>来指定</p>
+<h4 id="te-dian-1">特点</h4>
+<ol>
+<li>不是幂等的</li>
+<li>浏览器回退是有害的，因为每一次提交都会起作用</li>
+<li>不会被浏览器缓存，一般是通过HTML表单发送，并返回服务器的处理结果</li>
+<li>请求携带的参数没有大小限制</li>
+<li>在<code>form</code>表单中<code>enctype</code>值用来指定给服务器的MIME类型，在<code>input</code>和<code>button</code>中通过<code>formenctype</code>属性来指定
+<ol>
+<li><code>application/x-www-form-urlencoded</code>：默认值，数据被编码成以</li>
+<li><code>multipart/form-data</code>：用于<code>input</code>元素<code>type:file</code></li>
+<li><code>text/plain</code>：HTML5</li>
+</ol>
+</li>
+<li>当请求方式是除HTML表单之外的方式，请求主体可以是任何类型</li>
+</ol>
 <h4 id="notes">Notes</h4>
 <ol>
-<li>即使将overflow设置为hidden，也可以使用JavaScript <code>Element.scrollTop</code>属性来滚动HTML元素</li>
-<li>设置一个轴为<code>visible</code>，同时设置另一个轴为不同的值，会导致设置<code>visible</code>的轴的行为会变成<code>auto</code></li>
-<li>存在<code>border</code>，<code>padding</code>属性时可以相应事件</li>
-<li>视觉上的隐藏，不影响其他元素的布局， 不占据空间</li>
-<li>会被读屏软件获取到</li>
-<li>用户无法进行直接的交互</li>
-<li>可以通过dom获取到</li>
-<li>子孙元素无法重新显示出来</li>
+<li><strong>Content-Type</strong>
+<ol>
+<li>指定客户端实际返回的内容的指定类型，但是浏览器不一定遵循此值</li>
+<li>可以使用<code>X-Content-Type-Options: nosniff</code>来提示客户端一定要遵循<code>COntent-Type</code>守部中对MIME类型的设定，禁用了客户端的MIME类型嗅探行为</li>
+<li><code>nosniff</code>只适用于<code>script</code>和<code>style</code>两种类型，将其应用于图片类型的文件</li>
+<li>请求类型是<code>style</code>。但是MIME类型不是<code>text/css</code>会被阻止</li>
+<li>请求类型是<code>script</code>但是MIME类型不是<code>JavaScript</code>类型会被阻止</li>
 </ol>
-<h3 id="opacity">opacity</h3>
-<p>指定了一个元素的透明度，这个元素和他包括的子元素都拥有相同的透明度。</p>
-<p>当<code>opacity</code>值不为1时，会将元素放在一个新的层叠上下文中。</p>
+</li>
+<li><code>enctype</code>会被<code>formenctype</code>覆盖</li>
+</ol>
+<h3 id="put">PUT</h3>
+<p>使用请求中的负载创建或者替换目标资源，对资源进行整体覆盖</p>
+<h4 id="te-dian-2">特点</h4>
+<ol>
+<li>幂等</li>
+<li>当目标资源不存在的时候将新建一份，服务器将返回201(Created)来通知客户端资源已创建</li>
+<li>当资源存在并且已经更新了资源，服务器返回200(OK)或者204(No Conetnt)来表示请求的成功完成</li>
+</ol>
+<h3 id="patch">PATCH</h3>
+<p>对资源进行部分修改</p>
+<h4 id="te-dian-3">特点</h4>
+<ol>
+<li>非幂等</li>
+<li>在跨域（cors）访问时，会在<code>Access-Control-Allow-Methods</code>中标明是否支持此请求方式</li>
+<li>如果在响应首部出现了<code>Accept-Patch</code>则表示服务器支持此请求方式</li>
+<li>当更改成功时服务器会响应204（No Content）</li>
+</ol>
+<h3 id="delete">DELETE</h3>
+<p>用于删除指定的资源</p>
+<h4 id="te-dian-4">特点</h4>
+<ol>
+<li>请求可以有主体</li>
+<li>返回的响应可以有主体</li>
+<li>幂等</li>
+<li>不可以在HTML表单中使用</li>
+<li>返回的状态码可能是202（Accepted），204（No content），200（OK）</li>
+</ol>
+<h3 id="head">HEAD</h3>
+<p>请求资源的头部信息，与GET请求返回的头部一致</p>
+<h4 id="shi-yong-chang-jing">使用场景</h4>
+<ol>
+<li>下载大文件前先获取其大小再决定是否下载来节约带宽资源</li>
+</ol>
+<h4 id="te-dian-5">特点</h4>
+<ol>
+<li>请求/响应没有正文</li>
+<li>幂等</li>
+<li>可以被缓存</li>
+<li>不支持HTML表单发送</li>
+</ol>
+<h3 id="options">OPTIONS</h3>
+<p>获取目的资源所支持的通信选项，</p>
+<h4 id="shi-yong-chang-jing-1">使用场景</h4>
+<ol>
+<li>检测服务器支持的请求方法</li>
+<li>CORS的预检请求</li>
+</ol>
+<h3 id="trace">TRACE</h3>
+<p>实现沿通向目标资源的路径的消息环回测试，提供了一种实用的debug机制</p>
+<p>请求的最终接收者应当原样反射（reflect）它接收到的消息，除了以下字段部分，作为一个<code>Content-Type</code> 为 <code>message/http</code>  的200（OK）响应的消息的主体（body）返回给客户端 。</p>
+<p>最终接收者是指初始（origin）服务器，或者第一个接收到<code>Max-Forwards</code> 值为 0的请求的服务器。</p>
+<h4 id="te-dian-6">特点</h4>
+<ol>
+<li>请求/响应没有主体</li>
+<li>幂等</li>
+<li>不可被缓存</li>
+<li>不允许HTML表单发送</li>
+</ol>
+<h3 id="connect">CONNECT</h3>
+<p>开启一个客户端与所请求资源之间的双向沟通的通道，用来创建隧道</p>
+<p><code>CONNECT</code>可以用来访问采用了 <code>SSL</code>，<code>HTTPS</code>协议的站点。客户端要求代理服务器将 TCP 连接作为通往目的主机隧道。之后该服务器会代替客户端与目的主机建立连接。连接建立好之后，代理服务器会面向客户端发送或接收 TCP 消息流。</p>
+<p><code>CONNECT</code> 是一个应用范围为点到点的方法。</p>
+<h4 id="te-dian-7">特点</h4>
+<ol>
+<li>请求没有主体</li>
+<li>响应有主体</li>
+<li>不是幂等的</li>
+<li>不可以被缓存</li>
+<li>不允许HTML表单发送</li>
+</ol>
 <h4 id="notes-1">Notes</h4>
 <ol>
-<li>视觉上的隐藏，影响其他元素的布局</li>
-<li>用户可以进行交互并且可以响应dom事件</li>
-<li>元素的所有内容会被读屏软件获取到。</li>
-</ol>
-<h3 id="visibility">visibility</h3>
-<p>显示或隐藏元素而不更改文档的布局，还可以隐藏<code>table</code>中的行或列</p>
-<ul>
-<li>
-<p><code>visible</code>：元素正常显示</p>
-</li>
-<li>
-<p><code>hidden</code>：隐藏元素，其他元素的布局不改变，和元素透明表现一致，若将其子元素设为<code>visibility: visible</code>，则该子元素依然可见。</p>
-</li>
-<li>
-<p><code>collapse</code>：隐藏表格的行或列，并且不占用任何空间，和<code>display:none</code>表现效果相当</p>
-</li>
-</ul>
-<h4 id="notes-2">Notes</h4>
-<ol>
-<li>各浏览器对<code>collapse</code>表现可能不太一致，不建议使用</li>
-<li>影响其他元素的布局</li>
-<li>不会响应任何用户交互</li>
-<li>通过dom可以获取元素，无法响应dom事件</li>
-<li>其子孙元素可以通过设置<code>visible</code>来重新显示出来</li>
-<li>元素在读屏软件中也会被隐藏</li>
-<li>和<code>transition</code>搭配没有动画效果，但是消失的时间和设置的时间一样。</li>
-<li>背景图会不会发送请求，因浏览器而异，Chrome会，Safari会</li>
-<li><code>img</code>会发送请求</li>
-</ol>
-<h3 id="display">display</h3>
-<p>指定了元素的显示类型，它包含两类基础特征，用于指定元素怎样生成盒模型</p>
-<ol>
-<li>外部显示类型：定义了元素怎样参与流式布局的处理</li>
-<li>内部显示类型：定义了元素内子元素的布局方式。</li>
-</ol>
-<ul>
-<li>none: 会将元素从可访问性树中移除，并且其子元素也不在被屏幕阅读技术访问</li>
-</ul>
-<h4 id="notes-3">Notes</h4>
-<ol>
-<li>元素不占据任何空间</li>
-<li>不能进行交互</li>
-<li>可以通过dom获取到，不能响应dom事件</li>
-<li>其子元素不能通过<code>block</code>重新显示</li>
-<li>读屏软件无法获取该元素</li>
-<li><code>transition</code>动画失效</li>
-<li>背景图会不会发送请求，因浏览器而异，Chrome会，Safari不会</li>
-<li><code>img</code>会发送请求</li>
-</ol>
-<h3 id="hidden">hidden</h3>
-<p>和<code>display:none</code>效果相当</p>
-<h3 id="position">position</h3>
-<p>假设有一个元素你想要与它交互，但是你又不想让它影响你的网页布局，在这种情况下，可以选择将元素移出可视区域</p>
-<h4 id="notes-4">Notes</h4>
-<ol>
-<li>视觉上的隐藏，实际显示在可视区域之外</li>
-<li>不影响其他元素布局</li>
-<li>用户无法直接进行交互</li>
-<li>可以被读屏软件获取到</li>
-<li>通过dom可以获取元素</li>
-</ol>
-<h3 id="clip-yi-cong-biao-zhun-shan-chu">clip（已从标准删除）</h3>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/clip" target="_blank" rel="noopener">文档-MDN</a></p>
-<h3 id="clip-path-ti-dai-clip-shu-xing">clip-path（替代clip属性）</h3>
-<p>通过裁剪实现元素隐藏</p>
-<h4 id="notes-5">Notes</h4>
-<ol>
-<li>视觉上的隐藏，元素仍然占据着空间，影响其他元素的布局。</li>
-<li>用户无法与其进行直接的交互</li>
-<li>元素的内容可以被读屏软件获取到</li>
-<li>通过dom可以获取到</li>
-<li>子孙元素无法在重新显示出来</li>
-</ol>
-<h3 id="z-index">z-index</h3>
-<p>元素存在，层叠关系变低，隐藏在其他元素下面</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">position</span><span class="selector-pseudo">:absolute</span>;</span><br><span class="line"><span class="selector-tag">z-index</span><span class="selector-pseudo">:-1000</span>;<span class="comment">/* 不占据空间，无法点击 */</span></span><br></pre></td></tr></table></figure>
-<h3 id="transform">transform</h3>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">scale</span>(0,0)</span><br></pre></td></tr></table></figure>
-<h4 id="notes-6">Notes</h4>
-<ol>
-<li>视觉上的隐藏，隐藏元素仍然占据着空间。影响其他元素布局</li>
-<li>用户无法进行直接交互</li>
-<li>可以被读屏软件获取到</li>
-<li>通过dom可以获取到</li>
-<li>子孙元素无法重新显示出来</li>
+<li>有可能代理服务器在创建隧道时需要进行身份验证</li>
 </ol>
 
 
         <!-- Friends Blog -->
         
+          <hr>
+          <h5>参考文档</h5>
+          <ul class="list-inline">
+            
+            <li style="display: block;margin-left: 15px;line-height: 30px">
+              <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods" target="_blank">HTTP请求方法-MDN</a>
+            </li>
+            
+          </ul>
+          
 
         <!-- 分享-->
         <div class="social-share share-component" align="center" data-source="https://nvnvyezi.club" data-sites="qzone,qq,weibo,wechat" data-wechat-qrcode-title="请打开微信扫一扫分享" data-wechat-qrcode-helper></div>
@@ -332,11 +354,11 @@
         <hr>
         <!-- Pager -->
         <ul class="pager">
-          
-          <li class="previous">
-            <a href="/2018/12/10/JavaScript/transform-type/" data-toggle="tooltip" data-placement="top" title="js数据类型转换">&larr; Previous Post</a>
-          </li>
            
+          <li class="next">
+            <a href="/2019/06/05/HTML/meta/" data-toggle="tooltip" data-placement="top" title="meta标签的用法">Next Post &rarr;</a>
+          </li>
+          
         </ul>
 
         <!-- disqus comment start -->
@@ -352,7 +374,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#overflow"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">overflow</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#opacity"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">opacity</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-1"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#visibility"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">visibility</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-2"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#display"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">display</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-3"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hidden"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">hidden</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#position"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">position</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-4"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#clip-yi-cong-biao-zhun-shan-chu"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">clip（已从标准删除）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#clip-path-ti-dai-clip-shu-xing"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">clip-path（替代clip属性）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-5"><span class="toc-nav-number">8.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#z-index"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">z-index</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#transform"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">transform</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-6"><span class="toc-nav-number">10.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#get"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">GET</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#post"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">POST</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-1"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">特点</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#put"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">PUT</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-2"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#patch"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">PATCH</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-3"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#delete"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">DELETE</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-4"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#head"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">HEAD</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#shi-yong-chang-jing"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">使用场景</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-5"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#options"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">OPTIONS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#shi-yong-chang-jing-1"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">使用场景</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#trace"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">TRACE</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-6"><span class="toc-nav-number">8.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#connect"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">CONNECT</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-7"><span class="toc-nav-number">9.1.</span> <span class="toc-nav-text">特点</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-1"><span class="toc-nav-number">9.2.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -372,7 +394,9 @@
           <h5><a href="/tags/">所属标签</a></h5>
           <div class="tags">
             
-            <a class="tag" href="/tags/#css" title="css">css</a>
+            <a class="tag" href="/tags/#http" title="http">http</a>
+            
+            <a class="tag" href="/tags/#HTTP请求方法" title="HTTP请求方法">HTTP请求方法</a>
             
           </div>
         </section>
