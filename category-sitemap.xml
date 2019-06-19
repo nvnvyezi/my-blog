@@ -8,6 +8,13 @@
     </url>
 
     <url>
+        <loc>http://nvnvyezi.club/categories/HTML/</loc>
+        <lastmod>2019-06-19T11:53:14.796Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://nvnvyezi.club/categories/HTTP/</loc>
         <lastmod>2019-06-17T10:09:24.179Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -24,13 +31,6 @@
     <url>
         <loc>http://nvnvyezi.club/categories/JavaScript/</loc>
         <lastmod>2019-06-16T11:47:53.459Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://nvnvyezi.club/categories/HTML/</loc>
-        <lastmod>2019-06-16T11:47:37.423Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

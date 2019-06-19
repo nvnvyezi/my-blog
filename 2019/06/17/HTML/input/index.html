@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="google-site-verification" content="r0MJNowOXwUCdeGtWMXCWKrxWGq1vRjhRKYMdi_B9AY">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="了解HTTP请求方法都有哪些，以及他们之间的区别">
+  <meta name="description" content="了解input的属性以及用法">
   <meta name="author" content="nvnvyezi">
   <link rel="shortcut icon" href="/images/portrait.png">
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <title>
-     HTTP请求方法 - nvnvyezi的博客 
+     input属性 - nvnvyezi的博客 
   </title>
 
-  <link rel="canonical" href="http://nvnvyezi.club/2019/06/17/HTTP/http-request-methods/">
+  <link rel="canonical" href="http://nvnvyezi.club/2019/06/17/HTML/input/">
 
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -57,7 +57,7 @@
 <style type="text/css">
   header.intro-header{
       
-          background-image: url('/images/bg8.jpg')
+          background-image: url('/images/bg4.jpg')
           /*post*/
       
   }
@@ -78,14 +78,14 @@
           <div class="post-heading">
             <div class="tags">
               
-              <a class="tag" href="/tags/#http" title="http">http</a>
+              <a class="tag" href="/tags/#html" title="html">html</a>
               
-              <a class="tag" href="/tags/#HTTP请求方法" title="HTTP请求方法">HTTP请求方法</a>
+              <a class="tag" href="/tags/#input" title="input">input</a>
               
             </div>
-            <h1>HTTP请求方法</h1>
+            <h1>input属性</h1>
             <h2 class="subheading">
-              了解HTTP请求方法都有哪些，以及他们之间的区别
+              了解input的属性以及用法
             </h2>
             <span class="meta" style="padding-bottom: 10px">
               <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
@@ -214,122 +214,101 @@
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container" style="margin-bottom: 30px;">
-        <h3 id="get">GET</h3>
-<p>请求指定的资源，使用<code>get</code>的请求理论上只应该用于获取数据</p>
-<h4 id="te-dian">特点</h4>
-<ol>
-<li>请求有主体</li>
-<li>成功的响应带有主体</li>
-<li>是幂等的，理论是安全的，在回退时不会有负面影响</li>
-<li>浏览器会主动缓存，也支持用户手动收藏</li>
-<li>支持HTML表单</li>
-<li>编码方式默认因浏览器和<code>Content-Type</code>来决定，为了后端一致性，建议使用js来进行统一进行编码</li>
-<li>传递的参数直接暴漏在URL中</li>
-<li>可以携带的参数有大小限制，一般是客户端或者服务器做的限制，不是请求本身的</li>
-</ol>
-<h3 id="post">POST</h3>
-<p>发送数据给服务器，请求主体的类型由<code>Content-Type</code>来指定</p>
-<h4 id="te-dian-1">特点</h4>
-<ol>
-<li>不是幂等的</li>
-<li>浏览器回退是有害的，因为每一次提交都会起作用</li>
-<li>不会被浏览器缓存，一般是通过HTML表单发送，并返回服务器的处理结果</li>
-<li>请求携带的参数没有大小限制</li>
-<li>在<code>form</code>表单中<code>enctype</code>值用来指定给服务器的MIME类型，在<code>input</code>和<code>button</code>中通过<code>formenctype</code>属性来指定
-<ol>
-<li><code>application/x-www-form-urlencoded</code>：默认值，数据被编码成以</li>
-<li><code>multipart/form-data</code>：用于<code>input</code>元素<code>type:file</code></li>
-<li><code>text/plain</code>：HTML5</li>
-</ol>
+        <h3 id="input">input</h3>
+<p>为基于Web的表单创建交互式控件，以便接受来自用户的数据；</p>
+<h3 id="input-shu-xing">input属性</h3>
+<ul>
+<li><strong>type</strong>：要呈现的控件类型</li>
+<li><strong>accept</strong>：当<code>type=&quot;file&quot;</code>时，表明服务器端可接受的文件类型，值为一个逗号分隔的列表，包含多个唯一的内容类型声明
+<ul>
+<li>以 STOP 字符 (U+002E) 开始的文件扩展名。（例如：&quot;.jpg,.png,.doc&quot;）</li>
+<li>一个有效的MIME类型，但没有拓展名</li>
+<li><code>audio/*</code>表示音频文件</li>
+<li><code>image/*</code>表示图片文件</li>
+<li><code>video/*</code>表示视频文件</li>
+</ul>
 </li>
-<li>当请求方式是除HTML表单之外的方式，请求主体可以是任何类型</li>
-</ol>
+<li><strong>accesskey</strong>：全局属性，为当前元素绑定一个触发事件的快捷键</li>
+<li><strong>autocomplete</strong>：表示控件的值是否可以被浏览器自动填充，当<code>type=hidden,checkbox,radio,file,button,submit,reset,image</code>时此值失效</li>
+<li><strong>autofocus</strong>：自动获得焦点，不适用于<code>type=hidden</code>，文档中只有一个表单元素可以具有<code>autofocus</code>属性</li>
+<li><strong>autoSave</strong>：当<code>type=search</code>时，之前的搜索值将在页面加载的下拉列表中保留</li>
+<li><strong>disabled</strong>：禁用此控件，提交表单忽略此组件，当<code>type=hidden</code>时，此属性将被忽略</li>
+<li><strong>form</strong>：值是在同一文件中的一个<code>form</code>的id，使表单不必一定得作为<code>form</code>的后代</li>
+<li><strong>formaction</strong>：处理提交的表单的url，可以覆盖<code>action</code>属性</li>
+<li><strong>formenctype</strong>：覆盖<code>enctype</code>属性</li>
+<li><strong>formmethod</strong>：覆盖<code>method</code>属性</li>
+<li><strong>formnovalidate</strong>：当<code>input</code>是提交按钮或者图片，则此属性指定在提交表单时需不需要验证。覆盖<code>novalidate</code>属性</li>
+<li><strong>formatarget</strong>：指示在提交表单后显示接收响应的位置，将覆盖<code>target</code>属性
+<ul>
+<li><code>_self</code>：缺省值，在当前页面重新加载返回值</li>
+<li><code>_blank</code>：在新窗口加载返回值</li>
+<li><code>_parent</code>：在父级浏览上下文中打开，当没有父级，和<code>_self</code>一致</li>
+<li><code>_top</code>：HTML 4文档时清空当前文档，加载返回内容；HTML5时在当前文档的最高级内加载返回值，如果没有父级，和<code>_self</code>的行为一致。</li>
+<li><code>iframename</code>: 返回值在指定frame中加载</li>
+</ul>
+</li>
+<li><strong>height</strong>：当<code>type=image</code>时定义图片高度</li>
+<li><strong>width</strong>：当<code>type=image</code>时定义图片宽度</li>
+<li><strong>list</strong>：预定义选项列表，值为同一文档的<code>datalist</code>的id，当<code>type=hidden,checkbox,radio,file</code>，此属性被忽略</li>
+<li><strong>max</strong>：数字或者日期的最大值，理论不小于<code>min</code></li>
+<li><strong>multiple</strong>：当<code>type=file,email</code>指示用户能否选择多个值。</li>
+<li><strong>name</strong>：控件的名称。和值一起被提交</li>
+<li><strong>pattern</strong>：当<code>type=text,search,tel,url,email</code>时检验控件值的正则表达式</li>
+<li><strong>placeholder</strong>：当<code>type=text.search,url,email,tel</code>时指示输入框的作用</li>
+<li><strong>readonly</strong>：指示用户无法修改控件的值</li>
+<li><strong>required</strong>：在提交表单前必须先填充值，当<code>type=hidden,image,reset,submit,button</code>时忽略</li>
+<li><strong>selectionDirection</strong>：选择发生的方向</li>
+<li><strong>size</strong>：控件的初始大小。当<code>type=text,password</code>时，表示输入的字符的长度。从HTML5开始，适用于当<code>type=text, search, tel, url, email,password</code>。否则会被忽略。 值必须大于0。 缺省值20。浏览器显示不一致</li>
+<li><strong>spellcheck</strong>：元素需要检查其拼写和语法</li>
+<li><strong>src</strong>：当<code>type=image</code>为图片路径</li>
+<li><strong>step</strong>：设置数字或日期时间值的增量</li>
+<li><strong>tabindex</strong>：元素在当前文档的tab导航顺序中的位置</li>
+<li><strong>value</strong>：控件的值</li>
+</ul>
+<h3 id="type-shu-xing">type属性</h3>
+<ul>
+<li><strong>button</strong>：无缺省行为按钮</li>
+<li><strong>checkbox</strong>：复选框，<code>value</code>属性定义被选中时的值，也可以使用<code>indeterminate</code>指示复选框在不确定状态</li>
+<li><strong>radio</strong>：单选框，value为选定的值，当在同一个单选按钮组中，所有单选按钮的<code>name</code>值相同时，同一时间只能有一个按钮被选中</li>
+<li><strong>color</strong>：选择颜色的控件</li>
+<li><strong>date</strong>：日期的控件（年/月/日， 不包括时间）</li>
+<li><strong>datetime</strong>：已废弃， 使用<code>datetime-local</code>代替</li>
+<li><strong>datetime</strong>-local： 日期时间控件，不包含时区</li>
+<li><strong>email</strong>：用于输入<code>e-mail</code>字段，可以搭配CSS伪类<code>:valid</code>和<code>:invalid</code>使用</li>
+<li><strong>file</strong>：用户选择文件，使用<code>accept</code>属性定义上传文件的可选择类型</li>
+<li><strong>hidden</strong>：页面不显示，但是值会提交到服务器</li>
+<li><strong>image</strong>：图片提交按钮，使用<code>src</code>属性来说明图片来源，使用<code>alt</code>来说明图片的信息，也可以使用<code>width</code>，<code>height</code>来定义图片大小</li>
+<li><strong>month</strong>：年月控件，不带时区</li>
+<li><strong>number</strong>：数字控件。输入浮点数可以使用<code>step</code>属性来指明几位小数</li>
+<li><strong>password</strong>：值为<code>*</code>的控件，可以使用<code>maxlength</code>指定可以输入的值的最大长度</li>
+<li><strong>range</strong>：不精确值的控件，缺省值为
+<ul>
+<li><strong>min</strong>：0</li>
+<li><strong>max</strong>： 100</li>
+<li><strong>value</strong>：<code>min+(max-min)/2</code>，当<code>max</code>小于<code>min</code>时使用<code>min</code></li>
+<li><strong>step</strong>：1</li>
+</ul>
+</li>
+<li><strong>reset</strong>：将表单内容设置为缺省值</li>
+<li><strong>search</strong>：输入搜索字符串的单行文本字段，换行会被从输入的值中自动移除。</li>
+<li><strong>submit</strong>：提交表单的按钮</li>
+<li><strong>tel</strong>：输入电话号码的控件，可以使用<code>pattern</code>和<code>maxlength</code>来约束输入的值</li>
+<li><strong>text</strong>：缺省值</li>
+<li><strong>time</strong>：不含时区的时间控件</li>
+<li><strong>url</strong>：编辑URL的字段，可以使用<code>pattern</code>和<code>maxlength</code>来约束输入的值</li>
+<li><strong>week</strong>：星期-年组成的日期，没有时间</li>
+</ul>
 <h4 id="notes">Notes</h4>
 <ol>
-<li><strong>Content-Type</strong>
-<ol>
-<li>指定客户端实际返回的内容的指定类型，但是浏览器不一定遵循此值</li>
-<li>可以使用<code>X-Content-Type-Options: nosniff</code>来提示客户端一定要遵循<code>COntent-Type</code>守部中对MIME类型的设定，禁用了客户端的MIME类型嗅探行为</li>
-<li><code>nosniff</code>只适用于<code>script</code>和<code>style</code>两种类型，将其应用于图片类型的文件</li>
-<li>请求类型是<code>style</code>。但是MIME类型不是<code>text/css</code>会被阻止</li>
-<li>请求类型是<code>script</code>但是MIME类型不是<code>JavaScript</code>类型会被阻止</li>
-</ol>
+<li>
+<p>可以用 <code>:valid</code> 和<code>:invalid</code>CSS 伪类来给一个元素指定符合输入和不符合时候的样式。</p>
 </li>
-<li><code>enctype</code>会被<code>formenctype</code>覆盖</li>
-</ol>
-<h3 id="put">PUT</h3>
-<p>使用请求中的负载创建或者替换目标资源，对资源进行整体覆盖</p>
-<h4 id="te-dian-2">特点</h4>
-<ol>
-<li>幂等</li>
-<li>当目标资源不存在的时候将新建一份，服务器将返回201(Created)来通知客户端资源已创建</li>
-<li>当资源存在并且已经更新了资源，服务器返回200(OK)或者204(No Conetnt)来表示请求的成功完成</li>
-</ol>
-<h3 id="patch">PATCH</h3>
-<p>对资源进行部分修改</p>
-<h4 id="te-dian-3">特点</h4>
-<ol>
-<li>非幂等</li>
-<li>在跨域（cors）访问时，会在<code>Access-Control-Allow-Methods</code>中标明是否支持此请求方式</li>
-<li>如果在响应首部出现了<code>Accept-Patch</code>则表示服务器支持此请求方式</li>
-<li>当更改成功时服务器会响应204（No Content）</li>
-</ol>
-<h3 id="delete">DELETE</h3>
-<p>用于删除指定的资源</p>
-<h4 id="te-dian-4">特点</h4>
-<ol>
-<li>请求可以有主体</li>
-<li>返回的响应可以有主体</li>
-<li>幂等</li>
-<li>不可以在HTML表单中使用</li>
-<li>返回的状态码可能是202（Accepted），204（No content），200（OK）</li>
-</ol>
-<h3 id="head">HEAD</h3>
-<p>请求资源的头部信息，与GET请求返回的头部一致</p>
-<h4 id="shi-yong-chang-jing">使用场景</h4>
-<ol>
-<li>下载大文件前先获取其大小再决定是否下载来节约带宽资源</li>
-</ol>
-<h4 id="te-dian-5">特点</h4>
-<ol>
-<li>请求/响应没有正文</li>
-<li>幂等</li>
-<li>可以被缓存</li>
-<li>不支持HTML表单发送</li>
-</ol>
-<h3 id="options">OPTIONS</h3>
-<p>获取目的资源所支持的通信选项，</p>
-<h4 id="shi-yong-chang-jing-1">使用场景</h4>
-<ol>
-<li>检测服务器支持的请求方法</li>
-<li>CORS的预检请求</li>
-</ol>
-<h3 id="trace">TRACE</h3>
-<p>实现沿通向目标资源的路径的消息环回测试，提供了一种实用的debug机制</p>
-<p>请求的最终接收者应当原样反射（reflect）它接收到的消息，除了以下字段部分，作为一个<code>Content-Type</code> 为 <code>message/http</code>  的200（OK）响应的消息的主体（body）返回给客户端 。</p>
-<p>最终接收者是指初始（origin）服务器，或者第一个接收到<code>Max-Forwards</code> 值为 0的请求的服务器。</p>
-<h4 id="te-dian-6">特点</h4>
-<ol>
-<li>请求/响应没有主体</li>
-<li>幂等</li>
-<li>不可被缓存</li>
-<li>不允许HTML表单发送</li>
-</ol>
-<h3 id="connect">CONNECT</h3>
-<p>开启一个客户端与所请求资源之间的双向沟通的通道，用来创建隧道</p>
-<p><code>CONNECT</code>可以用来访问采用了 <code>SSL</code>，<code>HTTPS</code>协议的站点。客户端要求代理服务器将 TCP 连接作为通往目的主机隧道。之后该服务器会代替客户端与目的主机建立连接。连接建立好之后，代理服务器会面向客户端发送或接收 TCP 消息流。</p>
-<p><code>CONNECT</code> 是一个应用范围为点到点的方法。</p>
-<h4 id="te-dian-7">特点</h4>
-<ol>
-<li>请求没有主体</li>
-<li>响应有主体</li>
-<li>不是幂等的</li>
-<li>不可以被缓存</li>
-<li>不允许HTML表单发送</li>
-</ol>
-<h4 id="notes-1">Notes</h4>
-<ol>
-<li>有可能代理服务器在创建隧道时需要进行身份验证</li>
+<li>
+<p><code>indeteminate</code>只能用js来指定</p>
+</li>
+<li>
+<p>换行会被移除</p>
+</li>
 </ol>
 
 
@@ -340,7 +319,7 @@
           <ul class="list-inline">
             
             <li style="display: block;margin-left: 15px;line-height: 30px">
-              <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods" target="_blank">HTTP请求方法-MDN</a>
+              <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Input#%E5%B1%9E%E6%80%A7" target="_blank">input-MDN</a>
             </li>
             
           </ul>
@@ -354,9 +333,13 @@
         <hr>
         <!-- Pager -->
         <ul class="pager">
+          
+          <li class="previous">
+            <a href="/2019/06/17/HTTP/http-request-methods/" data-toggle="tooltip" data-placement="top" title="HTTP请求方法">&larr; Previous Post</a>
+          </li>
            
           <li class="next">
-            <a href="/2019/06/17/HTML/input/" data-toggle="tooltip" data-placement="top" title="input属性">Next Post &rarr;</a>
+            <a href="/2019/06/05/HTML/meta/" data-toggle="tooltip" data-placement="top" title="meta标签的用法">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -374,7 +357,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#get"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">GET</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#post"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">POST</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-1"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">特点</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#put"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">PUT</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-2"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#patch"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">PATCH</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-3"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#delete"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">DELETE</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-4"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#head"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">HEAD</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#shi-yong-chang-jing"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">使用场景</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-5"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#options"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">OPTIONS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#shi-yong-chang-jing-1"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">使用场景</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#trace"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">TRACE</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-6"><span class="toc-nav-number">8.1.</span> <span class="toc-nav-text">特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#connect"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">CONNECT</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#te-dian-7"><span class="toc-nav-number">9.1.</span> <span class="toc-nav-text">特点</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes-1"><span class="toc-nav-number">9.2.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#input"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">input</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#input-shu-xing"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">input属性</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#type-shu-xing"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">type属性</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -394,9 +377,9 @@
           <h5><a href="/tags/">所属标签</a></h5>
           <div class="tags">
             
-            <a class="tag" href="/tags/#http" title="http">http</a>
+            <a class="tag" href="/tags/#html" title="html">html</a>
             
-            <a class="tag" href="/tags/#HTTP请求方法" title="HTTP请求方法">HTTP请求方法</a>
+            <a class="tag" href="/tags/#input" title="input">input</a>
             
           </div>
         </section>
