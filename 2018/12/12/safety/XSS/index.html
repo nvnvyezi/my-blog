@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="google-site-verification" content="r0MJNowOXwUCdeGtWMXCWKrxWGq1vRjhRKYMdi_B9AY">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="跨站点请求伪造，">
+  <meta name="description" content="跨站点脚本攻击，">
   <meta name="author" content="nvnvyezi">
   <link rel="shortcut icon" href="/images/portrait.png">
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <title>
-     CSRF - nvnvyezi的博客 
+     XSS - nvnvyezi的博客 
   </title>
 
-  <link rel="canonical" href="http://nvnvyezi.club/2018/12/10/safety/CSRF/">
+  <link rel="canonical" href="http://nvnvyezi.club/2018/12/12/safety/XSS/">
 
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -78,12 +78,12 @@
           <div class="post-heading">
             <div class="tags">
               
-              <a class="tag" href="/tags/#csrf" title="csrf">csrf</a>
+              <a class="tag" href="/tags/#xss" title="xss">xss</a>
               
             </div>
-            <h1>CSRF</h1>
+            <h1>XSS</h1>
             <h2 class="subheading">
-              跨站点请求伪造，
+              跨站点脚本攻击，
             </h2>
             <span class="meta" style="padding-bottom: 10px">
               <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
@@ -98,7 +98,7 @@
               <!-- </div> -->
               visitors</span>
             <span class="meta">
-              Posted by nvnvyezi on 2018-12-10
+              Posted by nvnvyezi on 2018-12-12
             </span>
           </div>
           
@@ -212,56 +212,39 @@
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container" style="margin-bottom: 30px;">
-        <h3 id="csrf-kua-zhan-dian-qing-qiu-wei-zao">CSRF(跨站点请求伪造)</h3>
-<p><code>(Cross—Site Request Forgery)</code></p>
-<p>通过社交工程（比如电子邮件/聊天发送链接）的帮助，在用户当前经过身份验证的Web应用程序上，欺骗Web应用程序的用户强制执行攻击者所想要执行的操作（如发邮件，盗取信息，转账，购买商品等）</p>
-<p>成功的CSRF漏洞攻击可以在针对普通用户时最终损害用户数据和操作。如果受害者是管理账户则可能会危及整个web程序。</p>
-<h3 id="liu-cheng">流程</h3>
+        <h3 id="xss">XSS</h3>
+<p><code>Cross-Site Scripting</code>，跨站点脚本攻击是一种注入类型,其中恶意脚本被注入到其他良性和可信赖的网站中,当攻击者使用Web应用程序将恶意代码(通常以浏览器端脚本的形式)发送给不同的最终用户时,就会触发XSS攻击。</p>
+<p>通常发生在Web应用程序在其生成的输出中使用了来自用户的输入而无需验证或编码它的任何地方</p>
+<p>因为脚本来自可信赖的网站，所以恶意脚本可以访问任何cookie，session tokens或与该站点一起使用的一些敏感信息，或者让恶意脚本重写HTML内容</p>
+<h3 id="tiao-jian">条件</h3>
 <ol>
-<li>利用URL或脚本构建漏洞</li>
-<li>欺骗用户用社会工程执行行动</li>
+<li>数据通过不受信任的来源进入Web应用程序（如Web请求）</li>
+<li>数据包含在动态内容中，该动态内容在未经过验证的情况下发送给Web用户</li>
 </ol>
-<p>用户正常登录受信任网站A，并在本地生成A网站的一些身份认证信息。随后在没登出A的情况下，访问危险网站B。</p>
-<h3 id="li-zi">例子</h3>
-<h4 id="get-chang-jing">get场景</h4>
-<p>假如一家银行用以运行转账操作的URL地址如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.bank.com/transform?account=AccoutName&amp;amount=1000&amp;for=PayeeName</span><br></pre></td></tr></table></figure>
-<p>攻击的方式可以通过</p>
-<ul>
-<li>发送带有HTML内容的未经请求的电子邮件</li>
-<li>在受害者正在进行网上银行业务时可能会访问的网页上植入漏洞利用网址或脚本</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 例子 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://www.bank.com/transform?account=Alice&amp;amount=1000&amp;for=Badman"</span> <span class="attr">width</span>=<span class="string">"0"</span> <span class="attr">height</span>=<span class="string">"0"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.bank.com/transform?account=Alice&amp;amount=1000&amp;for=Badman"</span>&gt;</span>点击有惊喜<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果有账户名为Alice的用户访问了恶意站点，而她之前刚访问过银行不久，登录信息尚未过期，那么她就会损失1000资金。</p>
-<h4 id="post-chang-jing">post场景</h4>
-<p>和GET的区别是受害者如何执行攻击</p>
-<p>post请求请求主体在body中，不能像get直接拼在参数中，攻击时可以使用FORM标记进行传递</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span> =<span class="string">“http://bank.com/transfer.do”</span> <span class="attr">method</span> =<span class="string">“POST”</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span> =<span class="string">“hidden”name</span> =<span class="string">“param1”value</span> =<span class="string">“PARAM1”/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span> =<span class="string">“hidden”name</span> =<span class="string">“param2”value</span> =<span class="string">“PARAM2”/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span> =<span class="string">“submit”value</span> =<span class="string">“查看我的图片”/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>触发此表单可以是用户手动点击提交按钮，或者使用js来执行</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span> =<span class="string">“document.forms[0].submit（）”</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="qi-ta-http-fang-fa">其他HTTP方法</h4>
-<p>可以使用AJAX来模拟请求，但是会受到同源策略的限制，除非CORS所允许的网站来源为*</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Access-Control-Allow-Origin：*</span></span><br></pre></td></tr></table></figure>
-<h4 id="tiao-jian">条件</h4>
-<ul>
-<li>浏览器自动发送用于识别用户会话的信息，假设用户刚刚对站点进行了身份验证，攻击者欺骗用户误点发送请求后，cookie随之自动发送</li>
-<li>用户登录了一个网站后，在不关闭的情况下打开另一个tab页面并访问另外的网站。</li>
-<li>关闭浏览器后，有些网站本地的Cookie不能立刻过期，即上次的会话已经结束。（事实上，关闭浏览器不能结束一个会话，但大多数人都会错误的认为关闭浏览器就等于退出登录/结束会话了）</li>
-<li>上图中所谓的攻击网站，可能是一个存在其他漏洞的可信任的经常被人访问的网站。</li>
-</ul>
+<h3 id="fen-lei">分类</h3>
+<h4 id="fan-she-xing-fei-chi-jiu-xing">反射型（非持久性）</h4>
+<p>指注入的脚本从服务器反射出来的攻击，例如错误消息，搜索结果或包含服务器的其他响应。攻击可以通过电子邮件或者欺骗用户点击恶意链接，提交特制的表单或者只是浏览恶意网站时</p>
+<h4 id="cun-chu-xing-chi-jiu-xing">存储型（持久性）</h4>
+<p>注入的脚本永久存储在目标服务器上的攻击，例如在数据库，消息论坛，访问者日志，注释字段等中</p>
+<h5 id="liu-cheng">流程</h5>
+<p>将恶意的XSS代码提交网站—&gt;网站把XSS代码存储进数据库—&gt;当页面再次被其他正常用户请求时，服务器发送已经被植入XSS代码的数据给客户端—&gt;客户端执行XSS代码</p>
+<h4 id="ji-yu-dom-de-xss-0-xing-xss">基于DOM的XSS（0型XSS）</h4>
+<p>不需要服务器的参与，客户端脚本自身解析不正确</p>
 <h3 id="fang-yu">防御</h3>
-<h4 id="code-referer-code"><code>Referer</code></h4>
-<p>HTTP头中的Referer字段标明了该 HTTP 请求的来源地址。在通常情况下，访问一个安全受限页面的请求来自于同一个网站，而如果黑客要对其实施 CSRF 攻击，他一般只能在他自己的网站构造请求。因此，可以通过验证Referer值来防御CSRF 攻击。</p>
-<h4 id="shi-yong-yan-zheng-ma">使用验证码</h4>
-<p>关键操作页面加上验证码，后台收到请求后通过判断验证码可以防御CSRF。但这种方法对用户不太友好。</p>
-<h4 id="tian-jia-token-yan-zheng">添加token验证</h4>
-<p>CSRF 攻击之所以能够成功，是因为用户所有验证信息都是存在于cookie中，攻击者可以完全伪造用户的请求。要抵御 CSRF，关键在于在请求中放入黑客所不能伪造的信息，并且该信息不存在于 cookie 之中。这种数据通常是窗体中的一个数据项。服务器将其生成并附加在窗体中，其内容是一个伪随机数。当客户端通过窗体提交请求时，这个伪随机数也一并提交上去以供校验。正常的访问时，客户端浏览器能够正确得到并传回这个伪随机数，而通过CSRF传来的欺骗性攻击中，攻击者无从事先得知这个伪随机数的值，服务端就会因为校验token的值为空或者错误，拒绝这个可疑请求。</p>
-<h4 id="header-zhong-zi-ding-yi-shu-xing">header中自定义属性</h4>
-<h4 id="xiang-url-he-suo-you-biao-dan-tian-jia-mei-ci-qing-qiu-de-sui-ji-shu-biao-dan-jian">向URL和所有表单添加每次请求的随机数（表单键）</h4>
-<p>许多框架已经开始内置此保护，因此不在需要特意编写此保护代码</p>
-<h4 id="xiang-suo-you-biao-dan-tian-jia-ha-xi-hui-hua-id-han-shu-ming-cheng-fu-wu-qi-duan-mi-yao">向所有表单添加哈希（会话ID， 函数名称，服务器端密钥）</h4>
-<h4 id="yong-hu-zai-fang-wen-ling-yi-ge-wang-ye-shi-zhu-xiao-dang-qian-wang-zhan-de-shen-fen-xin-xi">用户在访问另一个网页时注销当前网站的身份信息</h4>
-<h4 id="samesite-cookie">samesite Cookie</h4>
+<ol>
+<li>将用户输入的内容进行转义</li>
+<li>对一些特殊字符进行转义</li>
+<li>使用自动转义模版系统</li>
+<li><strong>CSP(Content Security Policy)</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP" target="_blank" rel="noopener">内容安全策略MDN</a></li>
+<li><code>httpOnly</code></li>
+<li><code>X-XSS-Protection</code>：一般默认启用，<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/X-XSS-Protection" target="_blank" rel="noopener">MDN</a></li>
+</ol>
+<h3 id="notes">NOTES</h3>
+<p>存储，反射，DOM三种不同类型的XSS存在重叠，在2012年中开始使用两个新术语来帮助组织可能发生的XSS类型</p>
+<h4 id="fu-wu-qi-xss">服务器XSS</h4>
+<p>恶意数据包含在服务器生成的HTML响应中。此数据的来源可以来自请求，也可以来自存储的位置。</p>
+<h4 id="ke-hu-duan-xss">客户端XSS</h4>
+<p>当不受信任的用户提供的数据用于使用不安全的JavaScript调用更新DOM。此数据可能来自DOM，也可能由服务器发送，</p>
 
 
         <!-- Friends Blog -->
@@ -271,7 +254,7 @@
           <ul class="list-inline">
             
             <li style="display: block;margin-left: 15px;line-height: 30px">
-              <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)" target="_blank">跨站请求伪造（CSRF） -  OWASP</a>
+              <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.md" target="_blank">防御</a>
             </li>
             
           </ul>
@@ -287,11 +270,11 @@
         <ul class="pager">
           
           <li class="previous">
-            <a href="/2018/12/10/JavaScript/inherit/" data-toggle="tooltip" data-placement="top" title="js继承">&larr; Previous Post</a>
+            <a href="/2019/02/22/webpack/build/" data-toggle="tooltip" data-placement="top" title="webpack4搭建以及优化">&larr; Previous Post</a>
           </li>
            
           <li class="next">
-            <a href="/2018/12/10/SEO/SEO/" data-toggle="tooltip" data-placement="top" title="前端常用的SEO优化">Next Post &rarr;</a>
+            <a href="/2018/12/10/JavaScript/type-detection/" data-toggle="tooltip" data-placement="top" title="js数据类型检测">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -309,7 +292,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#csrf-kua-zhan-dian-qing-qiu-wei-zao"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">CSRF(跨站点请求伪造)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#liu-cheng"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">流程</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#li-zi"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">例子</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#get-chang-jing"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">get场景</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#post-chang-jing"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">post场景</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#qi-ta-http-fang-fa"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">其他HTTP方法</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#tiao-jian"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">条件</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#fang-yu"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">防御</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#code-referer-code"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Referer</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#shi-yong-yan-zheng-ma"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">使用验证码</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#tian-jia-token-yan-zheng"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">添加token验证</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#header-zhong-zi-ding-yi-shu-xing"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">header中自定义属性</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#xiang-url-he-suo-you-biao-dan-tian-jia-mei-ci-qing-qiu-de-sui-ji-shu-biao-dan-jian"><span class="toc-nav-number">4.5.</span> <span class="toc-nav-text">向URL和所有表单添加每次请求的随机数（表单键）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#xiang-suo-you-biao-dan-tian-jia-ha-xi-hui-hua-id-han-shu-ming-cheng-fu-wu-qi-duan-mi-yao"><span class="toc-nav-number">4.6.</span> <span class="toc-nav-text">向所有表单添加哈希（会话ID， 函数名称，服务器端密钥）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#yong-hu-zai-fang-wen-ling-yi-ge-wang-ye-shi-zhu-xiao-dang-qian-wang-zhan-de-shen-fen-xin-xi"><span class="toc-nav-number">4.7.</span> <span class="toc-nav-text">用户在访问另一个网页时注销当前网站的身份信息</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#samesite-cookie"><span class="toc-nav-number">4.8.</span> <span class="toc-nav-text">samesite Cookie</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#xss"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">XSS</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tiao-jian"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">条件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#fen-lei"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">分类</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#fan-she-xing-fei-chi-jiu-xing"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">反射型（非持久性）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#cun-chu-xing-chi-jiu-xing"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">存储型（持久性）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#liu-cheng"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">流程</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ji-yu-dom-de-xss-0-xing-xss"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">基于DOM的XSS（0型XSS）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#fang-yu"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">防御</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">NOTES</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#fu-wu-qi-xss"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">服务器XSS</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ke-hu-duan-xss"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">客户端XSS</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -329,7 +312,7 @@
           <h5><a href="/tags/">所属标签</a></h5>
           <div class="tags">
             
-            <a class="tag" href="/tags/#csrf" title="csrf">csrf</a>
+            <a class="tag" href="/tags/#xss" title="xss">xss</a>
             
           </div>
         </section>
