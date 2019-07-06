@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head tag -->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="r0MJNowOXwUCdeGtWMXCWKrxWGq1vRjhRKYMdi_B9AY">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="了解缓存的几种方式以及理解HTTP304状态码">
+  <meta name="author" content="nvnvyezi">
+  <link rel="shortcut icon" href="/images/portrait.png">
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <title>
+     HTTP缓存 - nvnvyezi的博客 
+  </title>
+
+  <link rel="canonical" href="http://nvnvyezi.club/2019/02/05/optimization/http-cache/">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/beantech.min.css">
+
+  <!-- Pygments Highlight CSS -->
+  <link rel="stylesheet" href="/css/highlight.css"> <link rel="stylesheet" href="/css/widget.css"> <link rel="stylesheet" href="/css/rocket.css">
+  <link rel="stylesheet" href="/css/signature.css"> <link rel="stylesheet" href="/css/toc.css">
+
+  <!-- Custom Fonts -->
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+  <!-- Hux change font-awesome CDN to qiniu -->
+  <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- ga & ba script hoook -->
+  <script></script>
+</head>
+
+
+  <!-- hack iOS CSS :active style -->
+  <body ontouchstart="">
+    <!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+  header.intro-header{
+      
+          background-image: url('/images/bg4.jpg')
+          /*post*/
+      
+  }
+  
+  #signature{
+      background-image: url('/images/logo.png');
+  }
+  
+</style>
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature" style="background-color: rgba(0, 0,0, 0.3);">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a class="tag" href="/tags/#HTTP缓存" title="HTTP缓存">HTTP缓存</a>
+              
+            </div>
+            <h1>HTTP缓存</h1>
+            <h2 class="subheading">
+              了解缓存的几种方式以及理解HTTP304状态码
+            </h2>
+            <span class="meta" style="padding-bottom: 10px">
+              <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
+                ><img
+                  alt="php计数器"
+                  src="http://monster.gostats.cn/bin/count/a_507608/t_4/i_1/z_0/show_hits/counter.png"
+                  style="border-width:0"
+              /></a> -->
+              <!-- <div align="center"> -->
+              <a href="http://www.amazingcounters.com"><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3242783&c=9728662" alt="AmazingCounters.com"></a>
+
+              <!-- </div> -->
+              visitors</span>
+            <span class="meta">
+              Posted by nvnvyezi on 2019-02-05
+            </span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+ <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NVNV YEZI</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Modify by Yu-Hsuan Yen -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container" style="margin-bottom: 30px;">
+        <h3 id="gai-nian">概念</h3>
+<p>缓存是一种保存资源副本并在下次请求时直接使用该副本的技术，当web缓存发现请求的资源已经被存储，就会拦截当前请求，返回该资源的副本，而不会去源服务器重新下载</p>
+<h4 id="notes">Notes</h4>
+<ul>
+<li>对于网站来说，缓存是使网站达到高性能的重要组成部分。</li>
+<li>缓存需要合理配置，因为不是所有的资源都是永久不变的。</li>
+<li>对一个资源的缓存应截止到其下一次发生改变（不能缓存过期的资源）</li>
+</ul>
+<h4 id="hao-chu">好处</h4>
+<p>使用缓存资源能够有效的提升网站与应用的性能。web站点借助HTTP缓存，能够减少网络延迟与阻塞，进而提高网站访问速度，使之变得更具有响应性。并且可以减少服务器的压力。</p>
+<h3 id="fen-lei">分类</h3>
+<p>私有缓存，共享缓存，网关缓存，反向代理缓存，负载均衡器，浏览器缓存</p>
+<h4 id="gong-xiang-huan-cun">共享缓存</h4>
+<p>共享缓存存储的响应能够被多个用户使用，例如，ISP(Internet Service Provider)或公司可能会架设一个web代理来作为本地网络基础的一部分提供给用户。这样热门的资源就会被重复使用，减少网络拥堵与延迟。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span>: public</span><br></pre></td></tr></table></figure>
+<img src="assets/image-20190422135032703.png" data-action="zoom">
+<h4 id="si-you-huan-cun">私有缓存</h4>
+<p>只为单个用户服务</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-control</span>: private</span><br></pre></td></tr></table></figure>
+<img src="assets/image-20190422135140660.png" data-action="zoom">
+<h4 id="wang-guan-huan-cun-bu-shu-zai-fu-wu-qi">网关缓存（部署在服务器）</h4>
+<p>网关（Gateway）是转发其他服务器通信数据的服务器（不能过滤信息），与代理的动作机制类似。接收从客户端发送来的请求时，它就像自己拥有资源的源服务器一样对请求进行处理。</p>
+<p>网关还能使通信线路上的服务器提供非HTTP协议服务，实现不同通信协议，数据格式或语言，甚至体系结构完全不同的网络之间的相互通信</p>
+<h4 id="cdn-xiang-jian-wang-luo-xiang-guan-bu-shu-zai-fu-wu-qi">CDN（详见网络相关，部署在服务器）</h4>
+<p>CDN（Content delivery networks）将用户的请求导向到离用户最近的服务节点上，解决因分布，带宽，服务器性能带来的访问延迟问题，适用于站点加速，点播，直播等场景。</p>
+<h4 id="fan-xiang-dai-li-huan-cun-bu-shu-zai-fu-wu-qi">反向代理缓存（部署在服务器）</h4>
+<p>代理服务器是浏览器和源服务器之间的中间服务器，浏览器在请求时，实际会先通过这个中间服务器的处理（权限验证，缓存匹配等），再将请求转发到源服务器。</p>
+<p>缓存原理和浏览器端类似，但规模要大得多，可以将其理解为一个共享缓存，一般是为成千上万的用户提供缓存机制，因此在减少相应时间和带宽使用方面很有效，大公司和大型的ISP提供商通常会将它们设立在防火墙上或是作为一个独立的设备来运营。</p>
+<h4 id="fu-zai-jun-heng-qi-bu-shu-zai-fu-wu-qi">负载均衡器（部署在服务器）</h4>
+<p>用来在多个计算机，网络连接，cpu，磁盘驱动器或其他资源中分配负载，以达到最优化资源使用，最大吞吐率，最小化响应时间，同时避免过载的目的。</p>
+<p>满足的条件：确保所选择的服务器可以处理此次的请求。根据预先配置的规则从健康的服务器池中进行选择</p>
+<h4 id="liu-lan-qi-huan-cun">浏览器缓存</h4>
+<h5 id="memory-cache">Memory Cache</h5>
+<p>将资源缓存到内存中，是一个短期缓存，一般随着进程结束而清除</p>
+<p><code>Memory Cache</code>命中除了URL，还要有相同的资源类型，CORS模式以及一些其他特性</p>
+<h6 id="notes-1">Notes</h6>
+<ul>
+<li><code>Memory Cache</code>不关心HTTP语义，比如<code>Cache-Control: max-age=0</code>的资源在同一个导航中仍然会被重用</li>
+<li>在特定情况下，<code>Memory Cache</code>会遵守<code>Cache-Control: no-store</code></li>
+</ul>
+<p>#####	Disk Cache（HTTP Cache）</p>
+<p>缓存存储在硬盘，读取速度比内存慢，但是胜在容量和存储时效上。</p>
+<p>持久化，允许跨session甚至是跨站点地重用。</p>
+<p>遵循HTTP语义，由响应头决定资源是否是最新的，是否需要验证以及是否应该缓存</p>
+<h6 id="notes-2">Notes</h6>
+<ul>
+<li>一种情况外不遵守HTTP语义，即通过预抓取的资源或者浏览器其他内部逻辑的资源，会保留到下个导航</li>
+</ul>
+<h5 id="push-cache">Push Cache</h5>
+<p>HTTP2推送资源存储的地方，是HTTP2会话的一部分，当HTTP会话结束了，储存在其中的资源都会消失。</p>
+<p>不同的会话发起的请求不会命中<code>Push Cache</code>中的资源，所有未被使用的资源在<code>Push Cache</code>会储存优先的时间（Chromium浏览器大约5分钟）。</p>
+<p><code>Push Cache</code>根据请求的URL以及请求表头来匹配资源，但是不是严格遵守HTTP语义的。</p>
+<p>如果一个请求命中了<code>Push Cache</code>里的资源，那么这个资源将会从<code>Push Cache</code>里移除，然后经过<code>HTTP Cache</code>时，会保留一份拷贝缓存下来，再经过<code>Service Worker</code>（如果有）时，也会保留一份拷贝储存下来，最后请求的资源回到渲染引擎时，<code>Memory Cache</code>会存储一份对该资源的引用，如果将来本导航会话中有相同的资源请求，这份引用就可以直接被分配给该请求</p>
+<h3 id="huan-cun-cao-zuo-de-mu-biao">缓存操作的目标</h3>
+<p>常见的HTTP缓存只能存储GET响应，缓存的关键主要包括request method和目标URI</p>
+<p>缓存案例</p>
+<ul>
+<li>一个检索请求的成功响应: 对于 <code>GET</code>请求，响应状态码为：<code>200</code>，则表示为成功。一个包含例如HTML文档，图片，或者文件的响应。</li>
+<li>永久重定向: 响应状态码：<code>301</code>。</li>
+<li>错误响应: 响应状态码：<code>404</code>的一个页面。</li>
+<li>不完全的响应: 响应状态码 <code>206</code>，只返回局部的信息。</li>
+<li>除了 <code>GET</code>请求外，如果匹配到作为一个已被定义的cache键名的响应。</li>
+</ul>
+<h3 id="huan-cun-xiang-guan-header">缓存相关 header</h3>
+<h4 id="pragma">Pragma</h4>
+<p>是HTTP/1.0标准中定义的一个header属性，效果依赖于不同的实现，所以在请求-响应链中会有不同的效果，它用来向后兼容只支持HTTP/1.0协议的缓存服务器。</p>
+<p><code>pragma: no-cache</code></p>
+<p>与<code>Cache-control：no-cache</code>一致，强制要求缓存服务器在使用缓存时先将请求提交到源服务器进行验证</p>
+<h4 id="expries">Expries</h4>
+<p>响应头包含日期/时间， 即在此时候之后，响应过期。</p>
+<p>无效的日期，比如 0, 代表着过去的日期，即该资源已经过期。</p>
+<p>如果在<code>Cache-Control</code>响应头设置了<code>max-age</code>或者<code>s-max-age</code>指令，那么 <code>Expires</code> 头会被忽略。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//也可以在html头部</span><br><span class="line">&lt;meta http-equiv="expires" content="Thu, 30 Nov 2017 11:17:26 GMT"&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="cache-control">Cache-control</h4>
+<h5 id="qing-qiu-zhi-ling">请求指令</h5>
+<ul>
+<li>
+<p><strong>max-age=&lt;seconds&gt;</strong>： 设置缓存存储的最大周期，超过这个时间缓存被认为过期（秒），与Expires相反，时间是相对于请求的时间。</p>
+<p>某些浏览器（比如Firefox）中如果设定为永不缓存，那么其发出的请求中，请求头会包含<code>max-age=0</code>。</p>
+</li>
+<li>
+<p><strong>max-stale=&lt;seconds&gt;</strong>： 客户端愿意接受一个过期的资源，可选的设置一个时间（单位秒），表示响应不能超过的过时时间。</p>
+</li>
+<li>
+<p><strong>min-fresh=&lt;seconds&gt;</strong>： 客户端在指定的时间内获取最新的响应</p>
+</li>
+<li>
+<p><strong>no-cache</strong></p>
+</li>
+<li>
+<p><strong>no-store</strong></p>
+</li>
+<li>
+<p><strong>no-transform</strong></p>
+</li>
+<li>
+<p><strong>Only-if-cahced</strong>：客户端只接受已缓存的响应，并且不要向原始服务器检查是否有更新的拷贝，cache要么用缓存的内容给出响应，要么给出一个504（GateWay Timeout）响应码。如果一组cache被作为一个内部相连的系统，那么其中的某个成员可以向这个缓存组里请求响应。</p>
+</li>
+</ul>
+<h5 id="xiang-ying-zhi-ling">响应指令</h5>
+<ul>
+<li><strong>must-revalidate</strong>： 缓存必须在使用前验证旧资源的状态，并且不可使用过期资源</li>
+<li><strong>no-cache</strong>： 在释放缓存副本之前，强制高速缓存将请求提交给原始服务器进行验证</li>
+<li><strong>no-store</strong>：缓存不应存储有关客户端请求或服务器响应的任何内容。</li>
+<li><strong>no-transform</strong>：不得对资源进行转换或转变。<code>Content-Encoding</code>, <code>Content-Range</code>, <code>Content-Type</code>等HTTP头不能由代理修改。例如，非透明代理可以对图像格式进行转换，以便节省缓存空间或者减少缓慢链路上的流量。 <code>no-transform</code>指令不允许这样做。</li>
+<li><strong>Public</strong>: 响应可以被任何对象（发送请求的客户端，代理服务器等）缓存</li>
+<li><strong>private</strong>：响应只能被单个用户缓存，不能作为共享缓存（代理服务器不能缓存它），可以缓存响应内容</li>
+<li><strong>max-age=&lt;seconds&gt;</strong>： 设置缓存存储的最大周期，超过这个时间缓存被认为过期（秒），与Expires相反，时间是相对于请求的时间。</li>
+<li><strong>proxy-revalidate</strong>： 与<code>must-revalidate</code>作用相同，但它仅适用于共享缓存（例如代理），并被私有缓存忽略。</li>
+<li><strong>s-maxage=&lt;seconds&gt;</strong>：覆盖<code>max-age</code>或者<code>Expries</code>头。但是仅用于共享缓存（比如各个代理），私有缓存会被忽略</li>
+</ul>
+<h5 id="tuo-zhan-zhi-ling">拓展指令</h5>
+<ul>
+<li><strong>immutable</strong>：表示响应正文不会随时间而改变。资源（如果未过期）在服务器上不发生改变，因此客户端不应发送重新验证请求头（例如<code>If-None-Match</code>或<code>If-Modified-Since</code>）来检查更新，即使用户显式地刷新页面。</li>
+<li><strong>stale-while-revalidate=&lt;seconds&gt;</strong>：客户端愿意接受陈旧的响应，同时在后台异步检查新的响应，秒值表示客户端愿意接受陈旧响应的时间</li>
+<li><strong>stale-if-error=&lt;seconds&gt;</strong>: 表示如果新的检查失败，则客户愿意接受陈旧的响应。秒数值表示客户在初始到期后愿意接受陈旧响应的时间。</li>
+</ul>
+<h4 id="if-modified-since-http-1-0-last-modified-http-1-0-if-unmodified-since">If-Modified-Since(HTTP/1.0) / Last-Modified(HTTP/1.0) /If-Unmodified-Since</h4>
+<h5 id="last-modified">Last-Modified</h5>
+<p>响应首部，包含源服务器认定的资源修改的日期及时间。 通常被用作一个验证器来判断接收到的和存储的资源是否彼此一致。由于精确度比<code>ETag</code>要低，经常作为一个备用机制。包含有<code>If-Modified-Since</code>或<code>If-Unmodified-Since</code>首部的条件请求会使用这个字段。</p>
+<h5 id="if-modified-since">If-Modified-Since</h5>
+<p>条件式请求首部，服务器只在所请求的资源在给定的日期时间之后对内容进行过修改的情况下才会将资源返回，状态码为<code>200</code>  。否则返回一个不带有消息主体的<code>304</code> 响应，在<code>Last-Modified</code>首部中带有上次修改时间。 不同于<code>If-Unmodified-Since</code>, <code>If-Modified-Since</code> 只可以用在<code>GET</code>或<code>HEAD</code>请求中。</p>
+<p>当与<code>If-None-Match</code>一同出现时，会被忽略掉，除非服务器不支持 <code>If-None-Match</code>。</p>
+<p>最常见的应用场景是来更新没有特定<code>ETag</code>标签的缓存实体。</p>
+<h5 id="if-unmodified-since">If-Unmodified-since</h5>
+<p>请求首部，使得当前请求成为条件式请求：只有当资源在指定的时间之后没有进行过修改的情况下，服务器才会返回请求的资源。或是接受<code>POST</code>或其他<code>non-safe</code>方法的请求。如果所请求的资源在指定的时间之后发生了修改，那么会返回<code>412</code>(Precondition Failed/先决条件失败）错误。</p>
+<p>常见的应用场景有两种：</p>
+<ul>
+<li>与<code>non-safe</code>方法如<code>POST</code>搭配使用，可以用来优化并发控制，例如在某些wiki应用中的做法：假如在原始副本获取之后，服务器上所存储的文档已经被修改，那么对其作出的编辑会被拒绝提交。</li>
+<li>与含有<code>If-Range</code>消息头的范围请求搭配使用，用来确保新的请求片段来自于未经修改的文档。</li>
+</ul>
+<h6 id="notes-3">Notes</h6>
+<ul>
+<li>本地打开缓存文件但是没有修改也会更新<code>last-modified</code>的时间</li>
+<li><code>last-modified</code>以秒计时，在一秒内做了更改<code>last-modified</code>不会做出更新</li>
+</ul>
+<h4 id="if-match-if-none-match-e-tag">If-Match/If-None-Match/ETag</h4>
+<h5 id="if-match">If-Match</h5>
+<p>请求首部。在请求方法为<code>GET</code>和<code>HEAD</code>的情况下，服务器仅在请求的资源满足此首部列出的 <code>ETag</code>之一时才会返回资源。而对于<code>PUT</code>或其他非安全方法来说，只有在满足条件的情况下才可以将资源上传。</p>
+<p><code>ETag</code>存储比较使用的是<strong>强比较算法</strong>，即只有在每一个比特都相同的情况下，才认为两个文件是相同的。采用相对宽松的算法可以在<code>ETag</code>前面添加<code>W/</code>。</p>
+<h6 id="liang-ge-chang-jian-de-ying-yong-chang-jing">两个常见的应用场景：</h6>
+<ul>
+<li>对于<code>GET</code>和<code>HEAD</code>方法，搭配<code>Range</code>首部使用，可以用来保证新请求的范围与之前请求的范围是对同一份资源的请求。如果  ETag 无法匹配，那么需要返回<code>416</code> (Not Satisfiable，范围请求无法满足) 响应。</li>
+<li>对于其他方法来说，尤其是<code>PUT</code>, <code>If-Match</code> 首部可以用来避免更新丢失问题。它可以用来检测用户想要上传的不会覆盖获取原始资源之后做出的更新。如果请求的条件不满足，那么需要返回  <code>412</code>(Precondition Failed，先决条件失败) 响应。</li>
+</ul>
+<h5 id="if-none-match-etag-http-1-1">If-None-Match / Etag(http1.1)</h5>
+<p>请求首部。对于<code>GET</code>和<code>HEAD</code>请求方法来说，当且仅当服务器上没有任何资源的<code>ETag</code>属性值与这个首部中列出的相匹配的时候，服务器端会才返回所请求的资源，响应码为<code>200</code> 。对于其他方法来说，当且仅当最终确认没有已存在的资源的<code>ETag</code>属性值与这个首部中所列出的相匹配的时候，才会对请求进行相应的处理。</p>
+<p>对于<code>GET</code>和<code>HEAD</code>方法来说，当验证失败的时候，服务器端必须返回响应码 304（Not Modified，未改变）。对于能够引发服务器状态改变的方法，则返回 412 （Precondition Failed，前置条件失败）。</p>
+<h6 id="notes-4">Notes</h6>
+<p>服务器端在生成状态码为 304 的响应的时候，必须同时生成以下会存在于对应的 200 响应中的首部：<code>Cache-Control</code>、<code>Content-Location</code>、<code>Date</code>、<code>ETag</code>、<code>Expires</code> 和 <code>Vary</code>。</p>
+<p><code>ETag</code>属性之间的比较采用的是<strong>弱比较算法</strong>，即两个文件除了每个比特都相同外，内容一致也可以认为是相同的。例如，如果两个页面仅仅在页脚的生成时间有所不同，就可以认为二者是相同的。</p>
+<p>当与<code>If-Modified-Since</code>一同使用的时候，<code>If-None-Match</code>优先级更高（假如服务器支持的话）。</p>
+<p>以下是两个常见的应用场景：</p>
+<ul>
+<li>采用<code>GET</code>或<code>HEAD</code>方法，来更新拥有特定的<code>ETag</code>属性值的缓存。</li>
+<li>采用其他方法，尤其是<code>PUT</code>,将 <code>If-None-Match</code> used 的值设置为 * ，用来生成事先并不知道是否存在的文件，可以确保先前并没有进行过类似的上传操作，防止之前操作数据的丢失。这个问题属于更新丢失问题的一种。</li>
+</ul>
+<h5 id="e-tag">ETag</h5>
+<p>HTTP响应头是资源的特定版本的标识符。这可以让缓存更高效，并节省带宽，因为如果内容没有改变，Web服务器不需要发送完整的响应。而如果内容发生了变化，使用ETag有助于防止资源的同时更新相互覆盖（“空中碰撞”）。</p>
+<p><strong>语法</strong></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ETag</span>: W/"&lt;etag_value&gt;"</span><br><span class="line"><span class="attribute">ETag</span>: "&lt;etag_value&gt;"</span><br></pre></td></tr></table></figure>
+<p><strong>指令</strong></p>
+<ul>
+<li>
+<p><code>W/</code> 可选</p>
+<p><code>'W/'</code>(大小写敏感) 表示使用弱验证器。 弱验证器很容易生成，但不利于比较。 强验证器是比较的理想选择，但很难有效地生成。 相同资源的两个弱<code>Etag</code>值可能语义等同，但不是每个字节都相同。</p>
+</li>
+<li>
+<p>“&lt;etag_value&gt;”</p>
+<p>实体标签唯一地表示所请求的资源。 它们是位于双引号之间的ASCII字符串（如“675af34563dc-tr34”）。 没有明确指定生成ETag值的方法。 通常，使用内容的散列，最后修改时间戳的哈希值，或简单地使用版本号。 例如，MDN使用wiki内容的十六进制数字的哈希值。</p>
+</li>
+</ul>
+<p>###缓存机制</p>
+<h4 id="xin-xian-du">新鲜度</h4>
+<p>理论上来讲，当一个资源被缓存存储后，该资源应该可以被永久存储在缓存中。由于缓存只有有限的空间用于存储资源副本，所以缓存会定期地将一些副本删除，这个过程叫做缓存驱逐。另一方面，当服务器上面的资源进行了更新，那么缓存中的对应资源也应该被更新，由于HTTP是C/S模式的协议，服务器更新一个资源时，不可能直接通知客户端及其缓存，所以双方必须为该资源约定一个过期时间，在该过期时间之前，该资源（缓存副本）就是新鲜的，当过了过期时间后，该资源（缓存副本）则变为陈旧的*。*驱逐算法用于将陈旧的资源（缓存副本）替换为新鲜的，注意，一个陈旧的资源（缓存副本）是不会直接被清除或忽略的，当客户端发起一个请求时，缓存检索到已有一个对应的陈旧资源（缓存副本），则缓存会先将此请求附加一个<code>If-None-Match</code>头，然后发给目标服务器，以此来检查该资源副本是否是依然还是算新鲜的，若服务器返回了<code>304</code> (Not Modified)（该响应不会有带有实体信息），则表示此资源副本是新鲜的，这样一来，可以节省一些带宽。若服务器通过<code>If-None-Match</code>或<code>If-Modified-Since</code>判断后发现已过期，那么会带有该资源的实体内容返回。</p>
+<p><strong>图示</strong></p>
+<img src="assets/HTTPStaleness.png" data-action="zoom">
+<p>对于含有特定头信息的请求，会去计算缓存寿命。比如<code>Cache-control: max-age=N</code>的头，相应的缓存的寿命就是<code>N</code>。通常情况下，对于不含这个属性的请求则会去查看是否包含<code>Expires</code>属性，通过比较<code>Expires</code>的值和头里面<code>Date</code>属性的值来判断是否缓存还有效。如果<code>max-age</code>和<code>expires</code>属性都没有，可以去找响应头里的<code>Last-Modified</code>信息。如果有，缓存的寿命就等于头里面<code>Date</code>的值减去<code>Last-Modified</code>的值除以10（注：根据rfc2626其实也就是乘以10%）</p>
+<p>缓存失效时间计算公式如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expirationTime = responseTime + freshnessLifetime - currentAge</span><br></pre></td></tr></table></figure>
+<p><code>responseTime</code> 表示浏览器接收到此响应的那个时间点</p>
+<h4 id="qiang-zhi-huan-cun">强制缓存</h4>
+<p>对于强制缓存，服务器响应头中会用<code>Expires</code>和<code>Cache-Control</code>来表明。</p>
+<p>当缓存生效时直接使用，否则进行协商缓存</p>
+<h4 id="xie-shang-huan-cun">协商缓存</h4>
+<p>又称对比缓存，客户端在请求时头部携带<code>If-Modified-Sincea/If-None-Match</code>，在后端检验后，文件没有发生改变，服务端会返回304，此时客户端直接从缓存中获取所请求的数据，如果标识失效，服务端会返回更新后的数据。</p>
+<h5 id="notes-5">Notes</h5>
+<p>两类缓存机制可以同时存在，强制缓存的优先级高于协商缓存，当执行强制缓存时，如若缓存命中，则直接使用缓存数据，不在进行缓存协商。</p>
+<h4 id="qi-fa-shi-huan-cun-jie-duan">启发式缓存阶段</h4>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Age:23146</span></span><br><span class="line"><span class="attribute">Cache-Control</span>: public</span><br><span class="line">Date:Tue, 28 Nov 2017 12:26:41 GMT</span><br><span class="line">Last-Modified:Tue, 28 Nov 2017 05:14:02 GMT</span><br><span class="line"><span class="attribute">Vary:Accept-Encoding</span></span><br></pre></td></tr></table></figure>
+<p>触发：当响应字段没有标注过期时间</p>
+<p><strong>根据响应头中2个时间字段 Date 和 Last-Modified 之间的时间差值，取其值的10%作为缓存时间周期。</strong></p>
+<h4 id="zheng-ti-liu-cheng-tu">整体流程图</h4>
+<img src="assets/image-20190422222835584.png" data-action="zoom">
+<h3 id="vary">Vary</h3>
+<p>响应头部信息，它决定了对于未来的一个请求头，应该用一个缓存的<code>response</code>还是向源服务器请求一个新的回复。它被服务器用来表明在内容协商算法中选择一个资源代表的时候应该使用哪些头部信息</p>
+<p>在响应状态码为 <code>304</code>(Not Modified) 的响应中，也要设置<code>Vary</code> 首部，而且要与相应的<code>200</code>响应设置得一模一样。</p>
+<p>当服务器收到一个请求，只有当前的请求和原始（缓存）的请求头跟缓存的响应头里的Vary都匹配，才能使用缓存的响应。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Vary</span>: User-Agent</span><br></pre></td></tr></table></figure>
+<p>哪种情况下使用<code>Vary</code>: 对于User-Agent头部信息，例如你提供给移动端的内容是不同的，可用防止你客户端误使用了用于桌面端的缓存。 并可帮助Google和其他搜索引擎来发现你的移动端版本的页面，同时告知他们不需要Cloaking。</p>
+<p>再比如，源服务器启用了gzip压缩，但用户使用了比较旧的浏览器，不支持压缩，缓存服务器如何返回？就可以这么设定：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Vary</span>: Accept-Encoding</span><br></pre></td></tr></table></figure>
+<p>当然，也可以这么用：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Vary</span>: User-Agent, Accept-Encoding</span><br></pre></td></tr></table></figure>
+<p>这意味着缓存服务器会以<code>User-Agent</code>和 <code>Accept-Encoding</code>两个请求首部字段来区分缓存版本。根据请求头里的这两个字段来决定返回给客户端什么内容。</p>
+<img src="assets/HTTPVary.png" data-action="zoom">
+<h3 id="age">Age</h3>
+<p>资源在缓存服务器存在的时长，<code>Cache-Control: max-age=[秒]</code>就是Age的最大值。</p>
+<p>可以结合date字段来判断请求的资源来自源服务器还是缓存服务器</p>
+<h3 id="date">Date</h3>
+<p>报文创建的时间</p>
+<p>如果按F5频繁刷新发现响应里的Date没有改变，就说明命中了缓存服务器的缓存。例子：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//response</span><br><span class="line"><span class="attribute">accept-ranges</span>: bytes</span><br><span class="line"><span class="attribute">access-control-allow-origin</span>: https://www.baidu.com</span><br><span class="line"><span class="attribute">age</span>: 44</span><br><span class="line"><span class="attribute">content-length</span>: 43036</span><br><span class="line"><span class="attribute">content-type</span>: application/octet-stream</span><br><span class="line"><span class="attribute">date</span>: Mon, 22 Apr 2019 14:06:57 GMT</span><br><span class="line"><span class="attribute">etag</span>: "5c77988f-a81c"</span><br><span class="line"><span class="attribute">last-modified</span>: Thu, 28 Feb 2019 08:15:11 GMT</span><br><span class="line"><span class="attribute">ohc-response-time</span>: 1 0 0 0 0 0</span><br><span class="line"><span class="attribute">server</span>: JSP3/2.0.14</span><br><span class="line"><span class="attribute">status</span>: 200</span><br></pre></td></tr></table></figure>
+<p>上图Age=44，说明这个资源已经在缓存服务器存在了44秒。如果文件被修改或替换，Age会重新由0开始累计。</p>
+<blockquote>
+<p>Age消息头的值通常接近于0。表示此消息对象刚刚从原始服务器获取不久；其他的值则是表示代理服务器当前的系统时间与此应答消息中的通用消息头 Date的值之差。</p>
+</blockquote>
+<h3 id="yong-hu-cao-zuo-xing-wei-dui-huan-cun-de-ying-xiang">用户操作行为对缓存的影响</h3>
+<p>以谷歌为准</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打开新窗口</td>
+<td>如果值为private或must-revalidate，则只有第一次访问时会访问服务器,以后就不再访问。如果值为no-cache,那么每次都会访问。如果值为max-age,则在过期之前不会重复访问。</td>
+</tr>
+<tr>
+<td>在地址栏回车</td>
+<td>如果指定cache-control的值为private、no-cache、must-revalidate，max-age=0。那么打开新窗口访问时都会重新访问服务器。而当max-age不为0,那么在此值内的时间里就不会重新访问服务器,例如：Cache-control: max-age=5 表示当访问此网页后的5秒内不会去再次访问服务器.</td>
+</tr>
+<tr>
+<td>按后退按扭</td>
+<td>如果值为private、must-revalidate、max-age,则不会重访问,而如果为no-cache,则每次都重复访问.</td>
+</tr>
+<tr>
+<td>按刷新按扭</td>
+<td>无论为何值,去查一下缓存是否过期.（可能返回状态码：200、304，这个不同浏览器处理是不一样的，FireFox正常，Chrome则会启用缓存(200 from cache)）</td>
+</tr>
+<tr>
+<td>按强制刷新按钮</td>
+<td>当做首次进入重新请求(返回状态码200)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="guan-yu-huan-cun-de-yi-xie-wen-da">关于缓存的一些问答</h3>
+<p><strong>1. 问题：请求被缓存，导致新代码未生效</strong></p>
+<ul>
+<li>服务端响应添加<code>Cache-Control:no-cache,must-revalidate</code>指令；</li>
+<li>修改请求头<code>If-modified-since:0</code>或<code>If-none-match</code>；</li>
+<li>修改请求URL，请求URL后加随机数，随机数可以是时间戳，哈希值</li>
+</ul>
+<p><strong>2. 问题：服务端缓存导致本地代码未更新</strong></p>
+<ul>
+<li>合理设置Cache-Control:s-maxage指令；</li>
+<li>设置Cache-Control:private指令，防止代理服务器缓存资源；</li>
+<li>CDN缓存可以使用管理员设置的缓存刷新接口进行刷新；</li>
+</ul>
+<p><strong>3. 问题： Cache-Control: max-age=0 和 no-cache有什么不同</strong></p>
+<p><code>max-age=0</code>和<code>no-cache</code>应该是从语气上不同。<code>max-age=0</code>是告诉客户端资源的缓存到期<strong>应该</strong>向服务器验证缓存的有效性。而<code>no-cache</code>则告诉客户端使用缓存前<strong>必须</strong>向服务器验证缓存的有效性。</p>
+
+
+        <!-- Friends Blog -->
+        
+          <hr>
+          <h5>参考文档</h5>
+          <ul class="list-inline">
+            
+            <li style="display: block;margin-left: 15px;line-height: 30px">
+              <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ" target="_blank">HTTP缓存-MDN</a>
+            </li>
+            
+          </ul>
+          
+
+        <!-- 分享-->
+        <div class="social-share share-component" align="center" data-source="https://nvnvyezi.club" data-sites="qzone,qq,weibo,wechat" data-wechat-qrcode-title="请打开微信扫一扫分享" data-wechat-qrcode-helper></div>
+        <!-- 分享-->
+        <div id="gitalk-container"></div>
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          <li class="previous">
+            <a href="/2019/02/22/webpack/build/" data-toggle="tooltip" data-placement="top" title="webpack4搭建以及优化">&larr; Previous Post</a>
+          </li>
+           
+          <li class="next">
+            <a href="/2019/01/04/design-atterns/设计模式/" data-toggle="tooltip" data-placement="top" title="设计模式">Next Post &rarr;</a>
+          </li>
+          
+        </ul>
+
+        <!-- disqus comment start -->
+        
+        <!-- disqus comment end -->
+      </div>
+
+      <!-- Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#gai-nian"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概念</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#notes"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Notes</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#hao-chu"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">好处</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#fen-lei"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">分类</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#gong-xiang-huan-cun"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">共享缓存</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#si-you-huan-cun"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">私有缓存</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#wang-guan-huan-cun-bu-shu-zai-fu-wu-qi"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">网关缓存（部署在服务器）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#cdn-xiang-jian-wang-luo-xiang-guan-bu-shu-zai-fu-wu-qi"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">CDN（详见网络相关，部署在服务器）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#fan-xiang-dai-li-huan-cun-bu-shu-zai-fu-wu-qi"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">反向代理缓存（部署在服务器）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#fu-zai-jun-heng-qi-bu-shu-zai-fu-wu-qi"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">负载均衡器（部署在服务器）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#liu-lan-qi-huan-cun"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">浏览器缓存</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#memory-cache"><span class="toc-nav-number">2.7.1.</span> <span class="toc-nav-text">Memory Cache</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#notes-1"><span class="toc-nav-number">2.7.1.1.</span> <span class="toc-nav-text">Notes</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#notes-2"><span class="toc-nav-number">2.7.1.2.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#push-cache"><span class="toc-nav-number">2.7.2.</span> <span class="toc-nav-text">Push Cache</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#huan-cun-cao-zuo-de-mu-biao"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">缓存操作的目标</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#huan-cun-xiang-guan-header"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">缓存相关 header</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#pragma"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Pragma</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#expries"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">Expries</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#cache-control"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">Cache-control</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#qing-qiu-zhi-ling"><span class="toc-nav-number">4.3.1.</span> <span class="toc-nav-text">请求指令</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#xiang-ying-zhi-ling"><span class="toc-nav-number">4.3.2.</span> <span class="toc-nav-text">响应指令</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#tuo-zhan-zhi-ling"><span class="toc-nav-number">4.3.3.</span> <span class="toc-nav-text">拓展指令</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#if-modified-since-http-1-0-last-modified-http-1-0-if-unmodified-since"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">If-Modified-Since(HTTP/1.0) / Last-Modified(HTTP/1.0) /If-Unmodified-Since</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#last-modified"><span class="toc-nav-number">4.4.1.</span> <span class="toc-nav-text">Last-Modified</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#if-modified-since"><span class="toc-nav-number">4.4.2.</span> <span class="toc-nav-text">If-Modified-Since</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#if-unmodified-since"><span class="toc-nav-number">4.4.3.</span> <span class="toc-nav-text">If-Unmodified-since</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#notes-3"><span class="toc-nav-number">4.4.3.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#if-match-if-none-match-e-tag"><span class="toc-nav-number">4.5.</span> <span class="toc-nav-text">If-Match/If-None-Match/ETag</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#if-match"><span class="toc-nav-number">4.5.1.</span> <span class="toc-nav-text">If-Match</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#liang-ge-chang-jian-de-ying-yong-chang-jing"><span class="toc-nav-number">4.5.1.1.</span> <span class="toc-nav-text">两个常见的应用场景：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#if-none-match-etag-http-1-1"><span class="toc-nav-number">4.5.2.</span> <span class="toc-nav-text">If-None-Match / Etag(http1.1)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#notes-4"><span class="toc-nav-number">4.5.2.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#e-tag"><span class="toc-nav-number">4.5.3.</span> <span class="toc-nav-text">ETag</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#xin-xian-du"><span class="toc-nav-number">4.6.</span> <span class="toc-nav-text">新鲜度</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#qiang-zhi-huan-cun"><span class="toc-nav-number">4.7.</span> <span class="toc-nav-text">强制缓存</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#xie-shang-huan-cun"><span class="toc-nav-number">4.8.</span> <span class="toc-nav-text">协商缓存</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#notes-5"><span class="toc-nav-number">4.8.1.</span> <span class="toc-nav-text">Notes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#qi-fa-shi-huan-cun-jie-duan"><span class="toc-nav-number">4.9.</span> <span class="toc-nav-text">启发式缓存阶段</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#zheng-ti-liu-cheng-tu"><span class="toc-nav-number">4.10.</span> <span class="toc-nav-text">整体流程图</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#vary"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Vary</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#age"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Age</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#date"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Date</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#yong-hu-cao-zuo-xing-wei-dui-huan-cun-de-ying-xiang"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">用户操作行为对缓存的影响</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#guan-yu-huan-cun-de-yi-xie-wen-da"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">关于缓存的一些问答</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+        <!-- Featured Tags -->
+        
+        <section>
+          <!-- no hr -->
+          <h5><a href="/tags/">所属标签</a></h5>
+          <div class="tags">
+            
+            <a class="tag" href="/tags/#HTTP缓存" title="HTTP缓存">HTTP缓存</a>
+            
+          </div>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- 添加gitalk评论 -->
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: "ed588defc49f2dd112f0",
+    clientSecret: "58808c8e9bcc55875f8380be0c63c748e1e465d1",
+    repo: "my-blog",
+    owner: "nvnvyezi",
+    admin: ["nvnvyezi"],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false // Facebook-like distraction free mode
+  });
+
+  gitalk.render("gitalk-container");
+</script>
+
+ 
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function(e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+  async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: "hover",
+      placement: "left",
+      icon: "ℬ"
+    };
+    anchors
+      .add()
+      .remove(".intro-header h1")
+      .remove(".subheading")
+      .remove(".sidebar-container h5");
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+               
+          <li>
+            <a target="_blank" href="https://github.com/nvnvyezi">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+           
+          <li>
+            <a target="_blank" href="https://user.qzone.qq.com/1187128658">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">
+          Copyright &copy; nvnvyezi 2019
+        </p>
+        <p class="copyright text-muted">
+          <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
+            ><img
+              alt="php计数器"
+              src="http://monster.gostats.cn/bin/count/a_507608/t_4/i_1/z_0/show_hits/counter.png"
+              style="border-width:0"
+          /></a> -->
+          <!-- <div align="center"> -->
+          <a href="http://www.amazingcounters.com"><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3242783&c=9728662" alt="AmazingCounters.com"></a>
+
+          <!-- </div> -->
+          visitors&nbsp;&nbsp;
+          <span class="post-count">30.7k words altogether</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function(e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+<!-- jquery.tagcloud.js -->
+<script>
+  // only load tagcloud.js in tag.html
+  if ($("#tag_cloud").length !== 0) {
+    async("http://nvnvyezi.club/js/jquery.tagcloud.js", function() {
+      $.fn.tagcloud.defaults = {
+        //size: {start: 1, end: 1, unit: 'em'},
+        color: { start: "#bbbbee", end: "#0085a1" }
+      };
+      $("#tag_cloud a").tagcloud();
+    });
+  }
+</script>
+
+<!--fastClick.js -->
+<script>
+  async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function() {
+    var $nav = document.querySelector("nav");
+    if ($nav) FastClick.attach($nav);
+  });
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+    <a id="rocket" href="#top" class=""></a>
+    <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+    <!-- Image to hack wechat -->
+    <!-- <img
+      src="http://nvnvyezi.club/images/icon_wechat.png"
+      width="0"
+      height="0"
+    /> -->
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+  </body>
+</html>

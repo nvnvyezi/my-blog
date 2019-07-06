@@ -127,14 +127,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -185,9 +185,11 @@
       <!-- 标签云 -->
       <div id="tag_cloud" class="tags">
         
-        <a href="#css" title="css" rel="1">css</a>
-        
         <a href="#html" title="html" rel="4">html</a>
+        
+        <a href="#doctype" title="doctype" rel="1">doctype</a>
+        
+        <a href="#css" title="css" rel="1">css</a>
         
         <a href="#input" title="input" rel="1">input</a>
         
@@ -199,15 +201,11 @@
         
         <a href="#类型检测" title="类型检测" rel="1">类型检测</a>
         
-        <a href="#csrf" title="csrf" rel="1">csrf</a>
-        
         <a href="#SEO" title="SEO" rel="1">SEO</a>
         
+        <a href="#csrf" title="csrf" rel="1">csrf</a>
+        
         <a href="#xss" title="xss" rel="1">xss</a>
-        
-        <a href="#doctype" title="doctype" rel="1">doctype</a>
-        
-        <a href="#类型转换" title="类型转换" rel="1">类型转换</a>
         
         <a href="#dir" title="dir" rel="1">dir</a>
         
@@ -227,44 +225,22 @@
         
         <a href="#继承" title="继承" rel="1">继承</a>
         
+        <a href="#类型转换" title="类型转换" rel="1">类型转换</a>
+        
+        <a href="#HTTP缓存" title="HTTP缓存" rel="1">HTTP缓存</a>
+        
+        <a href="#设计模式" title="设计模式" rel="1">设计模式</a>
+        
         <a href="#webpack" title="webpack" rel="1">webpack</a>
         
         <a href="#react" title="react" rel="1">react</a>
         
         <a href="#typescript" title="typescript" rel="1">typescript</a>
         
-        <a href="#设计模式" title="设计模式" rel="1">设计模式</a>
-        
       </div>
 
       <!-- 标签列表 -->
 
-      
-      <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="css">
-          <span class="tag-text">css</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2018/12/10/CSS/hide/">
-            <h2 class="post-title">
-              元素隐藏的几种方法
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              CSS隐藏页面元素的方法，以及各方法之间的区别
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
       
       <div class="one-tag-list">
         <span class="fa fa-tag listing-seperator" id="html">
@@ -340,6 +316,58 @@
             
             <h3 class="post-subtitle" style="color: #b2bac2">
               doctype的作用以及为什么HTML5只写 <!DOCTYPE HTML>
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="doctype">
+          <span class="tag-text">doctype</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2019/06/03/HTML/doctype/">
+            <h2 class="post-title">
+              DOCTYPE 作用
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              doctype的作用以及为什么HTML5只写 <!DOCTYPE HTML>
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="css">
+          <span class="tag-text">css</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2018/12/10/CSS/hide/">
+            <h2 class="post-title">
+              元素隐藏的几种方法
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              CSS隐藏页面元素的方法，以及各方法之间的区别
             </h3>
             
           </a>
@@ -518,32 +546,6 @@
       </div>
       
       <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="csrf">
-          <span class="tag-text">csrf</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2018/12/10/safety/CSRF/">
-            <h2 class="post-title">
-              CSRF
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              跨站点请求伪造，
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
-      <div class="one-tag-list">
         <span class="fa fa-tag listing-seperator" id="SEO">
           <span class="tag-text">SEO</span>
         </span>
@@ -570,6 +572,32 @@
       </div>
       
       <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="csrf">
+          <span class="tag-text">csrf</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2018/12/10/safety/CSRF/">
+            <h2 class="post-title">
+              CSRF
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              跨站点请求伪造，
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
         <span class="fa fa-tag listing-seperator" id="xss">
           <span class="tag-text">xss</span>
         </span>
@@ -586,58 +614,6 @@
             
             <h3 class="post-subtitle" style="color: #b2bac2">
               跨站点脚本攻击，
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
-      <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="doctype">
-          <span class="tag-text">doctype</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2019/06/03/HTML/doctype/">
-            <h2 class="post-title">
-              DOCTYPE 作用
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              doctype的作用以及为什么HTML5只写 <!DOCTYPE HTML>
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
-      <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="类型转换">
-          <span class="tag-text">类型转换</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2018/12/10/JavaScript/transform-type/">
-            <h2 class="post-title">
-              js数据类型转换
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              搞清楚==和===以及[] == ![]的区别
             </h3>
             
           </a>
@@ -882,6 +858,84 @@
       </div>
       
       <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="类型转换">
+          <span class="tag-text">类型转换</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2018/12/10/JavaScript/transform-type/">
+            <h2 class="post-title">
+              js数据类型转换
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              搞清楚==和===以及[] == ![]的区别
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="HTTP缓存">
+          <span class="tag-text">HTTP缓存</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2019/02/05/optimization/http-cache/">
+            <h2 class="post-title">
+              HTTP缓存
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              了解缓存的几种方式以及理解HTTP304状态码
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="设计模式">
+          <span class="tag-text">设计模式</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2019/01/04/design-atterns/设计模式/">
+            <h2 class="post-title">
+              设计模式
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              简单了解单例模式，工厂模式，观察者模式等设计模式
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
         <span class="fa fa-tag listing-seperator" id="webpack">
           <span class="tag-text">webpack</span>
         </span>
@@ -959,32 +1013,6 @@
         
       </div>
       
-      <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="设计模式">
-          <span class="tag-text">设计模式</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2019/01/04/design-atterns/设计模式/">
-            <h2 class="post-title">
-              设计模式
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              简单了解单例模式，工厂模式，观察者模式等设计模式
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
     </div>
   </div>
 </div>
@@ -1032,7 +1060,7 @@
 
           <!-- </div> -->
           visitors&nbsp;&nbsp;
-          <span class="post-count">24.6k words altogether</span>
+          <span class="post-count">30.7k words altogether</span>
         </p>
       </div>
     </div>
