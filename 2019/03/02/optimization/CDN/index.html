@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="google-site-verification" content="r0MJNowOXwUCdeGtWMXCWKrxWGq1vRjhRKYMdi_B9AY">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="了解SEO的用处以及作为前端应该怎么进行SEO优化">
+  <meta name="description" content="简单了解CDN">
   <meta name="author" content="nvnvyezi">
   <link rel="shortcut icon" href="/images/portrait.png">
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <title>
-     前端常用的SEO优化 - nvnvyezi的博客 
+     CDN - nvnvyezi的博客 
   </title>
 
-  <link rel="canonical" href="http://nvnvyezi.club/2018/12/10/SEO/SEO/">
+  <link rel="canonical" href="http://nvnvyezi.club/2019/03/02/optimization/CDN/">
 
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -57,7 +57,7 @@
 <style type="text/css">
   header.intro-header{
       
-          background-image: url('/images/bg2.jpg')
+          background-image: url('/images/bg8.jpg')
           /*post*/
       
   }
@@ -78,12 +78,12 @@
           <div class="post-heading">
             <div class="tags">
               
-              <a class="tag" href="/tags/#SEO" title="SEO">SEO</a>
+              <a class="tag" href="/tags/#cdn" title="cdn">cdn</a>
               
             </div>
-            <h1>前端常用的SEO优化</h1>
+            <h1>CDN</h1>
             <h2 class="subheading">
-              了解SEO的用处以及作为前端应该怎么进行SEO优化
+              简单了解CDN
             </h2>
             <span class="meta" style="padding-bottom: 10px">
               <!-- <a target="_blank" title="php计数器" href="http://gostats.cn"
@@ -98,7 +98,7 @@
               <!-- </div> -->
               visitors</span>
             <span class="meta">
-              Posted by nvnvyezi on 2018-12-10
+              Posted by nvnvyezi on 2019-03-02
             </span>
           </div>
           
@@ -212,47 +212,44 @@
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container" style="margin-bottom: 30px;">
-        <h3 id="sou-suo-yin-qing-you-hua-seo">搜索引擎优化（SEO）</h3>
-<p>是一种透过了解搜索引擎的运作规则来调整网站，以及提高目的网站在有关搜索引擎内排名的方式</p>
-<p>通过不少研究发现，搜索引擎的用户往往只会留意搜索结果最前面的几个条目</p>
-<h4 id="zhen-dui-sou-suo-yin-qing-zuo-zui-you-hua-de-chu-li">针对搜索引擎作最优化的处理</h4>
-<p>为了让网站更容易被搜索引擎所接受，搜索引擎会将网站彼此间的内容做一些相关性的数据对比，然后在由浏览器将这些内容以最快速且接近最完整的方式，呈现给搜索者，搜索引擎优化就是通过搜索引擎的规则进行优化，为用户打造更好的用户体验，最终的目的就是做好用户体验</p>
-<h3 id="you-hua">优化</h3>
-<h4 id="title">title</h4>
-<p>定义网页的标题，显示在浏览器的标题或标签页上，只可以包含文本，并且尽量避免内容和网页内容</p>
-<h4 id="meta">meta</h4>
-<p>使用<code>description</code>来对网页进行一个高度的概括，方便搜索引擎抓取</p>
-<h4 id="shi-yong-yu-yi-hua-biao-qian">使用语义化标签</h4>
-<p>用语义化标签让搜索引擎抓取的时候知道一些侧重点，但是不能滥用</p>
-<h4 id="img-de-alt-shu-xing">img的alt属性</h4>
-<p>可以在图片未加载出来或者加载出错的时候显示图片信息，让搜索引擎知道图片的信息，以及可以让屏幕阅读器获取图片信息</p>
-<h4 id="rel-nofollow">rel=“nofollow”</h4>
-<p>可以让搜索引擎不抓取网页上内嵌的链接，因为搜索引擎分配到每个页面的权重是一定的，为了集中网页权重并将权重分给其他必要的链接，为不必跟踪的链接添加这个属性就显得很必要了。</p>
-<h4 id="wang-zhan-de-jie-gou">网站的结构</h4>
+        <h3 id="cdn">CDN</h3>
+<p>全称是Content Delivery Network，即内容分发网络。是一种透过互联网互相连接的计算机网络系统，利用最靠近每位用户的服务器来更快更可靠地将音乐，图片，影片，应用程序及其他文件发送给用户， 以此来提供高性能，可拓展性及低成本的将网络内容传递给用户。</p>
+<h3 id="ji-zhu">技术</h3>
+<p>在多个地点，多个不同的网络上摆放节点，这些节点会动态的传输内容，对用户的下载行为最优化，减少内容供应者所需要的带宽成本，改善用户的下载速度，提高系统稳定性。</p>
+<p>CDN所需要的节点数量随着需求和服务对象的大小而不同</p>
+<p>工作方式一般是基于nginx的模式，即仅仅缓存网站的静态资源，在HTTPS的作用下变成nginx+SNI的模式(一个CDN节点上可以借此技术绑定N个域名)</p>
+<h3 id="you-dian">优点</h3>
+<ul>
+<li>承载的用户数量比传统单一服务器多</li>
+<li>将服务器放到不同的地点，可以减少互连的流量，降低带宽成本</li>
+<li>选择就近的服务器给用户纷发资源，减少延迟和数据包漏失率，使一些高带宽的应用（点播，直播，高画质的影片）更容易推动</li>
+<li>在一个服务器宕机的情况下可以调用临近的服务器进行服务，提高可靠度</li>
+<li>服务提供者拥有更多的控制权，可以根据客户，地区或其他因素来进行调整</li>
+<li>集群抗攻击，广泛分布的CDN节点加上节点之间的冗余机制，可以有效地预防黑客入侵以及降低各种DDoS攻击对网站的影响，同时保证较好的服务质量 。</li>
+</ul>
+<h3 id="jie-gou">结构</h3>
+<p>一般分为中心与边缘节点两部分，中心节点负责全局负载均衡管理与内容管理。</p>
+<p><strong>中心节点功能：</strong></p>
 <ol>
-<li>采取HTML，CSS分离的写法，保持HTML的纯粹，否则会拖慢网页的加载速度，若果加载超时，会导致搜索引擎放弃抓取这个页面</li>
-<li>扁平化网站结构，一般层级不超过三层</li>
-<li>将重要信息放在页面前面</li>
-<li>控制首页的链接数量</li>
-<li>导航尽量使用文字，帮助搜索引擎更快建立网站的整体结构</li>
-<li>重要内容不采用js添加的方式</li>
-<li>重要内容谨慎使用<code>display:none</code>，因为搜索引擎会过滤其中的内容</li>
-<li>尽量减少使用<code>iframe</code>，搜索引擎不会抓取<code>iframe</code>中的内容</li>
+<li>随时监控边缘节点的健康状况（可用性，拥塞程度）；</li>
+<li>根据边缘节点到请求端的距离，以及边缘节点的健康状况，按一定的策略重定向请求；</li>
+<li>与源站进行数据同步。</li>
+</ol>
+<h3 id="gong-zuo-yuan-li">工作原理</h3>
+<img src="assets/v2-5793aec83fc645e002a1cd70ab7209a3_hd.jpg" data-action="zoom">
+<ol>
+<li>当用户点击网站页面上的内容URL，经过本地DNS系统解析，DNS系统会最终将域名的解析权交给CNAME指向的CDN专用DNS服务器。</li>
+<li>CDN的DNS服务器将CDN的全局负载均衡设备IP地址返回用户。</li>
+<li>用户向CDN的全局负载均衡设备发起内容URL访问请求。</li>
+<li>CDN全局负载均衡设备根据用户IP地址，以及用户请求的内容URL，选择一台用户所属区域的区域负载均衡设备，告诉用户向这台设备发起请求。</li>
+<li>区域负载均衡设备会为用户选择一台合适的缓存服务器提供服务，选择的依据包括：根据用户IP地址，判断哪一台服务器距用户最近；根据用户所请求的URL中携带的内容名称，判断哪一台服务器上有用户所需内容；查询各个服务器当前的负载情况，判断哪一台服务器尚有服务能力。基于以上这些条件的综合分析之后，区域负载均衡设备会向全局负载均衡设备返回一台缓存服务器的IP地址。</li>
+<li>全局负载均衡设备把服务器的IP地址返回给用户。</li>
+<li>用户向缓存服务器发起请求，缓存服务器响应用户请求，将用户所需内容传送到用户终端。如果这台缓存服务器上并没有用户想要的内容，而区域均衡设备依然将它分配给了用户，那么这台服务器就要向它的上一级缓存服务器请求内容，直至追溯到网站的源服务器将内容拉到本地。</li>
 </ol>
 
 
         <!-- Friends Blog -->
         
-          <hr>
-          <h5>参考文档</h5>
-          <ul class="list-inline">
-            
-            <li style="display: block;margin-left: 15px;line-height: 30px">
-              <a href="https://zh.wikipedia.org/wiki/搜尋引擎最佳化" target="_blank">搜索引擎最佳化-MDN</a>
-            </li>
-            
-          </ul>
-          
 
         <!-- 分享-->
         <div class="social-share share-component" align="center" data-source="https://nvnvyezi.club" data-sites="qzone,qq,weibo,wechat" data-wechat-qrcode-title="请打开微信扫一扫分享" data-wechat-qrcode-helper></div>
@@ -264,11 +261,11 @@
         <ul class="pager">
           
           <li class="previous">
-            <a href="/2018/12/10/safety/CSRF/" data-toggle="tooltip" data-placement="top" title="CSRF">&larr; Previous Post</a>
+            <a href="/2019/06/03/HTML/doctype/" data-toggle="tooltip" data-placement="top" title="DOCTYPE 作用">&larr; Previous Post</a>
           </li>
            
           <li class="next">
-            <a href="/2018/12/10/JavaScript/transform-type/" data-toggle="tooltip" data-placement="top" title="js数据类型转换">Next Post &rarr;</a>
+            <a href="/2019/02/22/webpack/build/" data-toggle="tooltip" data-placement="top" title="webpack4搭建以及优化">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -286,7 +283,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#sou-suo-yin-qing-you-hua-seo"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">搜索引擎优化（SEO）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#zhen-dui-sou-suo-yin-qing-zuo-zui-you-hua-de-chu-li"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">针对搜索引擎作最优化的处理</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#you-hua"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">优化</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#title"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">title</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#meta"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">meta</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#shi-yong-yu-yi-hua-biao-qian"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">使用语义化标签</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#img-de-alt-shu-xing"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">img的alt属性</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#rel-nofollow"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">rel=“nofollow”</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#wang-zhan-de-jie-gou"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">网站的结构</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#cdn"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">CDN</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ji-zhu"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">技术</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#you-dian"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">优点</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#jie-gou"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">结构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#gong-zuo-yuan-li"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">工作原理</span></a></li></ol>
         
         </div>
       </aside>
@@ -306,7 +303,7 @@
           <h5><a href="/tags/">所属标签</a></h5>
           <div class="tags">
             
-            <a class="tag" href="/tags/#SEO" title="SEO">SEO</a>
+            <a class="tag" href="/tags/#cdn" title="cdn">cdn</a>
             
           </div>
         </section>

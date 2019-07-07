@@ -185,27 +185,33 @@
       <!-- 标签云 -->
       <div id="tag_cloud" class="tags">
         
-        <a href="#html" title="html" rel="4">html</a>
-        
-        <a href="#doctype" title="doctype" rel="1">doctype</a>
-        
-        <a href="#css" title="css" rel="1">css</a>
-        
-        <a href="#input" title="input" rel="1">input</a>
-        
         <a href="#http" title="http" rel="1">http</a>
         
         <a href="#HTTP请求方法" title="HTTP请求方法" rel="1">HTTP请求方法</a>
+        
+        <a href="#SEO" title="SEO" rel="1">SEO</a>
+        
+        <a href="#html" title="html" rel="4">html</a>
+        
+        <a href="#doctype" title="doctype" rel="1">doctype</a>
         
         <a href="#js" title="js" rel="3">js</a>
         
         <a href="#类型检测" title="类型检测" rel="1">类型检测</a>
         
-        <a href="#SEO" title="SEO" rel="1">SEO</a>
+        <a href="#cdn" title="cdn" rel="1">cdn</a>
+        
+        <a href="#input" title="input" rel="1">input</a>
+        
+        <a href="#css" title="css" rel="1">css</a>
         
         <a href="#csrf" title="csrf" rel="1">csrf</a>
         
         <a href="#xss" title="xss" rel="1">xss</a>
+        
+        <a href="#类型转换" title="类型转换" rel="1">类型转换</a>
+        
+        <a href="#继承" title="继承" rel="1">继承</a>
         
         <a href="#dir" title="dir" rel="1">dir</a>
         
@@ -223,10 +229,6 @@
         
         <a href="#meta" title="meta" rel="1">meta</a>
         
-        <a href="#继承" title="继承" rel="1">继承</a>
-        
-        <a href="#类型转换" title="类型转换" rel="1">类型转换</a>
-        
         <a href="#HTTP缓存" title="HTTP缓存" rel="1">HTTP缓存</a>
         
         <a href="#设计模式" title="设计模式" rel="1">设计模式</a>
@@ -241,6 +243,84 @@
 
       <!-- 标签列表 -->
 
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="http">
+          <span class="tag-text">http</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2019/06/17/HTTP/http-request-methods/">
+            <h2 class="post-title">
+              HTTP请求方法
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              了解HTTP请求方法都有哪些，以及他们之间的区别
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="HTTP请求方法">
+          <span class="tag-text">HTTP请求方法</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2019/06/17/HTTP/http-request-methods/">
+            <h2 class="post-title">
+              HTTP请求方法
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              了解HTTP请求方法都有哪些，以及他们之间的区别
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="SEO">
+          <span class="tag-text">SEO</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2018/12/10/SEO/SEO/">
+            <h2 class="post-title">
+              前端常用的SEO优化
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              了解SEO的用处以及作为前端应该怎么进行SEO优化
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
       
       <div class="one-tag-list">
         <span class="fa fa-tag listing-seperator" id="html">
@@ -352,110 +432,6 @@
       </div>
       
       <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="css">
-          <span class="tag-text">css</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2018/12/10/CSS/hide/">
-            <h2 class="post-title">
-              元素隐藏的几种方法
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              CSS隐藏页面元素的方法，以及各方法之间的区别
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
-      <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="input">
-          <span class="tag-text">input</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2019/06/17/HTML/input/">
-            <h2 class="post-title">
-              input属性
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              了解input的属性以及用法
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
-      <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="http">
-          <span class="tag-text">http</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2019/06/17/HTTP/http-request-methods/">
-            <h2 class="post-title">
-              HTTP请求方法
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              了解HTTP请求方法都有哪些，以及他们之间的区别
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
-      <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="HTTP请求方法">
-          <span class="tag-text">HTTP请求方法</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2019/06/17/HTTP/http-request-methods/">
-            <h2 class="post-title">
-              HTTP请求方法
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              了解HTTP请求方法都有哪些，以及他们之间的区别
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
-      <div class="one-tag-list">
         <span class="fa fa-tag listing-seperator" id="js">
           <span class="tag-text">js</span>
         </span>
@@ -546,8 +522,8 @@
       </div>
       
       <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="SEO">
-          <span class="tag-text">SEO</span>
+        <span class="fa fa-tag listing-seperator" id="cdn">
+          <span class="tag-text">cdn</span>
         </span>
         
         <!-- <li class="listing-item">
@@ -555,13 +531,65 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
         <div class="post-preview">
-          <a href="/2018/12/10/SEO/SEO/">
+          <a href="/2019/03/02/optimization/CDN/">
             <h2 class="post-title">
-              前端常用的SEO优化
+              CDN
             </h2>
             
             <h3 class="post-subtitle" style="color: #b2bac2">
-              了解SEO的用处以及作为前端应该怎么进行SEO优化
+              简单了解CDN
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="input">
+          <span class="tag-text">input</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2019/06/17/HTML/input/">
+            <h2 class="post-title">
+              input属性
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              了解input的属性以及用法
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="css">
+          <span class="tag-text">css</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2018/12/10/CSS/hide/">
+            <h2 class="post-title">
+              元素隐藏的几种方法
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              CSS隐藏页面元素的方法，以及各方法之间的区别
             </h3>
             
           </a>
@@ -614,6 +642,58 @@
             
             <h3 class="post-subtitle" style="color: #b2bac2">
               跨站点脚本攻击，
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="类型转换">
+          <span class="tag-text">类型转换</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2018/12/10/JavaScript/transform-type/">
+            <h2 class="post-title">
+              js数据类型转换
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              搞清楚==和===以及[] == ![]的区别
+            </h3>
+            
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-tag listing-seperator" id="继承">
+          <span class="tag-text">继承</span>
+        </span>
+        
+        <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+        <div class="post-preview">
+          <a href="/2018/12/10/JavaScript/inherit/">
+            <h2 class="post-title">
+              js继承
+            </h2>
+            
+            <h3 class="post-subtitle" style="color: #b2bac2">
+              继承是oo语言中的一个最为人津津乐道的概念。许多oo语言都支持两种继承方式：接口继承和实现继承。接口继承只继承方法签名，而实现继承则继承实际的方法。如前所述，由于函数没有签名，在ECMAScript中无法实现接口继承。ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。
             </h3>
             
           </a>
@@ -832,58 +912,6 @@
       </div>
       
       <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="继承">
-          <span class="tag-text">继承</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2018/12/10/JavaScript/inherit/">
-            <h2 class="post-title">
-              js继承
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              继承是oo语言中的一个最为人津津乐道的概念。许多oo语言都支持两种继承方式：接口继承和实现继承。接口继承只继承方法签名，而实现继承则继承实际的方法。如前所述，由于函数没有签名，在ECMAScript中无法实现接口继承。ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
-      <div class="one-tag-list">
-        <span class="fa fa-tag listing-seperator" id="类型转换">
-          <span class="tag-text">类型转换</span>
-        </span>
-        
-        <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-        <div class="post-preview">
-          <a href="/2018/12/10/JavaScript/transform-type/">
-            <h2 class="post-title">
-              js数据类型转换
-            </h2>
-            
-            <h3 class="post-subtitle" style="color: #b2bac2">
-              搞清楚==和===以及[] == ![]的区别
-            </h3>
-            
-          </a>
-          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </div>
-        <hr>
-        
-      </div>
-      
-      <div class="one-tag-list">
         <span class="fa fa-tag listing-seperator" id="HTTP缓存">
           <span class="tag-text">HTTP缓存</span>
         </span>
@@ -1060,7 +1088,7 @@
 
           <!-- </div> -->
           visitors&nbsp;&nbsp;
-          <span class="post-count">30.7k words altogether</span>
+          <span class="post-count">31.7k words altogether</span>
         </p>
       </div>
     </div>
